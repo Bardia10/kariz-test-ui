@@ -1,0 +1,167 @@
+:root {
+    /*
+      MAIN ALIGNMENT SETTINGS
+
+      side-width:
+      Width occupied by the left and right frame pieces.
+
+      top-height:
+      Height occupied by the top corners and top edge.
+
+      bottom-height:
+      Height occupied by the bottom corners and bottom edge.
+    */
+
+    --side-width: 120px;
+    --top-height: 120px;
+    --bottom-height: 120px;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+
+body {
+    background: #ffffff;
+    overflow: hidden;
+}
+
+
+/* Entire full-screen frame */
+
+.frame {
+    position: fixed;
+    inset: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        var(--side-width)
+        minmax(0, 1fr)
+        var(--side-width);
+
+    grid-template-rows:
+        var(--top-height)
+        minmax(0, 1fr)
+        var(--bottom-height);
+
+    pointer-events: none;
+    overflow: hidden;
+}
+
+
+/*
+  Every piece fills only its own grid area.
+
+  background-size: 100% 100% stretches the image
+  to the exact dimensions of that area.
+*/
+
+.frame-piece {
+    width: 100%;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+
+/* =========================
+   TOP
+========================= */
+
+.top-left {
+    grid-column: 1;
+    grid-row: 1;
+
+    background-image:
+        url("assets/top-corner-image.png");
+}
+
+
+.top-edge {
+    grid-column: 2;
+    grid-row: 1;
+
+    background-image:
+        url("assets/top-edge-image.png");
+}
+
+
+.top-right {
+    grid-column: 3;
+    grid-row: 1;
+
+    background-image:
+        url("assets/top-corner-image.png");
+
+    transform: scaleX(-1);
+}
+
+
+/* =========================
+   SIDES
+========================= */
+
+.left-edge {
+    grid-column: 1;
+    grid-row: 2;
+
+    background-image:
+        url("assets/side-edge-image.png");
+}
+
+
+.right-edge {
+    grid-column: 3;
+    grid-row: 2;
+
+    background-image:
+        url("assets/side-edge-image.png");
+
+    transform: scaleX(-1);
+}
+
+
+/* =========================
+   BOTTOM
+========================= */
+
+.bottom-left {
+    grid-column: 1;
+    grid-row: 3;
+
+    background-image:
+        url("assets/bottom-corner-image.png");
+}
+
+
+.bottom-edge {
+    grid-column: 2;
+    grid-row: 3;
+
+    background-image:
+        url("assets/bottom-edge-image.png");
+}
+
+
+.bottom-right {
+    grid-column: 3;
+    grid-row: 3;
+
+    background-image:
+        url("assets/bottom-corner-image.png");
+
+    transform: scaleX(-1);
+}
