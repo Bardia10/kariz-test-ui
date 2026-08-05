@@ -6,19 +6,19 @@
    ============================================================ */
 :root {
   /* ---- Frame alignment ---- */
-  --side-width: 120px;    /* width of the left/right vertical frame strips */
-  --top-height: 120px;    /* height of the top strip (corners + top edge) */
-  --bottom-height: 120px; /* height of the bottom strip (corners + bottom edge) */
+  --side-width: 150px;    /* width of the left/right vertical frame strips */
+  --top-height: 150px;    /* height of the top strip (corners + top edge) */
+  --bottom-height: 150px; /* height of the bottom strip (corners + bottom edge) */
 
   /* ---- Page padding, each side independent ---- */
   /* Breathing room between the window edges and the content.
      This is the ONLY thing stopping the header (and any future
      content) from touching the window edges. Set a side to 0
      and the content will touch that edge. */
-  --pad-top: 18px;
-  --pad-right: 18px;
-  --pad-bottom: 18px;
-  --pad-left: 18px;
+  --pad-top: 25px;
+  --pad-right: 25px;
+  --pad-bottom: 25px;
+  --pad-left: 25px;
 
   /* ---- Header ---- */
   /* How far down the header stretches. Pure preference. */
