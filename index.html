@@ -38,9 +38,10 @@
         </header>
 
         <main class="content">
-            <!-- A product is one gold or silver name bar plus its red
-                 and green gem buttons. All three images are simple
-                 backgrounds; labels and prices remain real HTML text.
+            <!-- PRODUCT STRUCTURE
+                 A product is one gold or silver name bar plus its red
+                 and green gem buttons. The images are backgrounds;
+                 labels and prices remain real HTML text.
 
                  Gold name bar (default):
                  class="product-name"
@@ -48,9 +49,14 @@
                  Silver name bar:
                  class="product-name product-name--silver"
 
-                 Only the class changes. The product structure and text
-                 stay exactly the same. -->
-            <section class="products" aria-label="Products">
+                 Only the title class changes. The rest of the product
+                 structure remains exactly the same. -->
+
+            <!-- PRODUCT GROUP 1
+                 The repeated groups below exist only to provide enough
+                 content for scrolling tests. Remove or replace any group
+                 without changing the product CSS. -->
+            <section class="products" aria-label="Products group 1">
                 <article class="product">
                     <div class="product-name">Full Gold Coin</div>
                     <button class="product-price product-price--sell" type="button">5,829,000</button>
@@ -82,10 +88,8 @@
                 </article>
             </section>
 
-
-
-
-            <section class="products" aria-label="Products">
+            <!-- PRODUCT GROUP 2 -->
+            <section class="products" aria-label="Products group 2">
                 <article class="product">
                     <div class="product-name">Full Gold Coin</div>
                     <button class="product-price product-price--sell" type="button">5,829,000</button>
@@ -117,13 +121,8 @@
                 </article>
             </section>
 
-
-
-
-
-
-
-                        <section class="products" aria-label="Products">
+            <!-- PRODUCT GROUP 3 -->
+            <section class="products" aria-label="Products group 3">
                 <article class="product">
                     <div class="product-name">Full Gold Coin</div>
                     <button class="product-price product-price--sell" type="button">5,829,000</button>
@@ -154,12 +153,6 @@
                     <button class="product-price product-price--buy" type="button">5,833,000</button>
                 </article>
             </section>
-
-
-
-
-
-
         </main>
     </div>
 

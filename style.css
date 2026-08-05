@@ -25,11 +25,14 @@ color that you can change freely without breaking anything.
     --header-height: 74px;
 
     /* ---- Header logo ---- */
-    /* The logo keeps its natural proportions. Height controls its
-    visible size; left offset controls its distance from the header's
-    left edge. The image file must be assets/logo.png. */
-    --logo-height: 64px;
+    /* The logo is positioned independently inside the header.
+    Height controls its size. Left offset moves it horizontally.
+    Vertical offset moves it from true vertical center: negative values
+    move it upward and positive values move it downward.
+    The image file must be assets/logo.png. */
+    --logo-height: 60px;
     --logo-left-offset: 6px;
+    --logo-vertical-offset: -6px;
 
     /* ---- Product layout ---- */
     /* Products are arranged two per row. Product-column-gap controls
@@ -46,6 +49,34 @@ color that you can change freely without breaking anything.
     from 0 (invisible) to 1 (fully opaque). */
     --gem-underlay-color: 0, 0, 0;
     --gem-underlay-strength: 0.24;
+
+    /* ---- Gem image tints ---- */
+    /* These two translucent colors paint ON TOP of the gem PNGs.
+    Buy and sell are independent, so each side can be tuned without
+    affecting the other. Strength ranges from 0 to 1. */
+    --sell-gem-tint-color: 120, 0, 12;
+    --sell-gem-tint-strength: 0.0;
+    --buy-gem-tint-color: 255, 255, 255;
+    --buy-gem-tint-strength: 0.11;
+
+    /* ---- Gem button hover growth ---- */
+    /* Scale 1 means no growth. 1.05 means five percent larger.
+    Duration controls how quickly the button grows and returns. */
+    --gem-hover-scale: 1.06;
+    --gem-hover-duration: 400ms;
+
+    /* ---- Product hover glow ---- */
+    /* This white translucent panel is created BEHIND each complete
+    product. Panel strength controls its center tint. Shadow strength,
+    blur, and spread control the soft glow around its edges. */
+    --product-glow-color: 0, 0, 0;
+    --product-glow-panel-strength: 0.12;
+    --product-glow-shadow-strength: 0.12;
+    --product-glow-padding: 8px;
+    --product-glow-blur: 18px;
+    --product-glow-spread: 5px;
+    --product-glow-radius: 9px;
+    --product-glow-duration: 320ms;
 
     /* ---- Footer ---- */
     /* How tall the sticky footer is. 74px matches the header for
@@ -400,14 +431,20 @@ empty bands; "cover" = fill without distortion but cropped.) */
     z-index: 4;
 }
 
-/* Non-clickable PNG logo placed inside the fixed header.
-The image preserves its natural proportions and never stretches. */
+/* Non-clickable PNG logo placed independently inside the header.
+Absolute positioning prevents header padding or flex alignment from
+pushing it around. Change only the three logo variables in :root when
+adjusting its size or position. */
 .header-logo {
+    position: absolute;
+    left: var(--logo-left-offset);
+    top: calc(50% + var(--logo-vertical-offset));
+    transform: translateY(-50%);
+
     display: block;
     width: auto;
     height: var(--logo-height);
     max-width: 40%;
-    margin-left: var(--logo-left-offset);
     object-fit: contain;
 
     /* The logo is display-only: it cannot capture clicks or selection. */
@@ -480,6 +517,11 @@ the image files.
 }
 
 .product {
+    /* Positioning and isolation keep the hover glow behind this
+    product only. The glow can never cover its title or buttons. */
+    position: relative;
+    isolation: isolate;
+
     min-width: 0;
     display: grid;
 
@@ -494,6 +536,36 @@ the image files.
     /* Deliberately smaller than the gap between complete products. */
     column-gap: var(--product-piece-gap);
     align-items: center;
+}
+
+/* Soft white hover panel behind a complete product.
+The pseudo-element is invisible until the product is hovered. */
+.product::before {
+    content: "";
+    position: absolute;
+    inset: calc(0px - var(--product-glow-padding));
+    z-index: -1;
+
+    background-color: rgba(
+        var(--product-glow-color),
+        var(--product-glow-panel-strength)
+    );
+    border-radius: var(--product-glow-radius);
+    box-shadow: 0 0
+        var(--product-glow-blur)
+        var(--product-glow-spread)
+        rgba(
+            var(--product-glow-color),
+            var(--product-glow-shadow-strength)
+        );
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--product-glow-duration) ease;
+}
+
+.product:hover::before {
+    opacity: 1;
 }
 
 /* Shared sizing and image behavior for all three product pieces.
@@ -559,16 +631,58 @@ removed so only the supplied gem image and price text are visible. */
     );
     border-radius: 10px;
     cursor: pointer;
+
+    /* Transform affects only visual size; the surrounding grid does
+    not move. A higher z-index keeps the enlarged gem above neighbors. */
+    position: relative;
+    z-index: 0;
+    transform: scale(1);
+    transform-origin: center;
+    transition:
+        transform var(--gem-hover-duration) ease,
+        z-index 0s linear var(--gem-hover-duration);
+}
+
+.product-price:hover {
+    z-index: 1;
+    transform: scale(var(--gem-hover-scale));
+    transition:
+        transform var(--gem-hover-duration) ease,
+        z-index 0s;
 }
 
 /* Red gem used for the sell price.
+The gradient is the adjustable tint painted ON TOP of the PNG.
 Expected file: assets/product-sell-button.png */
 .product-price--sell {
-    background-image: url("assets/product-sell-button.png");
+    background-image:
+        linear-gradient(
+            rgba(
+                var(--sell-gem-tint-color),
+                var(--sell-gem-tint-strength)
+            ),
+            rgba(
+                var(--sell-gem-tint-color),
+                var(--sell-gem-tint-strength)
+            )
+        ),
+        url("assets/product-sell-button.png");
 }
 
 /* Green gem used for the buy price.
+The gradient is independent from the sell tint above.
 Expected file: assets/product-buy-button.png */
 .product-price--buy {
-    background-image: url("assets/product-buy-button.png");
+    background-image:
+        linear-gradient(
+            rgba(
+                var(--buy-gem-tint-color),
+                var(--buy-gem-tint-strength)
+            ),
+            rgba(
+                var(--buy-gem-tint-color),
+                var(--buy-gem-tint-strength)
+            )
+        ),
+        url("assets/product-buy-button.png");
 }
