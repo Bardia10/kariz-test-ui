@@ -241,17 +241,16 @@ body {
 
   /* Front layer: header and any future content paint above
      both the frame and the wallpaper. */
-  z-index: 2;
+  z-index: 0;
 
   width: 100%;
-  padding-top: calc(var(--header-height) + var(--pad-top));
-
-  /* The footer is pinned to the bottom of the SCREEN (see below),
-     so it would cover the end of a long page while scrolling.
-     This padding reserves exactly enough room for the footer plus
-     a small gap (15px, arbitrary) so no content can ever end up
-     trapped behind it. Delete it only if the footer goes away. */
-  padding-bottom: calc(var(--footer-height) + 15px);
+/* Breathing room on every side of the content.
+   Top and bottom also reserve space for the pinned header
+   and footer so nothing can get trapped behind them. */
+padding-top: calc(var(--header-height) + var(--pad-top));
+padding-right: var(--pad-right);
+padding-bottom: calc(var(--footer-height) + 15px);
+padding-left: var(--pad-left);
 }
 
 /* The header stretches as far up and as wide as it can —
