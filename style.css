@@ -20,6 +20,7 @@ color that you can change freely without breaking anything.
     --pad-bottom: 18px;
     --pad-left: 25px;
 
+    
     /* ---- Header ---- */
     /* How far down the header stretches. Pure preference. */
     --header-height: 74px;
@@ -40,10 +41,10 @@ color that you can change freely without breaking anything.
     A more negative spread produces a tighter shadow.
     Increase strength or depth for a heavier, deeper frame. */
     --content-shadow-color: 0, 0, 0;
-    --content-shadow-strength: 0.66;
-    --content-shadow-depth: 14px;
-    --content-shadow-blur: 20px;
-    --content-shadow-spread: -6px;
+    --content-shadow-strength: 0.60;
+    --content-shadow-depth: 18px;
+    --content-shadow-blur: 26px;
+    --content-shadow-spread: -8px;
 
     /* ---- Wallpaper tint ---- */
     /* RGB of the color layered over the repeating background image.
