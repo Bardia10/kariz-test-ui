@@ -1,69 +1,164 @@
 /* ============================================================
    MAIN SETTINGS
+   Every knob you will ever want to turn lives in this block.
+   Nothing here is magic — each value is a plain number or
+   color that you can change freely without breaking anything.
    ============================================================ */
 :root {
-  /* Frame alignment */
-  --side-width: 120px;
-  --top-height: 120px;
-  --bottom-height: 120px;
+  /* ---- Frame alignment ---- */
+  --side-width: 120px;    /* width of the left/right vertical frame strips */
+  --top-height: 120px;    /* height of the top strip (corners + top edge) */
+  --bottom-height: 120px; /* height of the bottom strip (corners + bottom edge) */
 
-  /* Padding — each side set individually.
-     This is the only thing that stops the header
-     from touching the edges of the window. */
+  /* ---- Page padding, each side independent ---- */
+  /* Breathing room between the window edges and the content.
+     This is the ONLY thing stopping the header (and any future
+     content) from touching the window edges. Set a side to 0
+     and the content will touch that edge. */
   --pad-top: 18px;
   --pad-right: 18px;
   --pad-bottom: 18px;
   --pad-left: 18px;
 
-  /* Header */
-  --header-height: 74px;  /* how far down the header stretches */
+  /* ---- Header ---- */
+  /* How far down the header stretches. Pure preference. */
+  --header-height: 74px;
+
+  /* ---- Wallpaper tint ---- */
+  /* RGB of the color layered over the repeating background image.
+     Current value is a dark green. Useful references:
+     0, 0, 0 = darkens the image · 255, 255, 255 = lightens it. */
+  --tint-color: 0, 78, 40;
+
+  /* How strong the tint is: 0 = invisible (pure image shows),
+     1 = image fully hidden behind solid color.
+     0.66 is arbitrary — chosen because it looked good. */
+  --tint-strength: 0.75;
 }
 
 * {
+  /* Makes width/height include padding and borders, so a padded
+     element set to 100% never spills out of its parent.
+     Keep this — removing it silently changes sizing everywhere. */
   box-sizing: border-box;
 }
 
-html,
-body {
-  width: 100%;
+html {
+  /* Full window height, so body below can say "at least 100%". */
   height: 100%;
   margin: 0;
 }
 
+/* ============================================================
+   LAYER 0 (the very back): the wallpaper
+   ============================================================
+   STACKING ORDER, once and for all:
+     Layer 0 = body background (wallpaper + tint) — always back
+     Layer 1 = .frame          (z-index: 1)
+     Layer 2 = .page-content   (z-index: 2) — header lives here
+
+   IMPORTANT, read before debugging:
+   A background can NEVER paint on top of content. It is always
+   the rear-most layer by definition, no z-index involved.
+   So if you ever SEE the wallpaper "on top of" the header or a
+   frame piece, the wallpaper did not move up — that element's
+   own image failed to load and you are looking at the wallpaper
+   THROUGH the empty hole. Check the file path, spelling, and
+   capitalization of that element's url("...") first.
+   (Also: if the header image itself contains transparent areas,
+   the wallpaper showing through them is normal and correct.)
+   ============================================================ */
 body {
+  /* KEY RULE for the wallpaper:
+     "min-height: 100%" means: be at least one full screen tall,
+     but grow taller if the content needs more room.
+     The background paints the entire body box, so this one line
+     guarantees the wallpaper covers the whole screen when content
+     is short AND the whole scrollable page when content is long. */
+  min-height: 100%;
+  margin: 0;
+
+  /* The per-side padding from the settings block above. */
   padding:
     var(--pad-top)
     var(--pad-right)
     var(--pad-bottom)
     var(--pad-left);
 
-  background: #ffffff;
-  overflow: hidden;
+  /* The wallpaper: two stacked background layers.
+     Layer A (painted on top of layer B): a solid color with
+     transparency — this is the tint.
+     Layer B: the image itself.
+     Both repeat, so together they read as one tinted, tiled image. */
+  background-image:
+    linear-gradient(
+      rgba(var(--tint-color), var(--tint-strength)),
+      rgba(var(--tint-color), var(--tint-strength))
+    ),
+    url("assets/background-image.png"); /* <- your wallpaper image */
+  background-repeat: repeat;
+
+  /* NOTE: "background-attachment" is deliberately left at its
+     default (scroll). That is what makes the wallpaper move
+     WITH the content when you scroll. Setting it to "fixed"
+     would pin the image to the screen while content slides
+     over it — the opposite of what we want. Do not add it. */
+
+  /* NOTE: "overflow: hidden" used to live here and was removed
+     on purpose — it made scrolling impossible. Do not add it
+     back, or long content will be permanently cut off. */
+
+  /* Fallback color, only visible if the image fails to load.
+     Arbitrary choice (plain white) — safe to change. */
+  background-color: #ffffff;
 }
 
 /* ============================================================
-   FRAME (unchanged)
+   LAYER 1 (middle): the frame
+   A full-screen decorative border made of 8 image pieces:
+   4 corners + 4 edges, arranged in a 3x3 grid. The center
+   cell stays empty — that is where the content shows through.
    ============================================================ */
 .frame {
+  /* "fixed" pins the frame to the SCREEN, not the page:
+     when the content scrolls, the frame stays exactly where it
+     is and the content slides underneath it. That is intentional
+     — the frame is meant to feel like a window border. */
   position: fixed;
-  inset: 0;
+  inset: 0; /* shorthand for top/right/bottom/left: 0 — cover the whole screen */
+
+  /* Middle layer: above the wallpaper, below the content.
+     Only works because this element is positioned (fixed above). */
+  z-index: 1;
 
   display: grid;
 
+  /* Three columns: fixed side strip, flexible middle, fixed side strip.
+     "minmax(0, 1fr)" lets the middle shrink all the way to 0 on
+     narrow windows instead of forcing the page wider. */
   grid-template-columns:
     var(--side-width)
     minmax(0, 1fr)
     var(--side-width);
 
+  /* Same idea vertically. */
   grid-template-rows:
     var(--top-height)
     minmax(0, 1fr)
     var(--bottom-height);
 
+  /* The frame is pure decoration: clicks pass straight through it
+     to the content below. Without this it would swallow every click. */
   pointer-events: none;
+
+  /* On windows smaller than the frame itself, clip the overflow
+     instead of creating scrollbars. Defensive rule — rarely needed. */
   overflow: hidden;
 }
 
+/* Every piece fills only its own grid cell.
+   "background-size: 100% 100%" stretches the image to the exact
+   cell dimensions — same "liquid fill" behavior as the header. */
 .frame-piece {
   width: 100%;
   height: 100%;
@@ -73,7 +168,7 @@ body {
   background-size: 100% 100%;
 }
 
-/* ---- Top ---- */
+/* ---- Top row ---- */
 .top-left {
   grid-column: 1;
   grid-row: 1;
@@ -86,6 +181,9 @@ body {
   background-image: url("assets/top-edge-image.png");
 }
 
+/* The right corner reuses the LEFT corner image, mirrored with
+   scaleX(-1). Saves one image file; delete the transform and use
+   a separate image if you ever want an asymmetric design. */
 .top-right {
   grid-column: 3;
   grid-row: 1;
@@ -93,7 +191,7 @@ body {
   transform: scaleX(-1);
 }
 
-/* ---- Sides ---- */
+/* ---- Middle row (sides) ---- */
 .left-edge {
   grid-column: 1;
   grid-row: 2;
@@ -107,7 +205,7 @@ body {
   transform: scaleX(-1);
 }
 
-/* ---- Bottom ---- */
+/* ---- Bottom row ---- */
 .bottom-left {
   grid-column: 1;
   grid-row: 3;
@@ -128,22 +226,34 @@ body {
 }
 
 /* ============================================================
-   CONTENT
+   LAYER 2 (the front): content
    ============================================================ */
 .page-content {
+  /* "relative" only exists so z-index works (z-index is ignored
+     on non-positioned elements). It does not move anything. */
   position: relative;
+
+  /* Front layer: header and any future content paint above
+     both the frame and the wallpaper. */
   z-index: 2;
+
   width: 100%;
 }
 
-/* Header: stretches fully to the top and side to side —
-   only the body padding stops it */
+/* The header stretches as far up and as wide as it can —
+   only the body padding stops it.
+   "background-size: 100% 100%" = liquid fill: the image matches
+   the header's exact dimensions, touching all four edges, never
+   cropped, never leaving empty bands. Trade-off: if the image's
+   proportions differ from the header's, it visibly distorts.
+   (Alternatives: "contain" = fit without distortion but possibly
+   empty bands; "cover" = fill without distortion but cropped.) */
 .header {
   width: 100%;
   height: var(--header-height);
 
-  background-image: url("assets/header-image.png");
+  background-image: url("assets/header-image.png"); /* <- your header image */
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% 100%; /* liquid fill: exactly the div's dimensions */
+  background-size: 100% 100%;
 }
