@@ -12,17 +12,22 @@
 
   /* ---- Page padding, each side independent ---- */
   /* Breathing room between the window edges and the content.
-     This is the ONLY thing stopping the header (and any future
-     content) from touching the window edges. Set a side to 0
-     and the content will touch that edge. */
+     The header, the sticky footer, and any future content all
+     respect this padding. Set a side to 0 and things will touch
+     that edge. */
   --pad-top: 25px;
   --pad-right: 25px;
-  --pad-bottom: 25px;
+  --pad-bottom: 18px;
   --pad-left: 25px;
 
   /* ---- Header ---- */
   /* How far down the header stretches. Pure preference. */
   --header-height: 74px;
+
+  /* ---- Footer ---- */
+  /* How tall the sticky footer is. 74px matches the header for
+     symmetry — arbitrary choice, safe to change independently. */
+  --footer-height: 74px;
 
   /* ---- Wallpaper tint ---- */
   /* RGB of the color layered over the repeating background image.
@@ -32,7 +37,7 @@
 
   /* How strong the tint is: 0 = invisible (pure image shows),
      1 = image fully hidden behind solid color.
-     0.66 is arbitrary — chosen because it looked good. */
+     0.75 is arbitrary — chosen because it looked good. */
   --tint-strength: 0.75;
 }
 
@@ -56,6 +61,7 @@ html {
      Layer 0 = body background (wallpaper + tint) — always back
      Layer 1 = .frame          (z-index: 1)
      Layer 2 = .page-content   (z-index: 2) — header lives here
+     Layer 2 = .footer         (z-index: 2) — pinned to the screen
 
    IMPORTANT, read before debugging:
    A background can NEVER paint on top of content. It is always
@@ -238,6 +244,13 @@ body {
   z-index: 2;
 
   width: 100%;
+
+  /* The footer is pinned to the bottom of the SCREEN (see below),
+     so it would cover the end of a long page while scrolling.
+     This padding reserves exactly enough room for the footer plus
+     a small gap (15px, arbitrary) so no content can ever end up
+     trapped behind it. Delete it only if the footer goes away. */
+  padding-bottom: calc(var(--footer-height) + 15px);
 }
 
 /* The header stretches as far up and as wide as it can —
@@ -256,4 +269,42 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
+}
+
+/* ============================================================
+   THE STICKY FOOTER
+   Pinned to the bottom of the SCREEN with position: fixed —
+   always visible, you never scroll to reach it. It sits at the
+   front layer with the content, so scrolling content slides
+   underneath it, same as it does under the frame.
+   It respects the same padding variables as everything else:
+   left, right, and bottom are each set to their padding value,
+   so it stretches side to side as far as the padding allows.
+   ============================================================ */
+.footer {
+  position: fixed;
+  left: var(--pad-left);
+  right: var(--pad-right);
+  bottom: var(--pad-bottom);
+  height: var(--footer-height);
+  /* (no width needed — left + right together define it) */
+
+  /* Front layer, same as .page-content. It comes AFTER
+     .page-content in the HTML, so if they ever overlap,
+     the footer wins. */
+  z-index: 2;
+
+  /* Reuses the header image FOR NOW, flipped upside down with
+     scaleY(-1) — the same mirroring trick the frame corners use,
+     but vertical. When you have a dedicated footer image, change
+     the url and delete the transform line.
+     WARNING: the transform flips the WHOLE element, so any text
+     you later put inside the footer would also appear upside
+     down — use a dedicated image or ask before adding text. */
+  background-image: url("assets/header-image.png"); /* same image as header, for now */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%; /* liquid fill, same as the header */
+
+  transform: scaleY(-1); /* the upside-down mirror */
 }
