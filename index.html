@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full-Screen Image Frame</title>
+    <title>Product Layout</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,76 +26,57 @@
         <div class="frame-piece bottom-right"></div>
     </div>
 
-    <!-- LAYER 2: the inward shadow cast onto the content opening.
-         This fixed, transparent overlay follows the inner boundaries
-         of the header, footer, and side frames. It is aria-hidden
-         because it is purely decorative, while pointer-events:none
-         in the CSS prevents it from interfering with the page. -->
+    <!-- LAYER 2: the inward shadow cast onto the content opening. -->
     <div class="content-shadow" aria-hidden="true"></div>
 
-    <!-- LAYER 1: all scrollable content goes inside here.
-         The fixed shadow paints over this content, while the frame,
-         header, and footer remain above both of them. -->
+    <!-- LAYER 1: all scrollable page content. -->
     <div class="page-content">
         <header class="header">
-            <!-- Later we can add logo/text here. -->
+            <!-- Later we can add the brand and market message here. -->
         </header>
 
         <main class="content">
-            <!-- Add your content below the header. If it grows taller than
-                 the screen, the page scrolls: the tinted wallpaper covers
-                 and moves with all of it, while the frame, header, footer,
-                 and content shadow stay pinned to the screen. The CSS
-                 reserves space at the bottom so nothing gets trapped
-                 behind the footer. -->
-            <h1>Welcome to My Simple Page</h1>
-            <p>This is a simple piece of HTML content made to show how text appears on a web page. It includes a heading and a longer paragraph so you can see how content flows and wraps naturally inside the body of a page. HTML paragraphs are used for blocks of text, and the body element is where visible page content belongs [web:12][web:15][web:18].</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
+            <!-- A product is one gold name bar plus its red and green
+                 gem buttons. All three images are simple backgrounds;
+                 the visible labels and prices remain real HTML text. -->
+            <section class="products" aria-label="Products">
+                <article class="product">
+                    <div class="product-name">Full Gold Coin</div>
+                    <button class="product-price product-price--sell" type="button">5,829,000</button>
+                    <button class="product-price product-price--buy" type="button">5,872,000</button>
+                </article>
 
-            <h1>Welcome to My Simple Page</h1>
-            <p>This is a simple piece of HTML content made to show how text appears on a web page. It includes a heading and a longer paragraph so you can see how content flows and wraps naturally inside the body of a page. HTML paragraphs are used for blocks of text, and the body element is where visible page content belongs [web:12][web:15][web:18].</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
+                <article class="product">
+                    <div class="product-name">Half Gold Coin</div>
+                    <button class="product-price product-price--sell" type="button">2,914,000</button>
+                    <button class="product-price product-price--buy" type="button">2,953,000</button>
+                </article>
 
-            <h1>Welcome to My Simple Page</h1>
-            <p>This is a simple piece of HTML content made to show how text appears on a web page. It includes a heading and a longer paragraph so you can see how content flows and wraps naturally inside the body of a page. HTML paragraphs are used for blocks of text, and the body element is where visible page content belongs [web:12][web:15][web:18].</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
-            <p>this paragraph times 10</p>
+                <article class="product">
+                    <div class="product-name">Quarter Gold Coin</div>
+                    <button class="product-price product-price--sell" type="button">1,457,000</button>
+                    <button class="product-price product-price--buy" type="button">1,476,000</button>
+                </article>
+
+                <article class="product">
+                    <div class="product-name">One-Gram Gold Coin</div>
+                    <button class="product-price product-price--sell" type="button">5,835,000</button>
+                    <button class="product-price product-price--buy" type="button">5,878,000</button>
+                </article>
+
+                <article class="product">
+                    <div class="product-name">Investment Coin</div>
+                    <button class="product-price product-price--sell" type="button">5,790,000</button>
+                    <button class="product-price product-price--buy" type="button">5,833,000</button>
+                </article>
+            </section>
         </main>
     </div>
 
-    <!-- LAYER 4: the sticky footer. It lives OUTSIDE .page-content
-         because it is pinned to the screen (position: fixed) and never
-         scrolls with the content. Its position and size come entirely
-         from the CSS — nothing to set here. -->
+    <!-- LAYER 4: the fixed footer. -->
     <footer class="footer">
         <!-- WARNING: this element is flipped upside down by the CSS.
-             Any text you put inside it will also appear upside down. -->
+             Any text placed directly inside it would also be flipped. -->
     </footer>
 </body>
 </html>

@@ -20,7 +20,6 @@ color that you can change freely without breaking anything.
     --pad-bottom: 18px;
     --pad-left: 25px;
 
-    
     /* ---- Header ---- */
     /* How far down the header stretches. Pure preference. */
     --header-height: 74px;
@@ -41,7 +40,7 @@ color that you can change freely without breaking anything.
     A more negative spread produces a tighter shadow.
     Increase strength or depth for a heavier, deeper frame. */
     --content-shadow-color: 0, 0, 0;
-    --content-shadow-strength: 0.60;
+    --content-shadow-strength: 0.78;
     --content-shadow-depth: 18px;
     --content-shadow-blur: 26px;
     --content-shadow-spread: -8px;
@@ -407,4 +406,81 @@ so it stretches side to side as far as the padding allows.
     background-size: 100% 100%; /* liquid fill, same as the header */
 
     transform: scaleY(-1); /* the upside-down mirror */
+}
+
+/* ============================================================
+PRODUCTS
+
+A product consists of three simple pieces:
+1. A gold image-backed name bar.
+2. A red image-backed sell button.
+3. A green image-backed buy button.
+
+The images provide only the decoration. Product names and prices
+remain normal HTML text, so they can be changed without editing
+the image files.
+============================================================ */
+.products {
+    width: 100%;
+    max-width: 760px;
+    margin: 24px auto;
+
+    display: grid;
+    gap: 28px;
+}
+
+.product {
+    display: grid;
+    grid-template-columns: minmax(280px, 2fr) minmax(150px, 1fr) minmax(150px, 1fr);
+    gap: 28px;
+    align-items: center;
+}
+
+/* Shared sizing and image behavior for all three product pieces.
+"100% 100%" stretches each supplied image across its full box. */
+.product-name,
+.product-price {
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* Gold bar behind the product name.
+Expected file: assets/product-name-bar.png */
+.product-name {
+    color: #080808;
+    background-image: url("assets/product-name-bar.png");
+}
+
+/* Prices are real buttons, but their default browser appearance is
+removed so only the supplied gem image and price text are visible. */
+.product-price {
+    padding: 0 18px;
+    border: 0;
+    color: #f2b93b;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* Red gem used for the sell price.
+Expected file: assets/product-sell-button.png */
+.product-price--sell {
+    background-image: url("assets/product-sell-button.png");
+}
+
+/* Green gem used for the buy price.
+Expected file: assets/product-buy-button.png */
+.product-price--buy {
+    background-image: url("assets/product-buy-button.png");
 }
