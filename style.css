@@ -1,315 +1,409 @@
 /* ============================================================
-   MAIN SETTINGS
-   Every knob you will ever want to turn lives in this block.
-   Nothing here is magic — each value is a plain number or
-   color that you can change freely without breaking anything.
-   ============================================================ */
+MAIN SETTINGS
+Every knob you will ever want to turn lives in this block.
+Nothing here is magic — each value is a plain number or
+color that you can change freely without breaking anything.
+============================================================ */
 :root {
-  /* ---- Frame alignment ---- */
-  --side-width: 150px;    /* width of the left/right vertical frame strips */
-  --top-height: 150px;    /* height of the top strip (corners + top edge) */
-  --bottom-height: 150px; /* height of the bottom strip (corners + bottom edge) */
+    /* ---- Frame alignment ---- */
+    --side-width: 150px;    /* width of the left/right vertical frame strips */
+    --top-height: 150px;    /* height of the top strip (corners + top edge) */
+    --bottom-height: 150px; /* height of the bottom strip (corners + bottom edge) */
 
-  /* ---- Page padding, each side independent ---- */
-  /* Breathing room between the window edges and the content.
-     The header, the sticky footer, and any future content all
-     respect this padding. Set a side to 0 and things will touch
-     that edge. */
-  --pad-top: 25px;
-  --pad-right: 25px;
-  --pad-bottom: 18px;
-  --pad-left: 25px;
+    /* ---- Page padding, each side independent ---- */
+    /* Breathing room between the window edges and the content.
+    The header, the sticky footer, and any future content all
+    respect this padding. Set a side to 0 and things will touch
+    that edge. */
+    --pad-top: 25px;
+    --pad-right: 25px;
+    --pad-bottom: 18px;
+    --pad-left: 25px;
 
-  /* ---- Header ---- */
-  /* How far down the header stretches. Pure preference. */
-  --header-height: 74px;
+    /* ---- Header ---- */
+    /* How far down the header stretches. Pure preference. */
+    --header-height: 74px;
 
-  /* ---- Footer ---- */
-  /* How tall the sticky footer is. 74px matches the header for
-     symmetry — arbitrary choice, safe to change independently. */
-  --footer-height: 74px;
+    /* ---- Footer ---- */
+    /* How tall the sticky footer is. 74px matches the header for
+    symmetry — arbitrary choice, safe to change independently. */
+    --footer-height: 74px;
 
-  /* ---- Wallpaper tint ---- */
-  /* RGB of the color layered over the repeating background image.
-     Current value is a dark green. Useful references:
-     0, 0, 0 = darkens the image · 255, 255, 255 = lightens it. */
-  --tint-color: 0, 78, 40;
+    /* ---- Content-opening shadow ---- */
+    /* These values control the inward shadow cast by the fixed
+    header, footer, and side frames onto the scrolling content.
 
-  /* How strong the tint is: 0 = invisible (pure image shows),
-     1 = image fully hidden behind solid color.
-     0.75 is arbitrary — chosen because it looked good. */
-  --tint-strength: 0.75;
+    Color uses RGB so opacity can be adjusted independently.
+    Depth controls how far the shadow is shifted into the opening.
+    Blur controls softness, while spread controls edge concentration.
+
+    A more negative spread produces a tighter shadow.
+    Increase strength or depth for a heavier, deeper frame. */
+    --content-shadow-color: 0, 0, 0;
+    --content-shadow-strength: 0.66;
+    --content-shadow-depth: 14px;
+    --content-shadow-blur: 20px;
+    --content-shadow-spread: -6px;
+
+    /* ---- Wallpaper tint ---- */
+    /* RGB of the color layered over the repeating background image.
+    Current value is a dark green. Useful references:
+    0, 0, 0 = darkens the image · 255, 255, 255 = lightens it. */
+    --tint-color: 0, 78, 40;
+
+    /* How strong the tint is: 0 = invisible (pure image shows),
+    1 = image fully hidden behind solid color.
+    0.75 is arbitrary — chosen because it looked good. */
+    --tint-strength: 0.75;
 }
 
 * {
-  /* Makes width/height include padding and borders, so a padded
-     element set to 100% never spills out of its parent.
-     Keep this — removing it silently changes sizing everywhere. */
-  box-sizing: border-box;
+    /* Makes width/height include padding and borders, so a padded
+    element set to 100% never spills out of its parent.
+    Keep this — removing it silently changes sizing everywhere. */
+    box-sizing: border-box;
 }
 
 html {
-  /* Full window height, so body below can say "at least 100%". */
-  height: 100%;
-  margin: 0;
+    /* Full window height, so body below can say "at least 100%". */
+    height: 100%;
+    margin: 0;
 }
 
 /* ============================================================
-   LAYER 0 (the very back): the wallpaper
-   ============================================================
-   STACKING ORDER, once and for all:
-     Layer 0 = body background (wallpaper + tint) — always back
-     Layer 1 = .frame          (z-index: 1)
-     Layer 2 = .page-content   (z-index: 2) — header lives here
-     Layer 2 = .footer         (z-index: 2) — pinned to the screen
+LAYER 0 (the very back): the wallpaper
+============================================================
+STACKING ORDER, once and for all:
+Layer 0 = body background     (wallpaper + tint)
+Layer 1 = normal page content (scrolls normally)
+Layer 2 = .content-shadow     (z-index: 2 — over content)
+Layer 3 = .frame              (z-index: 3)
+Layer 4 = .header / .footer   (z-index: 4)
 
-   IMPORTANT, read before debugging:
-   A background can NEVER paint on top of content. It is always
-   the rear-most layer by definition, no z-index involved.
-   So if you ever SEE the wallpaper "on top of" the header or a
-   frame piece, the wallpaper did not move up — that element's
-   own image failed to load and you are looking at the wallpaper
-   THROUGH the empty hole. Check the file path, spelling, and
-   capitalization of that element's url("...") first.
-   (Also: if the header image itself contains transparent areas,
-   the wallpaper showing through them is normal and correct.)
-   ============================================================ */
+The shadow is deliberately above the scrolling content, so it
+darkens everything passing beneath the fixed decorative pieces.
+It remains below the frame, header, and footer themselves.
+
+IMPORTANT, read before debugging:
+A background can NEVER paint on top of content. It is always
+the rear-most layer by definition, no z-index involved.
+So if you ever SEE the wallpaper "on top of" the header or a
+frame piece, the wallpaper did not move up — that element's
+own image failed to load and you are looking at the wallpaper
+THROUGH the empty hole. Check the file path, spelling, and
+capitalization of that element's url("...") first.
+(Also: if the header image itself contains transparent areas,
+the wallpaper showing through them is normal and correct.)
+============================================================ */
 body {
-  /* KEY RULE for the wallpaper:
-     "min-height: 100%" means: be at least one full screen tall,
-     but grow taller if the content needs more room.
-     The background paints the entire body box, so this one line
-     guarantees the wallpaper covers the whole screen when content
-     is short AND the whole scrollable page when content is long. */
-  min-height: 100%;
-  margin: 0;
+    /* KEY RULE for the wallpaper:
+    "min-height: 100%" means: be at least one full screen tall,
+    but grow taller if the content needs more room.
+    The background paints the entire body box, so this one line
+    guarantees the wallpaper covers the whole screen when content
+    is short AND the whole scrollable page when content is long. */
+    min-height: 100%;
+    margin: 0;
 
-  /* The per-side padding from the settings block above. */
-  padding:
-    var(--pad-top)
-    var(--pad-right)
-    var(--pad-bottom)
-    var(--pad-left);
+    /* The per-side padding from the settings block above. */
+    padding:
+        var(--pad-top)
+        var(--pad-right)
+        var(--pad-bottom)
+        var(--pad-left);
 
-  /* The wallpaper: two stacked background layers.
-     Layer A (painted on top of layer B): a solid color with
-     transparency — this is the tint.
-     Layer B: the image itself.
-     Both repeat, so together they read as one tinted, tiled image. */
-  background-image:
-    linear-gradient(
-      rgba(var(--tint-color), var(--tint-strength)),
-      rgba(var(--tint-color), var(--tint-strength))
-    ),
-    url("assets/background-image.png"); /* <- your wallpaper image */
-  background-repeat: repeat;
+    /* The wallpaper: two stacked background layers.
+    Layer A (painted on top of layer B): a solid color with
+    transparency — this is the tint.
+    Layer B: the image itself.
+    Both repeat, so together they read as one tinted, tiled image. */
+    background-image:
+        linear-gradient(
+            rgba(var(--tint-color), var(--tint-strength)),
+            rgba(var(--tint-color), var(--tint-strength))
+        ),
+        url("assets/background-image.png"); /* <- your wallpaper image */
+    background-repeat: repeat;
 
-  /* NOTE: "background-attachment" is deliberately left at its
-     default (scroll). That is what makes the wallpaper move
-     WITH the content when you scroll. Setting it to "fixed"
-     would pin the image to the screen while content slides
-     over it — the opposite of what we want. Do not add it. */
+    /* NOTE: "background-attachment" is deliberately left at its
+    default (scroll). That is what makes the wallpaper move
+    WITH the content when you scroll. Setting it to "fixed"
+    would pin the image to the screen while content slides
+    over it — the opposite of what we want. Do not add it. */
 
-  /* NOTE: "overflow: hidden" used to live here and was removed
-     on purpose — it made scrolling impossible. Do not add it
-     back, or long content will be permanently cut off. */
+    /* NOTE: "overflow: hidden" used to live here and was removed
+    on purpose — it made scrolling impossible. Do not add it
+    back, or long content will be permanently cut off. */
 
-  /* Fallback color, only visible if the image fails to load.
-     Arbitrary choice (plain white) — safe to change. */
-  background-color: #ffffff;
+    /* Fallback color, only visible if the image fails to load.
+    Arbitrary choice (plain white) — safe to change. */
+    background-color: #ffffff;
 }
 
 /* ============================================================
-   LAYER 1 (middle): the frame
-   A full-screen decorative border made of 8 image pieces:
-   4 corners + 4 edges, arranged in a 3x3 grid. The center
-   cell stays empty — that is where the content shows through.
-   ============================================================ */
+LAYER 3: the frame
+A full-screen decorative border made of 8 image pieces:
+4 corners + 4 edges, arranged in a 3x3 grid. The center
+cell stays empty — that is where the content shows through.
+============================================================ */
 .frame {
-  /* "fixed" pins the frame to the SCREEN, not the page:
-     when the content scrolls, the frame stays exactly where it
-     is and the content slides underneath it. That is intentional
-     — the frame is meant to feel like a window border. */
-  position: fixed;
-  inset: 0; /* shorthand for top/right/bottom/left: 0 — cover the whole screen */
+    /* "fixed" pins the frame to the SCREEN, not the page:
+    when the content scrolls, the frame stays exactly where it
+    is and the content slides underneath it. That is intentional
+    — the frame is meant to feel like a window border. */
+    position: fixed;
+    inset: 0; /* shorthand for top/right/bottom/left: 0 — cover the whole screen */
 
-  /* Middle layer: above the wallpaper, below the content.
-     Only works because this element is positioned (fixed above). */
-  z-index: 1;
+    /* Above both the scrolling content and its shadow.
+    Only works because this element is positioned (fixed above). */
+    z-index: 3;
 
-  display: grid;
+    display: grid;
 
-  /* Three columns: fixed side strip, flexible middle, fixed side strip.
-     "minmax(0, 1fr)" lets the middle shrink all the way to 0 on
-     narrow windows instead of forcing the page wider. */
-  grid-template-columns:
-    var(--side-width)
-    minmax(0, 1fr)
-    var(--side-width);
+    /* Three columns: fixed side strip, flexible middle, fixed side strip.
+    "minmax(0, 1fr)" lets the middle shrink all the way to 0 on
+    narrow windows instead of forcing the page wider. */
+    grid-template-columns:
+        var(--side-width)
+        minmax(0, 1fr)
+        var(--side-width);
 
-  /* Same idea vertically. */
-  grid-template-rows:
-    var(--top-height)
-    minmax(0, 1fr)
-    var(--bottom-height);
+    /* Same idea vertically. */
+    grid-template-rows:
+        var(--top-height)
+        minmax(0, 1fr)
+        var(--bottom-height);
 
-  /* The frame is pure decoration: clicks pass straight through it
-     to the content below. Without this it would swallow every click. */
-  pointer-events: none;
+    /* The frame is pure decoration: clicks pass straight through it
+    to the content below. Without this it would swallow every click. */
+    pointer-events: none;
 
-  /* On windows smaller than the frame itself, clip the overflow
-     instead of creating scrollbars. Defensive rule — rarely needed. */
-  overflow: hidden;
+    /* On windows smaller than the frame itself, clip the overflow
+    instead of creating scrollbars. Defensive rule — rarely needed. */
+    overflow: hidden;
 }
 
 /* Every piece fills only its own grid cell.
-   "background-size: 100% 100%" stretches the image to the exact
-   cell dimensions — same "liquid fill" behavior as the header. */
+"background-size: 100% 100%" stretches the image to the exact
+cell dimensions — same "liquid fill" behavior as the header. */
 .frame-piece {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
 }
 
 /* ---- Top row ---- */
 .top-left {
-  grid-column: 1;
-  grid-row: 1;
-  background-image: url("assets/top-corner-image.png");
+    grid-column: 1;
+    grid-row: 1;
+    background-image: url("assets/top-corner-image.png");
 }
 
 .top-edge {
-  grid-column: 2;
-  grid-row: 1;
-  background-image: url("assets/top-edge-image.png");
+    grid-column: 2;
+    grid-row: 1;
+    background-image: url("assets/top-edge-image.png");
 }
 
 /* The right corner reuses the LEFT corner image, mirrored with
-   scaleX(-1). Saves one image file; delete the transform and use
-   a separate image if you ever want an asymmetric design. */
+scaleX(-1). Saves one image file; delete the transform and use
+a separate image if you ever want an asymmetric design. */
 .top-right {
-  grid-column: 3;
-  grid-row: 1;
-  background-image: url("assets/top-corner-image.png");
-  transform: scaleX(-1);
+    grid-column: 3;
+    grid-row: 1;
+    background-image: url("assets/top-corner-image.png");
+    transform: scaleX(-1);
 }
 
 /* ---- Middle row (sides) ---- */
 .left-edge {
-  grid-column: 1;
-  grid-row: 2;
-  background-image: url("assets/side-edge-image.png");
+    grid-column: 1;
+    grid-row: 2;
+    background-image: url("assets/side-edge-image.png");
 }
 
 .right-edge {
-  grid-column: 3;
-  grid-row: 2;
-  background-image: url("assets/side-edge-image.png");
-  transform: scaleX(-1);
+    grid-column: 3;
+    grid-row: 2;
+    background-image: url("assets/side-edge-image.png");
+    transform: scaleX(-1);
 }
 
 /* ---- Bottom row ---- */
 .bottom-left {
-  grid-column: 1;
-  grid-row: 3;
-  background-image: url("assets/bottom-corner-image.png");
+    grid-column: 1;
+    grid-row: 3;
+    background-image: url("assets/bottom-corner-image.png");
 }
 
 .bottom-edge {
-  grid-column: 2;
-  grid-row: 3;
-  background-image: url("assets/bottom-edge-image.png");
+    grid-column: 2;
+    grid-row: 3;
+    background-image: url("assets/bottom-edge-image.png");
 }
 
 .bottom-right {
-  grid-column: 3;
-  grid-row: 3;
-  background-image: url("assets/bottom-corner-image.png");
-  transform: scaleX(-1);
+    grid-column: 3;
+    grid-row: 3;
+    background-image: url("assets/bottom-corner-image.png");
+    transform: scaleX(-1);
 }
 
 /* ============================================================
-   LAYER 2 (the front): content
-   ============================================================ */
+LAYER 2: THE CONTENT-OPENING SHADOW
+
+This transparent fixed rectangle represents the opening between
+the header, footer, and side frames. Its four inset shadows make
+those surrounding pieces appear to cast depth onto everything
+scrolling beneath them.
+
+The opening uses the same padding, header-height, and footer-height
+variables as the visible layout. Therefore it stays aligned when
+those dimensions are changed in the settings block.
+
+This element must remain transparent and pointer-events must stay
+disabled. It is a visual overlay only and must never block links,
+buttons, text selection, or other interaction.
+============================================================ */
+.content-shadow {
+    position: fixed;
+
+    /* Match the four visible inner boundaries of the frame opening. */
+    top: calc(var(--pad-top) + var(--header-height));
+    right: var(--pad-right);
+    bottom: calc(var(--pad-bottom) + var(--footer-height));
+    left: var(--pad-left);
+
+    /* Above scrolling content, below all fixed decorative pieces. */
+    z-index: 2;
+
+    pointer-events: none;
+
+    /* One inward shadow for each edge.
+    Positive offsets cast from the top and left.
+    Negative offsets cast from the bottom and right.
+
+    All visual adjustments should normally be made through the
+    shadow variables in :root rather than editing these four lines. */
+    box-shadow:
+        inset 0
+            var(--content-shadow-depth)
+            var(--content-shadow-blur)
+            var(--content-shadow-spread)
+            rgba(
+                var(--content-shadow-color),
+                var(--content-shadow-strength)
+            ),
+
+        inset 0
+            calc(0px - var(--content-shadow-depth))
+            var(--content-shadow-blur)
+            var(--content-shadow-spread)
+            rgba(
+                var(--content-shadow-color),
+                var(--content-shadow-strength)
+            ),
+
+        inset var(--content-shadow-depth)
+            0
+            var(--content-shadow-blur)
+            var(--content-shadow-spread)
+            rgba(
+                var(--content-shadow-color),
+                var(--content-shadow-strength)
+            ),
+
+        inset calc(0px - var(--content-shadow-depth))
+            0
+            var(--content-shadow-blur)
+            var(--content-shadow-spread)
+            rgba(
+                var(--content-shadow-color),
+                var(--content-shadow-strength)
+            );
+}
+
+/* ============================================================
+LAYER 1: scrollable content
+============================================================ */
 .page-content {
-  /* "relative" only exists so z-index works (z-index is ignored
-     on non-positioned elements). It does not move anything. */
-  position: relative;
+    /* Keeps the element available as a positioning reference without
+    creating a stacking context. This allows the fixed header to use
+    the page-wide stacking order defined above. */
+    position: relative;
+    z-index: auto;
 
-  /* Front layer: header and any future content paint above
-     both the frame and the wallpaper. */
-  z-index: 0;
+    width: 100%;
 
-  width: 100%;
-/* Breathing room on every side of the content.
-   Top and bottom also reserve space for the pinned header
-   and footer so nothing can get trapped behind them. */
-padding-top: calc(var(--header-height) + var(--pad-top));
-padding-right: var(--pad-right);
-padding-bottom: calc(var(--footer-height) + 15px);
-padding-left: var(--pad-left);
+    /* Breathing room on every side of the content.
+    Top and bottom also reserve space for the pinned header
+    and footer so nothing can get trapped behind them. */
+    padding-top: calc(var(--header-height) + var(--pad-top));
+    padding-right: var(--pad-right);
+    padding-bottom: calc(var(--footer-height) + 15px);
+    padding-left: var(--pad-left);
 }
 
 /* The header stretches as far up and as wide as it can —
-   only the body padding stops it.
-   "background-size: 100% 100%" = liquid fill: the image matches
-   the header's exact dimensions, touching all four edges, never
-   cropped, never leaving empty bands. Trade-off: if the image's
-   proportions differ from the header's, it visibly distorts.
-   (Alternatives: "contain" = fit without distortion but possibly
-   empty bands; "cover" = fill without distortion but cropped.) */
+only the body padding stops it.
+"background-size: 100% 100%" = liquid fill: the image matches
+the header's exact dimensions, touching all four edges, never
+cropped, never leaving empty bands. Trade-off: if the image's
+proportions differ from the header's, it visibly distorts.
+(Alternatives: "contain" = fit without distortion but possibly
+empty bands; "cover" = fill without distortion but cropped.) */
 .header {
-  position: fixed;
-  top: var(--pad-top);
-  left: var(--pad-left);
-  right: var(--pad-right);
-  width: auto;
-  height: var(--header-height);
+    position: fixed;
+    top: var(--pad-top);
+    left: var(--pad-left);
+    right: var(--pad-right);
+    width: auto;
+    height: var(--header-height);
 
-  background-image: url("assets/header-image.png"); /* <- your header image */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  z-index: 2;
+    background-image: url("assets/header-image.png"); /* <- your header image */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
+    /* Above the content shadow and decorative frame. */
+    z-index: 4;
 }
 
 /* ============================================================
-   THE STICKY FOOTER
-   Pinned to the bottom of the SCREEN with position: fixed —
-   always visible, you never scroll to reach it. It sits at the
-   front layer with the content, so scrolling content slides
-   underneath it, same as it does under the frame.
-   It respects the same padding variables as everything else:
-   left, right, and bottom are each set to their padding value,
-   so it stretches side to side as far as the padding allows.
-   ============================================================ */
+LAYER 4: THE STICKY FOOTER
+Pinned to the bottom of the SCREEN with position: fixed —
+always visible, you never scroll to reach it. It sits above the
+content shadow, so scrolling content and its shadow remain below
+it, same as they do beneath the frame.
+It respects the same padding variables as everything else:
+left, right, and bottom are each set to their padding value,
+so it stretches side to side as far as the padding allows.
+============================================================ */
 .footer {
-  position: fixed;
-  left: var(--pad-left);
-  right: var(--pad-right);
-  bottom: var(--pad-bottom);
-  height: var(--footer-height);
-  /* (no width needed — left + right together define it) */
+    position: fixed;
+    left: var(--pad-left);
+    right: var(--pad-right);
+    bottom: var(--pad-bottom);
+    height: var(--footer-height);
+    /* (no width needed — left + right together define it) */
 
-  /* Front layer, same as .page-content. It comes AFTER
-     .page-content in the HTML, so if they ever overlap,
-     the footer wins. */
-  z-index: 2;
+    /* Above the content shadow and decorative frame. */
+    z-index: 4;
 
-  /* Reuses the header image FOR NOW, flipped upside down with
-     scaleY(-1) — the same mirroring trick the frame corners use,
-     but vertical. When you have a dedicated footer image, change
-     the url and delete the transform line.
-     WARNING: the transform flips the WHOLE element, so any text
-     you later put inside the footer would also appear upside
-     down — use a dedicated image or ask before adding text. */
-  background-image: url("assets/header-image.png"); /* same image as header, for now */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%; /* liquid fill, same as the header */
+    /* Reuses the header image FOR NOW, flipped upside down with
+    scaleY(-1) — the same mirroring trick the frame corners use,
+    but vertical. When you have a dedicated footer image, change
+    the url and delete the transform line.
+    WARNING: the transform flips the WHOLE element, so any text
+    you later put inside the footer would also appear upside
+    down — use a dedicated image or ask before adding text. */
+    background-image: url("assets/header-image.png"); /* same image as header, for now */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%; /* liquid fill, same as the header */
 
-  transform: scaleY(-1); /* the upside-down mirror */
+    transform: scaleY(-1); /* the upside-down mirror */
 }
