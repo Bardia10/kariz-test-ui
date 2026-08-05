@@ -36,9 +36,18 @@
         </header>
 
         <main class="content">
-            <!-- A product is one gold name bar plus its red and green
-                 gem buttons. All three images are simple backgrounds;
-                 the visible labels and prices remain real HTML text. -->
+            <!-- A product is one gold or silver name bar plus its red
+                 and green gem buttons. All three images are simple
+                 backgrounds; labels and prices remain real HTML text.
+
+                 Gold name bar (default):
+                 class="product-name"
+
+                 Silver name bar:
+                 class="product-name product-name--silver"
+
+                 Only the class changes. The product structure and text
+                 stay exactly the same. -->
             <section class="products" aria-label="Products">
                 <article class="product">
                     <div class="product-name">Full Gold Coin</div>

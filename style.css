@@ -426,13 +426,19 @@ the image files.
     margin: 24px auto;
 
     display: grid;
-    gap: 28px;
+
+    /* Controls the vertical distance between complete product rows.
+    This is deliberately larger than the spacing between the three
+    pieces inside each row, so every product reads as one group. */
+    row-gap: 36px;
 }
 
 .product {
     display: grid;
     grid-template-columns: minmax(280px, 2fr) minmax(150px, 1fr) minmax(150px, 1fr);
-    gap: 28px;
+
+    /* Keeps the name bar and its two buttons visually connected. */
+    column-gap: 18px;
     align-items: center;
 }
 
@@ -442,9 +448,12 @@ the image files.
 .product-price {
     height: 68px;
 
+    /* Flex centering keeps both labels and prices exactly centered
+    horizontally and vertically, regardless of the text length. */
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     background-repeat: no-repeat;
     background-position: center;
@@ -454,13 +463,26 @@ the image files.
     font-size: 24px;
     line-height: 1;
     white-space: nowrap;
+
+    /* A small down-right shadow suggests a light source above and to
+    the left. The short distance and tight blur keep each piece resting
+    on the page instead of making it appear to float above the page. */
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.36);
 }
 
-/* Gold bar behind the product name.
+/* Gold is the default product-name bar.
 Expected file: assets/product-name-bar.png */
 .product-name {
     color: #080808;
     background-image: url("assets/product-name-bar.png");
+}
+
+/* Optional silver version of the same product-name bar.
+Add "product-name--silver" beside "product-name" in the HTML
+for any product that should use the silver image instead.
+Expected file: assets/product-name-bar-silver.png */
+.product-name--silver {
+    background-image: url("assets/product-name-bar-silver.png");
 }
 
 /* Prices are real buttons, but their default browser appearance is
