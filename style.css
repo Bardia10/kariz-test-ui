@@ -244,6 +244,7 @@ body {
   z-index: 2;
 
   width: 100%;
+  padding-top: calc(var(--header-height) + var(--pad-top));
 
   /* The footer is pinned to the bottom of the SCREEN (see below),
      so it would cover the end of a long page while scrolling.
@@ -262,13 +263,18 @@ body {
    (Alternatives: "contain" = fit without distortion but possibly
    empty bands; "cover" = fill without distortion but cropped.) */
 .header {
-  width: 100%;
+  position: fixed;
+  top: var(--pad-top);
+  left: var(--pad-left);
+  right: var(--pad-right);
+  width: auto;
   height: var(--header-height);
 
   background-image: url("assets/header-image.png"); /* <- your header image */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
+  z-index: 2;
 }
 
 /* ============================================================
