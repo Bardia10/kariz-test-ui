@@ -24,6 +24,29 @@ color that you can change freely without breaking anything.
     /* How far down the header stretches. Pure preference. */
     --header-height: 74px;
 
+    /* ---- Header logo ---- */
+    /* The logo keeps its natural proportions. Height controls its
+    visible size; left offset controls its distance from the header's
+    left edge. The image file must be assets/logo.png. */
+    --logo-height: 64px;
+    --logo-left-offset: 6px;
+
+    /* ---- Product layout ---- */
+    /* Products are arranged two per row. Product-column-gap controls
+    the larger space between those two complete products. Piece-gap
+    controls the smaller space between a title and its two buttons. */
+    --product-row-gap: 36px;
+    --product-column-gap: 48px;
+    --product-piece-gap: 8px;
+    --product-piece-height: 58px;
+
+    /* ---- Gem button underlay ---- */
+    /* This translucent color paints BEHIND each gem PNG. It is only
+    visible through transparent parts of the image. Strength ranges
+    from 0 (invisible) to 1 (fully opaque). */
+    --gem-underlay-color: 0, 0, 0;
+    --gem-underlay-strength: 0.24;
+
     /* ---- Footer ---- */
     /* How tall the sticky footer is. 74px matches the header for
     symmetry — arbitrary choice, safe to change independently. */
@@ -368,8 +391,28 @@ empty bands; "cover" = fill without distortion but cropped.) */
     background-position: center;
     background-size: 100% 100%;
 
+    /* The logo is normal content inside the header. Flex alignment
+    centers it vertically without changing the background image. */
+    display: flex;
+    align-items: center;
+
     /* Above the content shadow and decorative frame. */
     z-index: 4;
+}
+
+/* Non-clickable PNG logo placed inside the fixed header.
+The image preserves its natural proportions and never stretches. */
+.header-logo {
+    display: block;
+    width: auto;
+    height: var(--logo-height);
+    max-width: 40%;
+    margin-left: var(--logo-left-offset);
+    object-fit: contain;
+
+    /* The logo is display-only: it cannot capture clicks or selection. */
+    pointer-events: none;
+    user-select: none;
 }
 
 /* ============================================================
@@ -422,23 +465,34 @@ the image files.
 ============================================================ */
 .products {
     width: 100%;
-    max-width: 760px;
+    max-width: 1200px;
     margin: 24px auto;
 
+    /* Two equal columns create two complete products per row.
+    Each grid cell contains one title plus its sell and buy buttons. */
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    /* Controls the vertical distance between complete product rows.
-    This is deliberately larger than the spacing between the three
-    pieces inside each row, so every product reads as one group. */
-    row-gap: 36px;
+    /* Row gap separates one horizontal pair from the next.
+    Column gap separates the two complete products in each row. */
+    row-gap: var(--product-row-gap);
+    column-gap: var(--product-column-gap);
 }
 
 .product {
+    min-width: 0;
     display: grid;
-    grid-template-columns: minmax(280px, 2fr) minmax(150px, 1fr) minmax(150px, 1fr);
 
-    /* Keeps the name bar and its two buttons visually connected. */
-    column-gap: 18px;
+    /* The title receives more width than either price button.
+    minmax(0, ...) allows all three pieces to shrink cleanly inside
+    their half of the two-column product layout. */
+    grid-template-columns:
+        minmax(0, 1.7fr)
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    /* Deliberately smaller than the gap between complete products. */
+    column-gap: var(--product-piece-gap);
     align-items: center;
 }
 
@@ -446,7 +500,7 @@ the image files.
 "100% 100%" stretches each supplied image across its full box. */
 .product-name,
 .product-price {
-    height: 68px;
+    height: var(--product-piece-height);
 
     /* Flex centering keeps both labels and prices exactly centered
     horizontally and vertically, regardless of the text length. */
@@ -459,8 +513,11 @@ the image files.
     background-position: center;
     background-size: 100% 100%;
 
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 24px;
+    /* A plain bold sans-serif stack. Arial is attempted first,
+    Helvetica second, then the browser's standard sans-serif font. */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
     line-height: 1;
     white-space: nowrap;
 
@@ -474,6 +531,7 @@ the image files.
 Expected file: assets/product-name-bar.png */
 .product-name {
     color: #080808;
+    font-size: 18px;
     background-image: url("assets/product-name-bar.png");
 }
 
@@ -488,10 +546,18 @@ Expected file: assets/product-name-bar-silver.png */
 /* Prices are real buttons, but their default browser appearance is
 removed so only the supplied gem image and price text are visible. */
 .product-price {
-    padding: 0 18px;
+    padding: 0 8px;
     border: 0;
-    color: #f2b93b;
-    background-color: transparent;
+    color: #fdff97;
+
+    /* The translucent underlay sits behind the PNG and shows through
+    only where the gem image is transparent. It is not a second image
+    and does not change the button's existing gem artwork. */
+    background-color: rgba(
+        var(--gem-underlay-color),
+        var(--gem-underlay-strength)
+    );
+    border-radius: 10px;
     cursor: pointer;
 }
 
