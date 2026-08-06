@@ -43,6 +43,7 @@ color that you can change freely without breaking anything.
     --announcement-color: 255, 211, 92;
     --announcement-font-size: 18px;
     --announcement-duration: 18s;
+    --announcement-vertical-offset: -3px;
 
     /* Width of the invisible fade where the message approaches the
     logo. This is an alpha mask, not a colored shadow. */
@@ -56,6 +57,16 @@ color that you can change freely without breaking anything.
     --product-column-gap: 48px;
     --product-piece-gap: 8px;
     --product-piece-height: 58px;
+
+    /* ---- Product categories ---- */
+    /* Category wrappers remain visually empty. These values control
+    only the spacing, centered title, and ornamental divider. */
+    --category-space: 64px;
+    --category-title-color: 242, 238, 232;
+    --category-title-size: 30px;
+    --category-divider-color: 242, 238, 232;
+    --category-divider-height: 38px;
+    --category-divider-gap: 18px;
 
     /* ---- Opening information card ---- */
     /* Controls the introductory tile shown before the product lists. */
@@ -76,6 +87,12 @@ color that you can change freely without breaking anything.
     --info-card-shadow-blur: 8px;
     --info-card-shadow-color: 0, 0, 0;
     --info-card-shadow-strength: 0.36;
+
+    /* ---- Tiled-panel underlay ---- */
+    /* This translucent black paints BEHIND div-tile-background.png.
+    It is shared by every panel that uses that decorative image. */
+    --tile-panel-underlay-color: 0, 0, 0;
+    --tile-panel-underlay-strength: 0.28;
 
     /* ---- Gem button underlay ---- */
     /* This translucent color paints BEHIND each gem PNG. It is only
@@ -120,7 +137,7 @@ color that you can change freely without breaking anything.
 
     /* ---- Footer navigation ---- */
     /* Icon and text use currentColor, so each state changes both.
-    Silver = default, bronze = hover, gold = current page. */
+    Bronze = default, silver = hover, gold = current page. */
     --footer-nav-max-width: 900px;
     --footer-nav-icon-size: 20px;
     --footer-nav-silver: 190, 194, 200;
@@ -143,6 +160,19 @@ color that you can change freely without breaking anything.
     --loading-text-size: 22px;
     --loading-content-gap: 16px;
     --loading-overlay-transition: 180ms;
+
+    /* ---- History menu and table ---- */
+    --history-menu-max-width: 760px;
+    --history-menu-gap: 28px;
+    --history-menu-button-height: 74px;
+    --history-gold-line: 205, 151, 45;
+    --history-column-tint: 160, 160, 160;
+    --history-column-tint-strength: 0.09;
+    --history-row-hover: 190, 190, 190;
+    --history-row-hover-strength: 0.18;
+    --history-table-text: 0, 0, 0;
+    --history-table-background: 0, 0, 0;
+    --history-table-background-strength: 0.0;
 
     /* ---- Content-opening shadow ---- */
     /* These values control the inward shadow cast by the fixed
@@ -526,6 +556,7 @@ can never enter the logo territory or leave the header.
     right: var(--announcement-right);
     top: 0;
     bottom: 0;
+    transform: translateY(var(--announcement-vertical-offset));
 
     display: flex;
     align-items: center;
@@ -1097,10 +1128,11 @@ The overlay blocks interaction, blurs the page, and pulses the logo.
     font-family: Arial, Helvetica, sans-serif;
     font-size: var(--loading-text-size);
     font-weight: 350;
-    line-height: 1.0;
+    line-height: 1;
 }
 
-.loading-overlay.is-active .loading-overlay-logo {
+.loading-overlay.is-active .loading-overlay-logo,
+.loading-overlay.is-active .loading-overlay-text {
     animation: loading-logo-pulse
         var(--loading-logo-pulse-duration)
         ease-in-out
@@ -1136,8 +1168,243 @@ buttons, but without automatic scrolling or animated size changes. */
         transition: none;
     }
 
-    .loading-overlay.is-active .loading-overlay-logo {
+    .loading-overlay.is-active .loading-overlay-logo,
+    .loading-overlay.is-active .loading-overlay-text {
         animation: none;
         opacity: var(--loading-logo-max-opacity);
     }
+}
+
+
+/* ============================================================
+SHARED TILED-PANEL UNDERLAY
+
+Every panel using div-tile-background.png receives the same
+translucent black base. The color sits behind the PNG and appears
+only through transparent or partially transparent image areas.
+============================================================ */
+.info-card,
+.page-placeholder {
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+}
+
+/* ============================================================
+PRODUCT CATEGORIES
+
+Category wrappers intentionally have no border and no background.
+Spacing and a centered ornamental heading are their only structure.
+============================================================ */
+.product-category {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-category + .product-category {
+    margin-top: var(--category-space);
+}
+
+.category-title-row {
+    width: 100%;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: minmax(80px, 1fr) auto minmax(80px, 1fr);
+    align-items: center;
+    gap: var(--category-divider-gap);
+    color: rgba(var(--category-divider-color), 1);
+}
+
+.category-title-row svg {
+    display: block;
+    width: 100%;
+    height: var(--category-divider-height);
+    overflow: visible;
+}
+
+.category-title-row .category-divider--right {
+    transform: scaleX(-1);
+}
+
+.category-title {
+    margin: 0;
+    color: rgba(var(--category-title-color), 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(22px, 3vw, var(--category-title-size));
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+/* Product spacing belongs to the category wrapper now, so the old
+.products margin is removed without changing its two-column grid. */
+.product-category .products {
+    margin: 0;
+}
+
+/* ============================================================
+HISTORY MENU
+
+Both choices share one image file. Trade History is a link to the
+detailed table; Payment History is deliberately inactive for now.
+============================================================ */
+.history-menu {
+    width: min(100%, var(--history-menu-max-width));
+    margin: 64px auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--history-menu-gap);
+}
+
+.history-menu-button {
+    height: var(--history-menu-button-height);
+    padding: 0 20px;
+    border: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(var(--footer-nav-gold), 1);
+    background-color: transparent;
+    background-image: url("assets/history-menu-button.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(15px, 2vw, 22px);
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.36);
+}
+
+.history-menu-button:hover {
+    color: rgba(var(--footer-nav-bronze), 1);
+}
+
+.history-menu-button--inactive {
+    cursor: default;
+}
+
+/* ============================================================
+TRADE-HISTORY TABLE
+
+The outer viewport scrolls horizontally when columns no longer fit.
+Rows are separated only by gold horizontal lines. Even-numbered
+columns receive a faint gray tint, and row hover/press overrides it.
+============================================================ */
+.history-table-page {
+    width: min(100%, 1200px);
+    margin: 36px auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.history-table-heading {
+    margin: 0 0 20px;
+    color: rgba(var(--category-title-color), 1);
+    text-align: center;
+}
+
+.history-back-link {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: rgba(var(--footer-nav-gold), 1);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.history-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    background-color: rgba(
+        var(--history-table-background),
+        var(--history-table-background-strength)
+    );
+    scrollbar-width: thin;
+}
+
+.trade-history-table {
+    width: 100%;
+    min-width: 940px;
+    border-collapse: collapse;
+    color: rgba(var(--history-table-text), 1);
+    text-align: left;
+}
+
+.trade-history-table th,
+.trade-history-table td {
+    padding: 14px 16px;
+    white-space: nowrap;
+}
+
+.trade-history-table thead tr,
+.trade-history-table tbody tr {
+    border-bottom: 1px solid rgba(var(--history-gold-line), 0.85);
+}
+
+.trade-history-table th {
+    color: rgba(var(--footer-nav-gold), 1);
+    font-weight: 700;
+}
+
+.trade-history-table th:nth-child(even),
+.trade-history-table td:nth-child(even) {
+    background-color: rgba(
+        var(--history-column-tint),
+        var(--history-column-tint-strength)
+    );
+}
+
+.trade-history-table tbody tr:hover td,
+.trade-history-table tbody tr:active td {
+    background-color: rgba(
+        var(--history-row-hover),
+        var(--history-row-hover-strength)
+    );
+}
+
+.trade-history-table tr[hidden] {
+    display: none;
+}
+
+.history-pagination {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.history-pagination button {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px 12px;
+    border: 1px solid rgba(var(--history-gold-line), 0.8);
+    color: rgba(var(--history-table-text), 1);
+    background-color: rgba(0, 0, 0, 0.5);
+    font: inherit;
+    cursor: pointer;
+}
+
+.history-pagination button:hover,
+.history-pagination button[aria-current="page"] {
+    color: #080808;
+    background-color: rgba(var(--footer-nav-gold), 1);
+}
+
+.history-pagination button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.history-pagination-pages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }

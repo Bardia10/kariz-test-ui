@@ -1,0 +1,70 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1200 64"
+  width="1200"
+  height="64"
+  fill="none"
+  color="#d8d2d2"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">Ornamental text divider</title>
+  <desc id="desc">Two fine horizontal rules with mirrored diamond-and-leaf ornaments pointing toward a central text space.</desc>
+
+  <defs>
+    <g id="divider-half">
+      <!-- Subtle double rule -->
+      <path d="M22 30.5H424" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M22 34H424" stroke="currentColor" stroke-width=".65" opacity=".38"/>
+      <circle cx="22" cy="30.5" r="1.7" fill="currentColor" opacity=".7"/>
+
+      <!-- Stem into the ornament -->
+      <path d="M424 30.5H449" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M424 34H442" stroke="currentColor" stroke-width=".65" opacity=".38"/>
+
+      <!-- Layered leaf and diamond ornament -->
+      <path
+        d="M441 31.8 449.5 24l7.1 6.2-7.1 7.7-8.5-6.1Z"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      />
+      <path
+        d="m447.5 31.5 8.6-9.2 8.1 9.2-8.1 9.3-8.6-9.3Z"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      />
+      <path
+        d="m454 31.5 7.6-6.4 8.5 6.4-8.5 6.5-7.6-6.5Z"
+        fill="currentColor"
+        fill-opacity=".17"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      />
+      <path d="m456.5 25.3 5.1 6.2-5.1 6.3" stroke="currentColor" stroke-width="1.25"/>
+      <path d="m448.8 25.4 5.3 6.1-5.3 6.3" stroke="currentColor" stroke-width="1.1"/>
+
+      <!-- Pointed flourish facing the text -->
+      <path
+        d="m462 25.1 12.6 6.4L462 38l4.5-6.5-4.5-6.4Z"
+        fill="currentColor"
+        fill-opacity=".12"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      />
+      <path d="m467 28.2 7.6 3.3-7.6 3.4 2.3-3.4-2.3-3.3Z" fill="currentColor"/>
+
+      <!-- Small engraved highlights -->
+      <path d="m442.5 31.7 7-2.8M442.5 31.7l7 3" stroke="currentColor" stroke-width=".75" opacity=".7"/>
+      <circle cx="461.6" cy="31.5" r="1.45" fill="currentColor"/>
+    </g>
+  </defs>
+
+  <g transform="translate(0 .5)">
+    <use href="#divider-half"/>
+    <use href="#divider-half" transform="translate(1200 0) scale(-1 1)"/>
+  </g>
+</svg>

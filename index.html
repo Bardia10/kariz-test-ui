@@ -47,154 +47,97 @@
         </header>
 
         <main class="content">
-            <!-- OPENING INFORMATION CARD
-                 This section appears before the products. Its decorative
-                 background file must be assets/div-tile-background.png. -->
+            <!-- Shared tiled panel: div-tile-background.png paints above
+                 the translucent black underlay defined in style.css. -->
             <section class="info-card" aria-labelledby="info-card-title">
-                <h1 class="info-card-title" id="info-card-title">
-                    Current Gold Market
-                </h1>
-
+                <h1 class="info-card-title" id="info-card-title">Current Gold Market</h1>
                 <p class="info-card-description">
-                    Review the current Mazane and per-gram prices before
-                    continuing with a sale.
+                    Review the current Mazane and per-gram prices before continuing with a sale.
                 </p>
 
-                <!-- Two horizontal metric columns. Each metric is a
-                     vertical stack containing its label and value. -->
                 <div class="info-card-metrics">
                     <div class="info-card-metric">
                         <span class="info-card-metric-label">Mazane price</span>
                         <strong class="info-card-metric-value">78,244,345</strong>
                     </div>
-
                     <div class="info-card-metric">
                         <span class="info-card-metric-label">Per Gram</span>
                         <strong class="info-card-metric-value">18,323,232</strong>
                     </div>
                 </div>
 
-                <!-- Reuses the existing ruby image, tint, and hover growth. -->
-                <button
-                    class="product-price product-price--sell info-card-sell"
-                    type="button"
-                >Sell</button>
+                <button class="product-price product-price--sell info-card-sell" type="button">Sell</button>
             </section>
 
-            <!-- PRODUCT STRUCTURE
-                 A product is one gold or silver name bar plus its red
-                 and green gem buttons. The images are backgrounds;
-                 labels and prices remain real HTML text.
+            <!-- Categories have no visible panel, border, or background. -->
+            <section class="product-category" aria-labelledby="coins-title">
+                <div class="category-title-row">
+                    <svg viewBox="0 0 480 64" aria-hidden="true">
+                        <use href="assets/ornamental-text-divider.svg#divider-half"></use>
+                    </svg>
+                    <h2 class="category-title" id="coins-title">Coins</h2>
+                    <svg class="category-divider--right" viewBox="0 0 480 64" aria-hidden="true">
+                        <use href="assets/ornamental-text-divider.svg#divider-half"></use>
+                    </svg>
+                </div>
 
-                 Gold name bar (default):
-                 class="product-name"
-
-                 Silver name bar:
-                 class="product-name product-name--silver"
-
-                 Only the title class changes. The rest of the product
-                 structure remains exactly the same. -->
-
-            <!-- PRODUCT GROUP 1
-                 The repeated groups below exist only to provide enough
-                 content for scrolling tests. Remove or replace any group
-                 without changing the product CSS. -->
-            <section class="products" aria-label="Products group 1">
-                <article class="product">
-                    <div class="product-name">Full Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,829,000</button>
-                    <button class="product-price product-price--buy" type="button">5,872,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name">Half Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">2,914,000</button>
-                    <button class="product-price product-price--buy" type="button">2,953,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name">Quarter Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">1,457,000</button>
-                    <button class="product-price product-price--buy" type="button">1,476,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name">One-Gram Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,835,000</button>
-                    <button class="product-price product-price--buy" type="button">5,878,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name product-name--silver">Investment Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,790,000</button>
-                    <button class="product-price product-price--buy" type="button">5,833,000</button>
-                </article>
+                <div class="products">
+                    <article class="product">
+                        <div class="product-name">Full Gold Coin</div>
+                        <button class="product-price product-price--sell" type="button">5,829,000</button>
+                        <button class="product-price product-price--buy" type="button">5,872,000</button>
+                    </article>
+                    <article class="product">
+                        <div class="product-name">Half Gold Coin</div>
+                        <button class="product-price product-price--sell" type="button">2,914,000</button>
+                        <button class="product-price product-price--buy" type="button">2,953,000</button>
+                    </article>
+                    <article class="product">
+                        <div class="product-name">Quarter Gold Coin</div>
+                        <button class="product-price product-price--sell" type="button">1,457,000</button>
+                        <button class="product-price product-price--buy" type="button">1,476,000</button>
+                    </article>
+                    <article class="product">
+                        <div class="product-name">One-Gram Gold Coin</div>
+                        <button class="product-price product-price--sell" type="button">5,835,000</button>
+                        <button class="product-price product-price--buy" type="button">5,878,000</button>
+                    </article>
+                </div>
             </section>
 
-            <!-- PRODUCT GROUP 2 -->
-            <section class="products" aria-label="Products group 2">
-                <article class="product">
-                    <div class="product-name">Full Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,829,000</button>
-                    <button class="product-price product-price--buy" type="button">5,872,000</button>
-                </article>
+            <section class="product-category" aria-labelledby="bars-title">
+                <div class="category-title-row">
+                    <svg viewBox="0 0 480 64" aria-hidden="true">
+                        <use href="assets/ornamental-text-divider.svg#divider-half"></use>
+                    </svg>
+                    <h2 class="category-title" id="bars-title">Bars</h2>
+                    <svg class="category-divider--right" viewBox="0 0 480 64" aria-hidden="true">
+                        <use href="assets/ornamental-text-divider.svg#divider-half"></use>
+                    </svg>
+                </div>
 
-                <article class="product">
-                    <div class="product-name">Half Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">2,914,000</button>
-                    <button class="product-price product-price--buy" type="button">2,953,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name">Quarter Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">1,457,000</button>
-                    <button class="product-price product-price--buy" type="button">1,476,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name">One-Gram Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,835,000</button>
-                    <button class="product-price product-price--buy" type="button">5,878,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name product-name--silver">Investment Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,790,000</button>
-                    <button class="product-price product-price--buy" type="button">5,833,000</button>
-                </article>
-            </section>
-
-            <!-- PRODUCT GROUP 3 -->
-            <section class="products" aria-label="Products group 3">
-                <article class="product">
-                    <div class="product-name">Full Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,829,000</button>
-                    <button class="product-price product-price--buy" type="button">5,872,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name">Half Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">2,914,000</button>
-                    <button class="product-price product-price--buy" type="button">2,953,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name">Quarter Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">1,457,000</button>
-                    <button class="product-price product-price--buy" type="button">1,476,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name">One-Gram Gold Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,835,000</button>
-                    <button class="product-price product-price--buy" type="button">5,878,000</button>
-                </article>
-
-                <article class="product">
-                    <div class="product-name product-name--silver">Investment Coin</div>
-                    <button class="product-price product-price--sell" type="button">5,790,000</button>
-                    <button class="product-price product-price--buy" type="button">5,833,000</button>
-                </article>
+                <div class="products">
+                    <article class="product">
+                        <div class="product-name">1-Gram Gold Bar</div>
+                        <button class="product-price product-price--sell" type="button">6,120,000</button>
+                        <button class="product-price product-price--buy" type="button">6,165,000</button>
+                    </article>
+                    <article class="product">
+                        <div class="product-name">5-Gram Gold Bar</div>
+                        <button class="product-price product-price--sell" type="button">30,510,000</button>
+                        <button class="product-price product-price--buy" type="button">30,735,000</button>
+                    </article>
+                    <article class="product">
+                        <div class="product-name">10-Gram Gold Bar</div>
+                        <button class="product-price product-price--sell" type="button">60,980,000</button>
+                        <button class="product-price product-price--buy" type="button">61,430,000</button>
+                    </article>
+                    <article class="product">
+                        <div class="product-name product-name--silver">20-Gram Silver Bar</div>
+                        <button class="product-price product-price--sell" type="button">7,420,000</button>
+                        <button class="product-price product-price--buy" type="button">7,510,000</button>
+                    </article>
+                </div>
             </section>
         </main>
     </div>
