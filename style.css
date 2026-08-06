@@ -62,8 +62,8 @@ color that you can change freely without breaking anything.
     --info-card-max-width: 380px;
     --info-card-padding: 24px;
     --info-card-gap: 24px;
-    --info-title-color: 0, 0, 0;
-    --info-text-color: 0, 0, 0;
+    --info-title-color: 5, 5, 5;
+    --info-text-color: 5, 5, 5;
     --info-metric-background: 0, 0, 0;
     --info-metric-background-strength: 0.95;
     --info-metric-radius: 10px;
@@ -139,6 +139,9 @@ color that you can change freely without breaking anything.
     --loading-logo-min-opacity: 0.04;
     --loading-logo-max-opacity: 1;
     --loading-logo-pulse-duration: 1200ms;
+    --loading-text-color: 255, 211, 92;
+    --loading-text-size: 22px;
+    --loading-content-gap: 16px;
     --loading-overlay-transition: 180ms;
 
     /* ---- Content-opening shadow ---- */
@@ -677,23 +680,23 @@ with currentColor, each icon automatically follows text state colors. */
 }
 
 .footer-nav-icon--profile {
-    -webkit-mask-image: url("assets/profile-icon.svg");
-    mask-image: url("assets/profile-icon.svg");
+    -webkit-mask-image: url("assets/profile.svg");
+    mask-image: url("assets/profile.svg");
 }
 
 .footer-nav-icon--trade {
-    -webkit-mask-image: url("assets/trade-icon.svg");
-    mask-image: url("assets/trade-icon.svg");
+    -webkit-mask-image: url("assets/trade.svg");
+    mask-image: url("assets/trade.svg");
 }
 
 .footer-nav-icon--history {
-    -webkit-mask-image: url("assets/history-icon.svg");
-    mask-image: url("assets/history-icon.svg");
+    -webkit-mask-image: url("assets/history.svg");
+    mask-image: url("assets/history.svg");
 }
 
 .footer-nav-icon--accounting {
-    -webkit-mask-image: url("assets/accounting-icon.svg");
-    mask-image: url("assets/accounting-icon.svg");
+    -webkit-mask-image: url("assets/account-statement.svg");
+    mask-image: url("assets/account-statement.svg");
 }
 
 /* ============================================================
@@ -1072,12 +1075,29 @@ The overlay blocks interaction, blurs the page, and pulses the logo.
         visibility 0s;
 }
 
+/* Keeps the pulsing logo and fixed loading label centered as one unit. */
+.loading-overlay-content {
+    display: grid;
+    justify-items: center;
+    gap: var(--loading-content-gap);
+    text-align: center;
+}
+
 .loading-overlay-logo {
     width: min(70vw, var(--loading-logo-width));
     height: auto;
     opacity: var(--loading-logo-min-opacity);
     pointer-events: none;
     user-select: none;
+}
+
+.loading-overlay-text {
+    margin: 0;
+    color: rgba(var(--loading-text-color), 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: var(--loading-text-size);
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .loading-overlay.is-active .loading-overlay-logo {

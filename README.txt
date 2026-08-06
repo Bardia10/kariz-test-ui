@@ -12,13 +12,16 @@ SHARED FILES
 
 REQUIRED FOOTER SVG FILENAMES
 Place these files inside the assets folder:
-- profile-icon.svg
-- trade-icon.svg
-- history-icon.svg
-- accounting-icon.svg
+- profile.svg
+- trade.svg
+- history.svg
+- account-statement.svg
 
-The SVG artwork is used as a CSS mask. Use a solid silhouette; its original
-SVG fill color does not matter because CSS supplies silver, bronze, or gold.
+The SVG artwork is used as a CSS mask. Use a solid silhouette. The SVG's own
+--icon-size and --icon-color values are intentionally ignored because style.css
+must control silver, bronze, and gold navigation states. Adjust icon size with
+--footer-nav-icon-size in :root, and adjust state colors with the footer-nav
+color variables in :root.
 
 OTHER REQUIRED IMAGE
 - div-tile-background.png
