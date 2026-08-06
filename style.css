@@ -44,6 +44,10 @@ color that you can change freely without breaking anything.
     --announcement-font-size: 18px;
     --announcement-duration: 18s;
 
+    /* Width of the invisible fade where the message approaches the
+    logo. This is an alpha mask, not a colored shadow. */
+    --announcement-logo-fade-width: 46px;
+
     /* ---- Product layout ---- */
     /* Products are arranged two per row. Product-column-gap controls
     the larger space between those two complete products. Piece-gap
@@ -58,12 +62,20 @@ color that you can change freely without breaking anything.
     --info-card-max-width: 380px;
     --info-card-padding: 24px;
     --info-card-gap: 24px;
-    --info-title-color: 190, 190, 190;
-    --info-text-color: 225, 225, 225;
-    --info-metric-background: 100, 100, 100;
-    --info-metric-background-strength: 0.82;
+    --info-title-color: 0, 0, 0;
+    --info-text-color: 0, 0, 0;
+    --info-metric-background: 0, 0, 0;
+    --info-metric-background-strength: 0.95;
+    --info-metric-radius: 10px;
     --info-gold-color: 255, 215, 92;
     --info-sell-width: 90px;
+
+    /* Same small down-right shadow language used by product pieces. */
+    --info-card-shadow-x: 3px;
+    --info-card-shadow-y: 5px;
+    --info-card-shadow-blur: 8px;
+    --info-card-shadow-color: 0, 0, 0;
+    --info-card-shadow-strength: 0.36;
 
     /* ---- Gem button underlay ---- */
     /* This translucent color paints BEHIND each gem PNG. It is only
@@ -105,6 +117,29 @@ color that you can change freely without breaking anything.
     /* How tall the sticky footer is. 74px matches the header for
     symmetry — arbitrary choice, safe to change independently. */
     --footer-height: 74px;
+
+    /* ---- Footer navigation ---- */
+    /* Icon and text use currentColor, so each state changes both.
+    Silver = default, bronze = hover, gold = current page. */
+    --footer-nav-max-width: 900px;
+    --footer-nav-icon-size: 20px;
+    --footer-nav-silver: 190, 194, 200;
+    --footer-nav-bronze: 205, 127, 50;
+    --footer-nav-gold: 255, 202, 65;
+    --footer-nav-divider: 205, 151, 45;
+    --footer-nav-transition: 180ms;
+
+    /* ---- Loading overlay ---- */
+    /* The overlay blurs and darkens everything behind it. The logo
+    repeatedly fades between the minimum and maximum opacity. */
+    --loading-overlay-color: 0, 0, 0;
+    --loading-overlay-strength: 0.48;
+    --loading-backdrop-blur: 6px;
+    --loading-logo-width: 180px;
+    --loading-logo-min-opacity: 0.04;
+    --loading-logo-max-opacity: 1;
+    --loading-logo-pulse-duration: 1200ms;
+    --loading-overlay-transition: 180ms;
 
     /* ---- Content-opening shadow ---- */
     /* These values control the inward shadow cast by the fixed
@@ -493,6 +528,21 @@ can never enter the logo territory or leave the header.
     align-items: center;
     overflow: hidden;
 
+    /* Alpha-only fade: text becomes invisible as it reaches the logo.
+    No colored shadow is painted over the header artwork. */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        #000 var(--announcement-logo-fade-width),
+        #000 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        #000 var(--announcement-logo-fade-width),
+        #000 100%
+    );
+
     color: rgba(var(--announcement-color), 1);
     font-family: Arial, Helvetica, sans-serif;
     font-size: var(--announcement-font-size);
@@ -524,14 +574,11 @@ private territory. The animation then carries it fully to the left. */
 }
 
 /* ============================================================
-LAYER 4: THE STICKY FOOTER
-Pinned to the bottom of the SCREEN with position: fixed —
-always visible, you never scroll to reach it. It sits above the
-content shadow, so scrolling content and its shadow remain below
-it, same as they do beneath the frame.
-It respects the same padding variables as everything else:
-left, right, and bottom are each set to their padding value,
-so it stretches side to side as far as the padding allows.
+LAYER 4: FIXED FOOTER AND NAVIGATION
+
+The footer stays fixed to the screen. Its decorative background is
+flipped inside ::before, leaving the navigation itself upright.
+Four equal navigation links sit above it with gold separators.
 ============================================================ */
 .footer {
     position: fixed;
@@ -539,24 +586,114 @@ so it stretches side to side as far as the padding allows.
     right: var(--pad-right);
     bottom: var(--pad-bottom);
     height: var(--footer-height);
-    /* (no width needed — left + right together define it) */
-
-    /* Above the content shadow and decorative frame. */
     z-index: 4;
 
-    /* Reuses the header image FOR NOW, flipped upside down with
-    scaleY(-1) — the same mirroring trick the frame corners use,
-    but vertical. When you have a dedicated footer image, change
-    the url and delete the transform line.
-    WARNING: the transform flips the WHOLE element, so any text
-    you later put inside the footer would also appear upside
-    down — use a dedicated image or ask before adding text. */
-    background-image: url("assets/header-image.png"); /* same image as header, for now */
+    /* Creates a local stacking context so ::before stays behind the
+    navigation without falling behind unrelated page layers. */
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 24px;
+}
+
+/* Decorative footer image only. Flipping this pseudo-element avoids
+turning the navigation icons and labels upside down. */
+.footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background-image: url("assets/header-image.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100% 100%; /* liquid fill, same as the header */
+    background-size: 100% 100%;
+    transform: scaleY(-1);
+}
 
-    transform: scaleY(-1); /* the upside-down mirror */
+.footer-nav {
+    width: min(100%, var(--footer-nav-max-width));
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+}
+
+.footer-nav-link {
+    position: relative;
+    min-width: 0;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    color: rgba(var(--footer-nav-silver), 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(11px, 1.25vw, 16px);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--footer-nav-transition) ease;
+}
+
+/* One gold vertical line between adjacent navigation links. */
+.footer-nav-link + .footer-nav-link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 1px;
+    background-color: rgba(var(--footer-nav-divider), 0.8);
+}
+
+.footer-nav-link:hover {
+    color: rgba(var(--footer-nav-bronze), 1);
+}
+
+.footer-nav-link--active,
+.footer-nav-link[aria-current="page"],
+.footer-nav-link--active:hover,
+.footer-nav-link[aria-current="page"]:hover {
+    color: rgba(var(--footer-nav-gold), 1);
+}
+
+/* External SVG files are used as masks. Because the mask is filled
+with currentColor, each icon automatically follows text state colors. */
+.footer-nav-icon {
+    flex: 0 0 auto;
+    width: var(--footer-nav-icon-size);
+    height: var(--footer-nav-icon-size);
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.footer-nav-icon--profile {
+    -webkit-mask-image: url("assets/profile-icon.svg");
+    mask-image: url("assets/profile-icon.svg");
+}
+
+.footer-nav-icon--trade {
+    -webkit-mask-image: url("assets/trade-icon.svg");
+    mask-image: url("assets/trade-icon.svg");
+}
+
+.footer-nav-icon--history {
+    -webkit-mask-image: url("assets/history-icon.svg");
+    mask-image: url("assets/history-icon.svg");
+}
+
+.footer-nav-icon--accounting {
+    -webkit-mask-image: url("assets/accounting-icon.svg");
+    mask-image: url("assets/accounting-icon.svg");
 }
 
 /* ============================================================
@@ -577,9 +714,21 @@ two side-by-side metric stacks, and one ruby sell button.
     justify-items: center;
     text-align: center;
 
+    /* 100% 100% guarantees complete edge-to-edge coverage without
+    cropping or empty bands. The trade-off is possible distortion. */
     background-image: url("assets/div-tile-background.png");
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-position: center;
+    background-size: 100% 100%;
+
+    box-shadow:
+        var(--info-card-shadow-x)
+        var(--info-card-shadow-y)
+        var(--info-card-shadow-blur)
+        rgba(
+            var(--info-card-shadow-color),
+            var(--info-card-shadow-strength)
+        );
 }
 
 .info-card-title {
@@ -621,6 +770,7 @@ field name above its value, matching a two-column, two-row table. */
         var(--info-metric-background),
         var(--info-metric-background-strength)
     );
+    border-radius: var(--info-metric-radius);
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     text-align: center;
@@ -854,6 +1004,104 @@ Expected file: assets/product-buy-button.png */
         url("assets/product-buy-button.png");
 }
 
+/* ============================================================
+SECONDARY PAGE PLACEHOLDERS
+
+Profile, History, and Account Statement use this small shared card
+until their real page-specific content is implemented.
+============================================================ */
+.page-placeholder {
+    width: min(100%, 620px);
+    margin: 48px auto;
+    padding: 32px;
+    color: rgba(var(--info-text-color), 1);
+    background-image: url("assets/div-tile-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.36);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.page-placeholder h1 {
+    margin: 0 0 12px;
+    color: rgba(var(--info-title-color), 1);
+}
+
+.page-placeholder p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ============================================================
+LOADING OVERLAY
+
+JavaScript adds .is-active for the configured five-second wait.
+The overlay blocks interaction, blurs the page, and pulses the logo.
+============================================================ */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    display: grid;
+    place-items: center;
+
+    background-color: rgba(
+        var(--loading-overlay-color),
+        var(--loading-overlay-strength)
+    );
+    -webkit-backdrop-filter: blur(var(--loading-backdrop-blur));
+    backdrop-filter: blur(var(--loading-backdrop-blur));
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        opacity var(--loading-overlay-transition) ease,
+        visibility 0s linear var(--loading-overlay-transition);
+}
+
+.loading-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+        opacity var(--loading-overlay-transition) ease,
+        visibility 0s;
+}
+
+.loading-overlay-logo {
+    width: min(70vw, var(--loading-logo-width));
+    height: auto;
+    opacity: var(--loading-logo-min-opacity);
+    pointer-events: none;
+    user-select: none;
+}
+
+.loading-overlay.is-active .loading-overlay-logo {
+    animation: loading-logo-pulse
+        var(--loading-logo-pulse-duration)
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes loading-logo-pulse {
+    from {
+        opacity: var(--loading-logo-min-opacity);
+    }
+
+    to {
+        opacity: var(--loading-logo-max-opacity);
+    }
+}
+
+body.is-loading {
+    overflow: hidden;
+}
+
 /* Users who request reduced motion still see the announcement and
 buttons, but without automatic scrolling or animated size changes. */
 @media (prefers-reduced-motion: reduce) {
@@ -863,7 +1111,13 @@ buttons, but without automatic scrolling or animated size changes. */
     }
 
     .product-price,
-    .product::before {
+    .product::before,
+    .loading-overlay {
         transition: none;
+    }
+
+    .loading-overlay.is-active .loading-overlay-logo {
+        animation: none;
+        opacity: var(--loading-logo-max-opacity);
     }
 }

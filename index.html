@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Layout</title>
     <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
-<body>
+<body data-loading-duration="5000">
     <!-- LAYER 3: the decorative frame.
          Pure decoration: aria-hidden tells screen readers to skip it,
          and pointer-events:none in the CSS lets clicks pass through it. -->
@@ -198,10 +199,36 @@
         </main>
     </div>
 
-    <!-- LAYER 4: the fixed footer. -->
+    <!-- LAYER 4: fixed footer navigation.
+         index.html is the Trade page, so Trade is the active item. -->
     <footer class="footer">
-        <!-- WARNING: this element is flipped upside down by the CSS.
-             Any text placed directly inside it would also be flipped. -->
+        <nav class="footer-nav" aria-label="Primary navigation">
+            <a class="footer-nav-link" href="profile.html">
+                <span class="footer-nav-icon footer-nav-icon--profile" aria-hidden="true"></span>
+                <span>Profile</span>
+            </a>
+
+            <a class="footer-nav-link footer-nav-link--active" href="index.html" aria-current="page">
+                <span class="footer-nav-icon footer-nav-icon--trade" aria-hidden="true"></span>
+                <span>Trade</span>
+            </a>
+
+            <a class="footer-nav-link" href="history.html">
+                <span class="footer-nav-icon footer-nav-icon--history" aria-hidden="true"></span>
+                <span>History</span>
+            </a>
+
+            <a class="footer-nav-link" href="accounting.html">
+                <span class="footer-nav-icon footer-nav-icon--accounting" aria-hidden="true"></span>
+                <span>Account Statement</span>
+            </a>
+        </nav>
     </footer>
+
+    <!-- Full-screen loading layer. JavaScript shows it for five seconds
+         whenever a ruby or emerald gem button is clicked. -->
+    <div class="loading-overlay" aria-hidden="true">
+        <img class="loading-overlay-logo" src="assets/logo.png" alt="">
+    </div>
 </body>
 </html>
