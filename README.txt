@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V6
+PRODUCT LAYOUT V7.1
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -38,6 +38,14 @@ NEW REQUIRED ASSETS
 - history-menu-button.png
   Shared image background for Trade History and Payment History buttons.
 
-SHARED TILE UNDERLAY
-Panels using div-tile-background.png receive a translucent black background
-from --tile-panel-underlay-color and --tile-panel-underlay-strength.
+DECORATIVE-IMAGE SHADOW UNDERLAY
+Almost every shadowed component with a background image should also receive a
+translucent base behind that image. PNG artwork often contains transparent
+pixels; the base fills those areas so the shadowed component remains visually
+solid. The information card, shared placeholder panels, history buttons, and
+the trade-history table all use --tile-panel-underlay-color and
+--tile-panel-underlay-strength.
+
+The trade-history table also uses div-tile-background.png, matching the opening
+information card. Table headings use --history-table-heading-color; table values
+use --history-table-text.

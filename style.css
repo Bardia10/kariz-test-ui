@@ -64,7 +64,7 @@ color that you can change freely without breaking anything.
     --category-space: 64px;
     --category-title-color: 242, 238, 232;
     --category-title-size: 30px;
-    --category-divider-color: 242, 238, 232;
+    --category-divider-color: 255, 202, 65;
     --category-divider-height: 38px;
     --category-divider-gap: 18px;
 
@@ -88,9 +88,12 @@ color that you can change freely without breaking anything.
     --info-card-shadow-color: 0, 0, 0;
     --info-card-shadow-strength: 0.36;
 
-    /* ---- Tiled-panel underlay ---- */
-    /* This translucent black paints BEHIND div-tile-background.png.
-    It is shared by every panel that uses that decorative image. */
+    /* ---- Decorative-image shadow underlay ---- */
+    /* GENERAL RULE: almost every element that combines a background
+    image with a shadow should also receive this translucent base.
+    Decorative PNGs often contain transparent parts; without an
+    underlay, those holes expose the page instead of reading as part
+    of the shadowed component. The color paints BEHIND the image. */
     --tile-panel-underlay-color: 0, 0, 0;
     --tile-panel-underlay-strength: 0.28;
 
@@ -170,9 +173,8 @@ color that you can change freely without breaking anything.
     --history-column-tint-strength: 0.09;
     --history-row-hover: 190, 190, 190;
     --history-row-hover-strength: 0.18;
+    --history-table-heading-color: 126, 83, 10;
     --history-table-text: 0, 0, 0;
-    --history-table-background: 0, 0, 0;
-    --history-table-background-strength: 0.0;
 
     /* ---- Content-opening shadow ---- */
     /* These values control the inward shadow cast by the fixed
@@ -1177,14 +1179,18 @@ buttons, but without automatic scrolling or animated size changes. */
 
 
 /* ============================================================
-SHARED TILED-PANEL UNDERLAY
+SHARED DECORATIVE-IMAGE SHADOW UNDERLAY
 
-Every panel using div-tile-background.png receives the same
-translucent black base. The color sits behind the PNG and appears
-only through transparent or partially transparent image areas.
+GENERAL RULE: almost every shadowed element with a background image
+needs this translucent base behind the image. PNG artwork frequently
+has transparent or partially transparent pixels; the underlay fills
+those pixels so the component remains visually solid and shadowed.
+This applies to tiled panels, the history table, and history buttons.
 ============================================================ */
 .info-card,
-.page-placeholder {
+.page-placeholder,
+.history-menu-button,
+.history-table-scroll {
     background-color: rgba(
         var(--tile-panel-underlay-color),
         var(--tile-panel-underlay-strength)
@@ -1268,7 +1274,9 @@ detailed table; Payment History is deliberately inactive for now.
     justify-content: center;
 
     color: rgba(var(--footer-nav-gold), 1);
-    background-color: transparent;
+
+    /* The shared translucent shadow underlay remains behind this PNG
+    and fills any transparent parts of the button artwork. */
     background-image: url("assets/history-menu-button.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -1299,8 +1307,10 @@ Rows are separated only by gold horizontal lines. Even-numbered
 columns receive a faint gray tint, and row hover/press overrides it.
 ============================================================ */
 .history-table-page {
+    position: relative;
     width: min(100%, 1200px);
     margin: 36px auto;
+    padding-top: 8px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -1311,20 +1321,36 @@ columns receive a faint gray tint, and row hover/press overrides it.
 }
 
 .history-back-link {
-    display: inline-block;
-    margin-bottom: 16px;
-    color: rgba(var(--footer-nav-gold), 1);
+    position: absolute;
+    top: -14px;
+    left: 0;
+
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(var(--history-table-heading-color), 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1;
     text-decoration: none;
-    font-weight: 700;
 }
 
 .history-table-scroll {
     width: 100%;
     overflow-x: auto;
-    background-color: rgba(
-        var(--history-table-background),
-        var(--history-table-background-strength)
-    );
+
+    /* Matches the information card at the start of the Trade page.
+    The shared translucent underlay sits behind this same tile PNG. */
+    background-image: url("assets/div-tile-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.36);
     scrollbar-width: thin;
 }
 
@@ -1348,7 +1374,7 @@ columns receive a faint gray tint, and row hover/press overrides it.
 }
 
 .trade-history-table th {
-    color: rgba(var(--footer-nav-gold), 1);
+    color: rgba(var(--history-table-heading-color), 1);
     font-weight: 700;
 }
 
@@ -1386,7 +1412,7 @@ columns receive a faint gray tint, and row hover/press overrides it.
     min-height: 40px;
     padding: 8px 12px;
     border: 1px solid rgba(var(--history-gold-line), 0.8);
-    color: rgba(var(--history-table-text), 1);
+    color: rgba(var(--history-table-heading-color), 1);
     background-color: rgba(0, 0, 0, 0.5);
     font: inherit;
     cursor: pointer;
