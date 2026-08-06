@@ -35,9 +35,51 @@
             <!-- Display-only logo. It is intentionally a plain image,
                  not a link or button, so it cannot be clicked. -->
             <img class="header-logo" src="assets/logo.png" alt="Company logo">
+
+            <!-- The announcement is confined to its own clipped area,
+                 so it can never travel underneath the transparent logo. -->
+            <div class="header-announcement" aria-label="Market announcement">
+                <span class="header-announcement-text">
+                    Wholesale rates may change based on market movement.
+                </span>
+            </div>
         </header>
 
         <main class="content">
+            <!-- OPENING INFORMATION CARD
+                 This section appears before the products. Its decorative
+                 background file must be assets/div-tile-background.png. -->
+            <section class="info-card" aria-labelledby="info-card-title">
+                <h1 class="info-card-title" id="info-card-title">
+                    Current Gold Market
+                </h1>
+
+                <p class="info-card-description">
+                    Review the current Mazane and per-gram prices before
+                    continuing with a sale.
+                </p>
+
+                <!-- Two horizontal metric columns. Each metric is a
+                     vertical stack containing its label and value. -->
+                <div class="info-card-metrics">
+                    <div class="info-card-metric">
+                        <span class="info-card-metric-label">Mazane price</span>
+                        <strong class="info-card-metric-value">78,244,345</strong>
+                    </div>
+
+                    <div class="info-card-metric">
+                        <span class="info-card-metric-label">Per Gram</span>
+                        <strong class="info-card-metric-value">18,323,232</strong>
+                    </div>
+                </div>
+
+                <!-- Reuses the existing ruby image, tint, and hover growth. -->
+                <button
+                    class="product-price product-price--sell info-card-sell"
+                    type="button"
+                >Sell</button>
+            </section>
+
             <!-- PRODUCT STRUCTURE
                  A product is one gold or silver name bar plus its red
                  and green gem buttons. The images are backgrounds;

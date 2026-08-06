@@ -34,6 +34,16 @@ color that you can change freely without breaking anything.
     --logo-left-offset: 6px;
     --logo-vertical-offset: -6px;
 
+    /* ---- Header announcement ---- */
+    /* Left and right define the announcement's private territory.
+    Increase the left value if a wider logo needs more room.
+    Duration controls how long one complete pass takes. */
+    --announcement-left: 100px;
+    --announcement-right: 18px;
+    --announcement-color: 255, 211, 92;
+    --announcement-font-size: 18px;
+    --announcement-duration: 18s;
+
     /* ---- Product layout ---- */
     /* Products are arranged two per row. Product-column-gap controls
     the larger space between those two complete products. Piece-gap
@@ -42,6 +52,18 @@ color that you can change freely without breaking anything.
     --product-column-gap: 48px;
     --product-piece-gap: 8px;
     --product-piece-height: 58px;
+
+    /* ---- Opening information card ---- */
+    /* Controls the introductory tile shown before the product lists. */
+    --info-card-max-width: 380px;
+    --info-card-padding: 24px;
+    --info-card-gap: 24px;
+    --info-title-color: 190, 190, 190;
+    --info-text-color: 225, 225, 225;
+    --info-metric-background: 100, 100, 100;
+    --info-metric-background-strength: 0.82;
+    --info-gold-color: 255, 215, 92;
+    --info-sell-width: 90px;
 
     /* ---- Gem button underlay ---- */
     /* This translucent color paints BEHIND each gem PNG. It is only
@@ -55,7 +77,7 @@ color that you can change freely without breaking anything.
     Buy and sell are independent, so each side can be tuned without
     affecting the other. Strength ranges from 0 to 1. */
     --sell-gem-tint-color: 120, 0, 12;
-    --sell-gem-tint-strength: 0.0;
+    --sell-gem-tint-strength: 0;
     --buy-gem-tint-color: 255, 255, 255;
     --buy-gem-tint-strength: 0.11;
 
@@ -66,9 +88,10 @@ color that you can change freely without breaking anything.
     --gem-hover-duration: 400ms;
 
     /* ---- Product hover glow ---- */
-    /* This white translucent panel is created BEHIND each complete
-    product. Panel strength controls its center tint. Shadow strength,
-    blur, and spread control the soft glow around its edges. */
+    /* This translucent panel is created BEHIND each complete product.
+    Its RGB color can be white, black, or any other color. Panel
+    strength controls the center tint; shadow strength, blur, and
+    spread control the soft glow around its edges. */
     --product-glow-color: 0, 0, 0;
     --product-glow-panel-strength: 0.12;
     --product-glow-shadow-strength: 0.12;
@@ -453,6 +476,54 @@ adjusting its size or position. */
 }
 
 /* ============================================================
+HEADER ANNOUNCEMENT
+
+The announcement owns only the horizontal area between the logo
+and the header's right edge. Overflow is clipped, so moving text
+can never enter the logo territory or leave the header.
+============================================================ */
+.header-announcement {
+    position: absolute;
+    left: var(--announcement-left);
+    right: var(--announcement-right);
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    color: rgba(var(--announcement-color), 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: var(--announcement-font-size);
+    font-weight: 700;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Padding places the message just beyond the right side of its
+private territory. The animation then carries it fully to the left. */
+.header-announcement-text {
+    display: inline-block;
+    min-width: max-content;
+    padding-left: 100%;
+    animation: header-announcement-scroll
+        var(--announcement-duration)
+        linear
+        infinite;
+}
+
+@keyframes header-announcement-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* ============================================================
 LAYER 4: THE STICKY FOOTER
 Pinned to the bottom of the SCREEN with position: fixed —
 always visible, you never scroll to reach it. It sits above the
@@ -486,6 +557,92 @@ so it stretches side to side as far as the padding allows.
     background-size: 100% 100%; /* liquid fill, same as the header */
 
     transform: scaleY(-1); /* the upside-down mirror */
+}
+
+/* ============================================================
+OPENING INFORMATION CARD
+
+This card appears once before the product lists. Its background is
+assets/div-tile-background.png. Inside it are a title, description,
+two side-by-side metric stacks, and one ruby sell button.
+============================================================ */
+.info-card {
+    width: 100%;
+    max-width: var(--info-card-max-width);
+    margin: 24px auto 36px;
+    padding: var(--info-card-padding);
+
+    display: grid;
+    gap: var(--info-card-gap);
+    justify-items: center;
+    text-align: center;
+
+    background-image: url("assets/div-tile-background.png");
+    background-repeat: repeat;
+    background-position: center;
+}
+
+.info-card-title {
+    margin: 0;
+    color: rgba(var(--info-title-color), 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-weight: 700;
+}
+
+.info-card-description {
+    max-width: 64ch;
+    margin: 0;
+    color: rgba(var(--info-text-color), 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(13px, 1.2vw, 16px);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* The two metric stacks sit horizontally. Each stack keeps its
+field name above its value, matching a two-column, two-row table. */
+.info-card-metrics {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.info-card-metric {
+    min-width: 0;
+    padding: 12px;
+
+    display: grid;
+    gap: 8px;
+
+    color: rgba(var(--info-gold-color), 1);
+    background-color: rgba(
+        var(--info-metric-background),
+        var(--info-metric-background-strength)
+    );
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+
+.info-card-metric-label {
+    font-size: clamp(12px, 1.2vw, 16px);
+}
+
+.info-card-metric-value {
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    font-size: clamp(14px, 1.6vw, 21px);
+    white-space: nowrap;
+    scrollbar-width: thin;
+}
+
+/* Reuses the existing ruby button image and hover behavior.
+Only its width and visible word differ from product price buttons. */
+.info-card-sell {
+    width: min(100%, var(--info-sell-width));
 }
 
 /* ============================================================
@@ -538,7 +695,7 @@ the image files.
     align-items: center;
 }
 
-/* Soft white hover panel behind a complete product.
+/* Soft tinted hover panel behind a complete product.
 The pseudo-element is invisible until the product is hovered. */
 .product::before {
     content: "";
@@ -588,10 +745,20 @@ The pseudo-element is invisible until the product is hovered. */
     /* A plain bold sans-serif stack. Arial is attempted first,
     Helvetica second, then the browser's standard sans-serif font. */
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+
+    /* Text shrinks with the viewport until reaching the readable
+    minimum. If content is still too wide, horizontal scrolling is
+    enabled as the final fallback instead of letting text overflow. */
+    font-size: clamp(10px, 1.2vw, 16px);
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: safe center;
+    scrollbar-width: thin;
 
     /* A small down-right shadow suggests a light source above and to
     the left. The short distance and tight blur keep each piece resting
@@ -603,7 +770,7 @@ The pseudo-element is invisible until the product is hovered. */
 Expected file: assets/product-name-bar.png */
 .product-name {
     color: #080808;
-    font-size: 18px;
+    font-size: clamp(11px, 1.4vw, 18px);
     background-image: url("assets/product-name-bar.png");
 }
 
@@ -685,4 +852,18 @@ Expected file: assets/product-buy-button.png */
             )
         ),
         url("assets/product-buy-button.png");
+}
+
+/* Users who request reduced motion still see the announcement and
+buttons, but without automatic scrolling or animated size changes. */
+@media (prefers-reduced-motion: reduce) {
+    .header-announcement-text {
+        padding-left: 0;
+        animation: none;
+    }
+
+    .product-price,
+    .product::before {
+        transition: none;
+    }
 }
