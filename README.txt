@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V9
+PRODUCT LAYOUT V9.1
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -67,11 +67,10 @@ app.js. Change data-page-size on either table to adjust rows per page.
 HOME PAGE
 The first footer section is now Home and links to home.html. Home intentionally
 omits the decorative frame and content-shadow markup. It uses its own wallpaper,
-header, and card artwork.
+rounded glass-island header/footer, and dark card artwork.
 
 NEW REQUIRED HOME ASSETS
 - home-page-background.png
-- home-page-header.png
 - home-page-div-background.png
 
 The existing profile.svg footer icon is retained for Home.
@@ -85,3 +84,18 @@ HOME CONTENT
 
 All personal details and contact values in home.html are sample placeholders.
 Replace them with live account data before production use.
+
+HOME-ONLY GLASS ISLANDS
+The Home header and footer use translucent color plus backdrop blur. Other pages
+keep the standard header/footer. Adjust these variables in style.css:
+- --home-glass-color
+- --home-glass-opacity
+- --home-glass-blur
+- --home-glass-saturation
+- --home-glass-radius
+- --home-glass-side-inset
+
+HOME COLORS AND EXPANSION CONTROL
+Home card values use --home-card-text (white by default); headings and labels
+use --home-card-heading (gold by default). My Info shows V while collapsed and
+X while expanded.
