@@ -175,6 +175,9 @@ color that you can change freely without breaking anything.
     --history-row-hover-strength: 0.18;
     --history-table-heading-color: 126, 83, 10;
     --history-table-text: 0, 0, 0;
+    --back-button-color: 255, 255, 255;
+    --back-button-hover-scale: 1.24;
+    --back-button-hover-duration: 220ms;
 
     /* ---- Content-opening shadow ---- */
     /* These values control the inward shadow cast by the fixed
@@ -1251,10 +1254,10 @@ Spacing and a centered ornamental heading are their only structure.
 }
 
 /* ============================================================
-HISTORY MENU
+HISTORY AND FINANCE MENUS
 
-Both choices share one image file. Trade History is a link to the
-detailed table; Payment History is deliberately inactive for now.
+Both sections share the same two-button layout and image file.
+Their second choices are deliberately inactive for now.
 ============================================================ */
 .history-menu {
     width: min(100%, var(--history-menu-max-width));
@@ -1331,12 +1334,21 @@ columns receive a faint gray tint, and row hover/press overrides it.
     align-items: center;
     justify-content: center;
 
-    color: rgba(var(--history-table-heading-color), 1);
+    color: rgba(var(--back-button-color), 1);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 52px;
     font-weight: 900;
     line-height: 1;
     text-decoration: none;
+
+    transform: scale(1);
+    transform-origin: center;
+    transition: transform var(--back-button-hover-duration) ease;
+}
+
+.history-back-link:hover,
+.history-back-link:focus-visible {
+    transform: scale(var(--back-button-hover-scale));
 }
 
 .history-table-scroll {
@@ -1433,4 +1445,11 @@ columns receive a faint gray tint, and row hover/press overrides it.
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+}
+
+
+/* The possessions table uses the same visual system and pagination as
+Trade History, but its three columns need a smaller minimum width. */
+.possessions-table {
+    min-width: 640px;
 }

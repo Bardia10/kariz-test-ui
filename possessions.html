@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Possessions / Account Statement</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body data-loading-duration="5000">
+    <!-- LAYER 3: the decorative frame.
+         Pure decoration: aria-hidden tells screen readers to skip it,
+         and pointer-events:none in the CSS lets clicks pass through it. -->
+    <div class="frame" aria-hidden="true">
+        <!-- Top row -->
+        <div class="frame-piece top-left"></div>
+        <div class="frame-piece top-edge"></div>
+        <div class="frame-piece top-right"></div>
+
+        <!-- Middle row (sides only — the center stays empty for content) -->
+        <div class="frame-piece left-edge"></div>
+        <div class="frame-piece right-edge"></div>
+
+        <!-- Bottom row -->
+        <div class="frame-piece bottom-left"></div>
+        <div class="frame-piece bottom-edge"></div>
+        <div class="frame-piece bottom-right"></div>
+    </div>
+
+    <!-- LAYER 2: the inward shadow cast onto the content opening. -->
+    <div class="content-shadow" aria-hidden="true"></div>
+
+    <!-- LAYER 1: all scrollable page content. -->
+    <div class="page-content">
+        <header class="header">
+            <!-- Display-only logo. It is intentionally a plain image,
+                 not a link or button, so it cannot be clicked. -->
+            <img class="header-logo" src="assets/logo.png" alt="Company logo">
+
+            <!-- The announcement is confined to its own clipped area,
+                 so it can never travel underneath the transparent logo. -->
+            <div class="header-announcement" aria-label="Market announcement">
+                <span class="header-announcement-text">
+                    Wholesale rates may change based on market movement.
+                </span>
+            </div>
+        </header>
+
+        <main class="content">
+            <section class="history-table-page">
+                <a
+                    class="history-back-link"
+                    href="finance.html"
+                    aria-label="Back to Finance"
+                    title="Back to Finance"
+                >&larr;</a>
+                <h1 class="history-table-heading">Your Possessions / Account Statement</h1>
+
+                <div class="history-table-scroll">
+                    <table class="trade-history-table possessions-table" data-paginated-table data-page-size="6">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-history-row>
+                                <td>Quarter Gold Coin</td>
+                                <td>2</td>
+                                <td>You owe us</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>Full Gold Coin</td>
+                                <td>1</td>
+                                <td>We owe you</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>Half Gold Coin</td>
+                                <td>3</td>
+                                <td>Settled</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>One-Gram Gold Coin</td>
+                                <td>5</td>
+                                <td>You owe us</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>1-Gram Gold Bar</td>
+                                <td>8</td>
+                                <td>We owe you</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>5-Gram Gold Bar</td>
+                                <td>2</td>
+                                <td>Settled</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>10-Gram Gold Bar</td>
+                                <td>1</td>
+                                <td>You owe us</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>20-Gram Silver Bar</td>
+                                <td>4</td>
+                                <td>We owe you</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>Investment Coin</td>
+                                <td>6</td>
+                                <td>Settled</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>Quarter Gold Coin</td>
+                                <td>7</td>
+                                <td>We owe you</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>Full Gold Coin</td>
+                                <td>2</td>
+                                <td>You owe us</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>5-Gram Gold Bar</td>
+                                <td>3</td>
+                                <td>Settled</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>One-Gram Gold Coin</td>
+                                <td>9</td>
+                                <td>You owe us</td>
+                            </tr>
+                            <tr data-history-row>
+                                <td>10-Gram Gold Bar</td>
+                                <td>2</td>
+                                <td>We owe you</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <nav class="history-pagination" aria-label="Possessions pages">
+                    <button type="button" data-pagination-prev>Previous</button>
+                    <div class="history-pagination-pages" data-pagination-pages></div>
+                    <button type="button" data-pagination-next>Next</button>
+                </nav>
+            </section>
+        </main>
+    </div>
+
+    <!-- LAYER 4: fixed footer navigation.
+         Finance remains active on this deeper possessions page. -->
+    <footer class="footer">
+        <nav class="footer-nav" aria-label="Primary navigation">
+            <a class="footer-nav-link" href="profile.html">
+                <span class="footer-nav-icon footer-nav-icon--profile" aria-hidden="true"></span>
+                <span>Profile</span>
+            </a>
+
+            <a class="footer-nav-link" href="index.html">
+                <span class="footer-nav-icon footer-nav-icon--trade" aria-hidden="true"></span>
+                <span>Trade</span>
+            </a>
+
+            <a class="footer-nav-link" href="history.html">
+                <span class="footer-nav-icon footer-nav-icon--history" aria-hidden="true"></span>
+                <span>History</span>
+            </a>
+
+            <a class="footer-nav-link footer-nav-link--active" href="finance.html" aria-current="page">
+                <span class="footer-nav-icon footer-nav-icon--accounting" aria-hidden="true"></span>
+                <span>Finance</span>
+            </a>
+        </nav>
+    </footer>
+
+    <!-- Full-screen loading layer. JavaScript shows it for five seconds
+         whenever a ruby or emerald gem button is clicked. -->
+    <div class="loading-overlay" aria-hidden="true">
+        <div class="loading-overlay-content">
+            <img class="loading-overlay-logo" src="assets/logo.png" alt="">
+            <p class="loading-overlay-text">Kariz Gold Gallery</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Statement</title>
+    <title>Finance</title>
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
 </head>
@@ -47,17 +47,19 @@
         </header>
 
         <main class="content">
-            <!-- Temporary page-specific content. Replace this section
-                 when the real Account Statement interface is designed. -->
-            <section class="page-placeholder">
-                <h1>Account Statement</h1>
-                <p>Account balances and statement details will be displayed here.</p>
+            <section class="history-menu" aria-label="Finance options">
+                <a class="history-menu-button" href="possessions.html">
+                    Your Possessions / Account Statement
+                </a>
+                <button class="history-menu-button history-menu-button--inactive" type="button">
+                    Payment and Withdraw
+                </button>
             </section>
         </main>
     </div>
 
     <!-- LAYER 4: fixed footer navigation.
-         Account Statement is the active page in this file. -->
+         Finance is the active section in this file. -->
     <footer class="footer">
         <nav class="footer-nav" aria-label="Primary navigation">
             <a class="footer-nav-link" href="profile.html">
@@ -75,9 +77,9 @@
                 <span>History</span>
             </a>
 
-            <a class="footer-nav-link footer-nav-link--active" href="accounting.html" aria-current="page">
+            <a class="footer-nav-link footer-nav-link--active" href="finance.html" aria-current="page">
                 <span class="footer-nav-icon footer-nav-icon--accounting" aria-hidden="true"></span>
-                <span>Account Statement</span>
+                <span>Finance</span>
             </a>
         </nav>
     </footer>

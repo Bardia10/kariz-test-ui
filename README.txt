@@ -1,11 +1,12 @@
-PRODUCT LAYOUT V7.1
+PRODUCT LAYOUT V8
 
 PAGE FILES
 - index.html       Trade page (current main page)
 - profile.html     Profile page
 - history.html     History menu page
 - trade-history.html Deeper paginated trade-history table
-- accounting.html  Account Statement page
+- finance.html      Finance menu page
+- possessions.html  Paginated possessions/account-statement table
 
 SHARED FILES
 - style.css
@@ -49,3 +50,16 @@ the trade-history table all use --tile-panel-underlay-color and
 The trade-history table also uses div-tile-background.png, matching the opening
 information card. Table headings use --history-table-heading-color; table values
 use --history-table-text.
+
+FINANCE SECTION
+The fourth footer section is now Finance. finance.html contains two buttons:
+- Your Possessions / Account Statement -> possessions.html
+- Payment and Withdraw -> intentionally inactive
+
+BACK ARROWS
+Both deeper tables use a white arrow controlled by --back-button-color. Hover
+growth uses --back-button-hover-scale and --back-button-hover-duration.
+
+PAGINATION
+trade-history.html and possessions.html both use the shared pagination code in
+app.js. Change data-page-size on either table to adjust rows per page.
