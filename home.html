@@ -31,99 +31,86 @@
                 <!-- ACCOUNT INFO: brief system-level account details. -->
                 <section class="home-card" aria-labelledby="account-info-title">
                     <h1 class="home-card-title" id="account-info-title">Account Info</h1>
-
-                    <div class="home-account-view" data-account-view>
-                        <div class="home-info-grid">
-                            <div class="home-info-item">
-                                <span class="home-info-label">Username</span>
-                                <span class="home-info-value" data-account-value="username">kariz_member</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">User ID</span>
-                                <span class="home-info-value" data-account-value="userId">KG-10482</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">Account Status</span>
-                                <span class="account-status account-status--premium" data-account-value="status">Premium</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">Member Since</span>
-                                <span class="home-info-value" data-account-value="memberSince">January 2024</span>
-                            </div>
+                    <div class="home-info-grid">
+                        <div class="home-info-item">
+                            <span class="home-info-label">Username</span>
+                            <span class="home-info-value">kariz_member</span>
                         </div>
-                        <button class="home-edit-button" type="button" data-account-edit>Edit</button>
+                        <div class="home-info-item">
+                            <span class="home-info-label">User ID</span>
+                            <span class="home-info-value">KG-10482</span>
+                        </div>
+                        <div class="home-info-item">
+                            <span class="home-info-label">Account Status</span>
+                            <span class="account-status account-status--premium">Premium</span>
+                        </div>
+                        <div class="home-info-item">
+                            <span class="home-info-label">Member Since</span>
+                            <span class="home-info-value">January 2024</span>
+                        </div>
                     </div>
-
-                    <form class="home-account-form" data-account-form hidden>
-                        <div class="home-edit-grid">
-                            <label class="home-edit-field">
-                                <span>Username</span>
-                                <input name="username" value="kariz_member" autocomplete="username">
-                            </label>
-                            <label class="home-edit-field">
-                                <span>User ID</span>
-                                <input name="userId" value="KG-10482">
-                            </label>
-                            <label class="home-edit-field">
-                                <span>Account Status</span>
-                                <select name="status">
-                                    <option value="normal">Normal</option>
-                                    <option value="premium" selected>Premium</option>
-                                    <option value="banned">Banned</option>
-                                </select>
-                            </label>
-                            <label class="home-edit-field">
-                                <span>Member Since</span>
-                                <input name="memberSince" value="January 2024">
-                            </label>
-                        </div>
-                        <div class="home-form-actions">
-                            <button type="button" data-account-cancel>Cancel</button>
-                            <button type="submit">Submit Change Info Request</button>
-                        </div>
-                    </form>
-
-                    <p class="home-request-status" data-account-status-message aria-live="polite"></p>
                 </section>
 
-                <!-- MY INFO: native expandable details panel. -->
+                <!-- MY INFO: expandable personal details and change request. -->
                 <details class="home-card home-details">
-                    <summary>My Info</summary>
+                    <summary><span class="home-details-title">My Info</span></summary>
                     <div class="home-details-body">
-                        <div class="home-info-grid">
-                            <div class="home-info-item">
-                                <span class="home-info-label">First Name</span>
-                                <span class="home-info-value">Sample</span>
+                        <div class="home-user-view" data-user-info-view>
+                            <div class="home-info-grid">
+                                <div class="home-info-item">
+                                    <span class="home-info-label">First Name</span>
+                                    <span class="home-info-value" data-user-value="firstName">Sample</span>
+                                </div>
+                                <div class="home-info-item">
+                                    <span class="home-info-label">Last Name</span>
+                                    <span class="home-info-value" data-user-value="lastName">Customer</span>
+                                </div>
+                                <div class="home-info-item">
+                                    <span class="home-info-label">Phone</span>
+                                    <span class="home-info-value" data-user-value="phone">+971 50 000 0000</span>
+                                </div>
+                                <div class="home-info-item">
+                                    <span class="home-info-label">Email</span>
+                                    <span class="home-info-value" data-user-value="email">customer@example.com</span>
+                                </div>
+                                <div class="home-info-item">
+                                    <span class="home-info-label">National ID</span>
+                                    <span class="home-info-value" data-user-value="nationalId">784-0000-0000000-0</span>
+                                </div>
+                                <div class="home-info-item">
+                                    <span class="home-info-label">City</span>
+                                    <span class="home-info-value" data-user-value="city">Dubai</span>
+                                </div>
+                                <div class="home-info-item">
+                                    <span class="home-info-label">Address</span>
+                                    <span class="home-info-value" data-user-value="address">Gold Souk Extension, Deira, Dubai, UAE</span>
+                                </div>
+                                <div class="home-info-item">
+                                    <span class="home-info-label">Postal Code</span>
+                                    <span class="home-info-value" data-user-value="postalCode">00000</span>
+                                </div>
                             </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">Last Name</span>
-                                <span class="home-info-value">Customer</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">Phone</span>
-                                <span class="home-info-value">+971 50 000 0000</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">Email</span>
-                                <span class="home-info-value">customer@example.com</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">National ID</span>
-                                <span class="home-info-value">784-0000-0000000-0</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">City</span>
-                                <span class="home-info-value">Dubai</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">Address</span>
-                                <span class="home-info-value">Gold Souk Extension, Deira, Dubai, UAE</span>
-                            </div>
-                            <div class="home-info-item">
-                                <span class="home-info-label">Postal Code</span>
-                                <span class="home-info-value">00000</span>
-                            </div>
+                            <button class="home-edit-button" type="button" data-user-info-edit>Edit</button>
                         </div>
+
+                        <form class="home-user-form" data-user-info-form hidden>
+                            <div class="home-edit-grid">
+                                <label class="home-edit-field"><span>First Name</span><input name="firstName" value="Sample"></label>
+                                <label class="home-edit-field"><span>Last Name</span><input name="lastName" value="Customer"></label>
+                                <label class="home-edit-field"><span>Phone</span><input name="phone" value="+971 50 000 0000" autocomplete="tel"></label>
+                                <label class="home-edit-field"><span>Email</span><input name="email" value="customer@example.com" autocomplete="email"></label>
+                                <label class="home-edit-field"><span>National ID</span><input name="nationalId" value="784-0000-0000000-0"></label>
+                                <label class="home-edit-field"><span>City</span><input name="city" value="Dubai"></label>
+                                <label class="home-edit-field"><span>Address</span><input name="address" value="Gold Souk Extension, Deira, Dubai, UAE"></label>
+                                <label class="home-edit-field"><span>Postal Code</span><input name="postalCode" value="00000"></label>
+                            </div>
+                            <div class="home-form-actions">
+                                <button type="button" data-user-info-cancel>Cancel</button>
+                                <button type="submit">Submit Change Info Request</button>
+                            </div>
+                        </form>
+
+                        <p class="home-request-status" data-user-info-message aria-live="polite"></p>
                     </div>
                 </details>
 
@@ -136,7 +123,7 @@
                 </section>
 
                 <!-- CONTACT US: text address and matching Google Maps embed. -->
-                <section class="home-card" aria-labelledby="contact-us-title">
+                <section class="home-card home-contact-card" aria-labelledby="contact-us-title">
                     <h2 class="home-card-title" id="contact-us-title">Contact Us</h2>
                     <div class="home-contact-layout">
                         <div class="home-contact-list">

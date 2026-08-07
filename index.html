@@ -1,180 +1,193 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Layout</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Layout</title>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="app.js"></script>
 </head>
-<body data-loading-duration="5000">
-    <!-- LAYER 3: the decorative frame.
+<body data-loading-duration="5000" data-trade-confirm-duration="5000">
+<!-- LAYER 3: the decorative frame.
          Pure decoration: aria-hidden tells screen readers to skip it,
          and pointer-events:none in the CSS lets clicks pass through it. -->
-    <div class="frame" aria-hidden="true">
-        <!-- Top row -->
-        <div class="frame-piece top-left"></div>
-        <div class="frame-piece top-edge"></div>
-        <div class="frame-piece top-right"></div>
-
-        <!-- Middle row (sides only — the center stays empty for content) -->
-        <div class="frame-piece left-edge"></div>
-        <div class="frame-piece right-edge"></div>
-
-        <!-- Bottom row -->
-        <div class="frame-piece bottom-left"></div>
-        <div class="frame-piece bottom-edge"></div>
-        <div class="frame-piece bottom-right"></div>
-    </div>
-
-    <!-- LAYER 2: the inward shadow cast onto the content opening. -->
-    <div class="content-shadow" aria-hidden="true"></div>
-
-    <!-- LAYER 1: all scrollable page content. -->
-    <div class="page-content">
-        <header class="header">
-            <!-- Display-only logo. It is intentionally a plain image,
+<div aria-hidden="true" class="frame">
+<!-- Top row -->
+<div class="frame-piece top-left"></div>
+<div class="frame-piece top-edge"></div>
+<div class="frame-piece top-right"></div>
+<!-- Middle row (sides only — the center stays empty for content) -->
+<div class="frame-piece left-edge"></div>
+<div class="frame-piece right-edge"></div>
+<!-- Bottom row -->
+<div class="frame-piece bottom-left"></div>
+<div class="frame-piece bottom-edge"></div>
+<div class="frame-piece bottom-right"></div>
+</div>
+<!-- LAYER 2: the inward shadow cast onto the content opening. -->
+<div aria-hidden="true" class="content-shadow"></div>
+<!-- LAYER 1: all scrollable page content. -->
+<div class="page-content">
+<header class="header">
+<!-- Display-only logo. It is intentionally a plain image,
                  not a link or button, so it cannot be clicked. -->
-            <img class="header-logo" src="assets/logo.png" alt="Company logo">
-
-            <!-- The announcement is confined to its own clipped area,
+<img alt="Company logo" class="header-logo" src="assets/logo.png"/>
+<!-- The announcement is confined to its own clipped area,
                  so it can never travel underneath the transparent logo. -->
-            <div class="header-announcement" aria-label="Market announcement">
-                <span class="header-announcement-text">
+<div aria-label="Market announcement" class="header-announcement">
+<span class="header-announcement-text">
                     Wholesale rates may change based on market movement.
                 </span>
-            </div>
-        </header>
-
-        <main class="content">
-            <!-- Shared tiled panel: div-tile-background.png paints above
+</div>
+</header>
+<main class="content"><h1 class="section-page-title">Trade</h1>
+<!-- Shared tiled panel: div-tile-background.png paints above
                  the translucent black underlay defined in style.css. -->
-            <section class="info-card" aria-labelledby="info-card-title">
-                <h1 class="info-card-title" id="info-card-title">Current Gold Market</h1>
-                <p class="info-card-description">
+<section aria-labelledby="info-card-title" class="info-card">
+<h1 class="info-card-title" id="info-card-title">Current Gold Market</h1>
+<p class="info-card-description">
                     Review the current Mazane and per-gram prices before continuing with a sale.
                 </p>
-
-                <div class="info-card-metrics">
-                    <div class="info-card-metric">
-                        <span class="info-card-metric-label">Mazane price</span>
-                        <strong class="info-card-metric-value">78,244,345</strong>
-                    </div>
-                    <div class="info-card-metric">
-                        <span class="info-card-metric-label">Per Gram</span>
-                        <strong class="info-card-metric-value">18,323,232</strong>
-                    </div>
-                </div>
-
-                <button class="product-price product-price--sell info-card-sell" type="button">Sell</button>
-            </section>
-
-            <!-- Categories have no visible panel, border, or background. -->
-            <section class="product-category" aria-labelledby="coins-title">
-                <div class="category-title-row">
-                    <svg viewBox="-400 0 960 64" aria-hidden="true">
-                        <use href="assets/ornamental-text-divider.svg#divider-half"></use>
-                    </svg>
-                    <h2 class="category-title" id="coins-title">Coins</h2>
-                    <svg class="category-divider--right" viewBox="-400 0 960 64" aria-hidden="true">
-                        <use href="assets/ornamental-text-divider.svg#divider-half"></use>
-                    </svg>
-                </div>
-
-                <div class="products">
-                    <article class="product">
-                        <div class="product-name">Full Gold Coin</div>
-                        <button class="product-price product-price--sell" type="button">5,829,000</button>
-                        <button class="product-price product-price--buy" type="button">5,872,000</button>
-                    </article>
-                    <article class="product">
-                        <div class="product-name">Half Gold Coin</div>
-                        <button class="product-price product-price--sell" type="button">2,914,000</button>
-                        <button class="product-price product-price--buy" type="button">2,953,000</button>
-                    </article>
-                    <article class="product">
-                        <div class="product-name">Quarter Gold Coin</div>
-                        <button class="product-price product-price--sell" type="button">1,457,000</button>
-                        <button class="product-price product-price--buy" type="button">1,476,000</button>
-                    </article>
-                    <article class="product">
-                        <div class="product-name">One-Gram Gold Coin</div>
-                        <button class="product-price product-price--sell" type="button">5,835,000</button>
-                        <button class="product-price product-price--buy" type="button">5,878,000</button>
-                    </article>
-                </div>
-            </section>
-
-            <section class="product-category" aria-labelledby="bars-title">
-                <div class="category-title-row">
-                    <svg viewBox="-400 0 960 64" aria-hidden="true">
-                        <use href="assets/ornamental-text-divider.svg#divider-half"></use>
-                    </svg>
-                    <h2 class="category-title" id="bars-title">Bars</h2>
-                    <svg class="category-divider--right" viewBox="-400 0 960 64" aria-hidden="true">
-                        <use href="assets/ornamental-text-divider.svg#divider-half"></use>
-                    </svg>
-                </div>
-
-                <div class="products">
-                    <article class="product">
-                        <div class="product-name">1-Gram Gold Bar</div>
-                        <button class="product-price product-price--sell" type="button">6,120,000</button>
-                        <button class="product-price product-price--buy" type="button">6,165,000</button>
-                    </article>
-                    <article class="product">
-                        <div class="product-name">5-Gram Gold Bar</div>
-                        <button class="product-price product-price--sell" type="button">30,510,000</button>
-                        <button class="product-price product-price--buy" type="button">30,735,000</button>
-                    </article>
-                    <article class="product">
-                        <div class="product-name">10-Gram Gold Bar</div>
-                        <button class="product-price product-price--sell" type="button">60,980,000</button>
-                        <button class="product-price product-price--buy" type="button">61,430,000</button>
-                    </article>
-                    <article class="product">
-                        <div class="product-name product-name--silver">20-Gram Silver Bar</div>
-                        <button class="product-price product-price--sell" type="button">7,420,000</button>
-                        <button class="product-price product-price--buy" type="button">7,510,000</button>
-                    </article>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- LAYER 4: fixed footer navigation.
+<div class="info-card-metrics">
+<div class="info-card-metric">
+<span class="info-card-metric-label">Mazane price</span>
+<strong class="info-card-metric-value">78,244,345</strong>
+</div>
+<div class="info-card-metric">
+<span class="info-card-metric-label">Per Gram</span>
+<strong class="info-card-metric-value">18,323,232</strong>
+</div>
+</div>
+<button class="product-price product-price--sell info-card-sell" data-trade-input-mode="amount" data-trade-item="Gold" data-trade-operation="sell" data-trade-unit-price="18323232" type="button">Sell</button>
+</section>
+<!-- Categories have no visible panel, border, or background. -->
+<section aria-labelledby="coins-title" class="product-category">
+<div class="category-title-row">
+<svg aria-hidden="true" viewbox="-400 0 960 64">
+<use href="assets/ornamental-text-divider.svg#divider-half"></use>
+</svg>
+<h2 class="category-title" id="coins-title">Coins</h2>
+<svg aria-hidden="true" class="category-divider--right" viewbox="-400 0 960 64">
+<use href="assets/ornamental-text-divider.svg#divider-half"></use>
+</svg>
+</div>
+<div class="products">
+<article class="product">
+<div class="product-name">Full Gold Coin</div>
+<button class="product-price product-price--sell" data-trade-input-mode="quantity" data-trade-item="Full Gold Coin" data-trade-operation="sell" data-trade-unit-price="5829000" type="button">5,829,000</button>
+<button class="product-price product-price--buy" data-trade-input-mode="quantity" data-trade-item="Full Gold Coin" data-trade-operation="buy" data-trade-unit-price="5872000" type="button">5,872,000</button>
+</article>
+<article class="product">
+<div class="product-name">Half Gold Coin</div>
+<button class="product-price product-price--sell" data-trade-input-mode="quantity" data-trade-item="Half Gold Coin" data-trade-operation="sell" data-trade-unit-price="2914000" type="button">2,914,000</button>
+<button class="product-price product-price--buy" data-trade-input-mode="quantity" data-trade-item="Half Gold Coin" data-trade-operation="buy" data-trade-unit-price="2953000" type="button">2,953,000</button>
+</article>
+<article class="product">
+<div class="product-name">Quarter Gold Coin</div>
+<button class="product-price product-price--sell" data-trade-input-mode="quantity" data-trade-item="Quarter Gold Coin" data-trade-operation="sell" data-trade-unit-price="1457000" type="button">1,457,000</button>
+<button class="product-price product-price--buy" data-trade-input-mode="quantity" data-trade-item="Quarter Gold Coin" data-trade-operation="buy" data-trade-unit-price="1476000" type="button">1,476,000</button>
+</article>
+<article class="product">
+<div class="product-name">One-Gram Gold Coin</div>
+<button class="product-price product-price--sell" data-trade-input-mode="quantity" data-trade-item="One-Gram Gold Coin" data-trade-operation="sell" data-trade-unit-price="5835000" type="button">5,835,000</button>
+<button class="product-price product-price--buy" data-trade-input-mode="quantity" data-trade-item="One-Gram Gold Coin" data-trade-operation="buy" data-trade-unit-price="5878000" type="button">5,878,000</button>
+</article>
+</div>
+</section>
+<section aria-labelledby="bars-title" class="product-category">
+<div class="category-title-row">
+<svg aria-hidden="true" viewbox="-400 0 960 64">
+<use href="assets/ornamental-text-divider.svg#divider-half"></use>
+</svg>
+<h2 class="category-title" id="bars-title">Bars</h2>
+<svg aria-hidden="true" class="category-divider--right" viewbox="-400 0 960 64">
+<use href="assets/ornamental-text-divider.svg#divider-half"></use>
+</svg>
+</div>
+<div class="products">
+<article class="product">
+<div class="product-name">1-Gram Gold Bar</div>
+<button class="product-price product-price--sell" data-trade-input-mode="quantity" data-trade-item="1-Gram Gold Bar" data-trade-operation="sell" data-trade-unit-price="6120000" type="button">6,120,000</button>
+<button class="product-price product-price--buy" data-trade-input-mode="quantity" data-trade-item="1-Gram Gold Bar" data-trade-operation="buy" data-trade-unit-price="6165000" type="button">6,165,000</button>
+</article>
+<article class="product">
+<div class="product-name">5-Gram Gold Bar</div>
+<button class="product-price product-price--sell" data-trade-input-mode="quantity" data-trade-item="5-Gram Gold Bar" data-trade-operation="sell" data-trade-unit-price="30510000" type="button">30,510,000</button>
+<button class="product-price product-price--buy" data-trade-input-mode="quantity" data-trade-item="5-Gram Gold Bar" data-trade-operation="buy" data-trade-unit-price="30735000" type="button">30,735,000</button>
+</article>
+<article class="product">
+<div class="product-name">10-Gram Gold Bar</div>
+<button class="product-price product-price--sell" data-trade-input-mode="quantity" data-trade-item="10-Gram Gold Bar" data-trade-operation="sell" data-trade-unit-price="60980000" type="button">60,980,000</button>
+<button class="product-price product-price--buy" data-trade-input-mode="quantity" data-trade-item="10-Gram Gold Bar" data-trade-operation="buy" data-trade-unit-price="61430000" type="button">61,430,000</button>
+</article>
+<article class="product">
+<div class="product-name product-name--silver">20-Gram Silver Bar</div>
+<button class="product-price product-price--sell" data-trade-input-mode="quantity" data-trade-item="20-Gram Silver Bar" data-trade-operation="sell" data-trade-unit-price="7420000" type="button">7,420,000</button>
+<button class="product-price product-price--buy" data-trade-input-mode="quantity" data-trade-item="20-Gram Silver Bar" data-trade-operation="buy" data-trade-unit-price="7510000" type="button">7,510,000</button>
+</article>
+</div>
+</section>
+</main>
+</div>
+<!-- LAYER 4: fixed footer navigation.
          index.html is the Trade page, so Trade is the active item. -->
-    <footer class="footer">
-        <nav class="footer-nav" aria-label="Primary navigation">
-            <a class="footer-nav-link" href="home.html">
-                <span class="footer-nav-icon footer-nav-icon--profile" aria-hidden="true"></span>
-                <span>Home</span>
-            </a>
-
-            <a class="footer-nav-link footer-nav-link--active" href="index.html" aria-current="page">
-                <span class="footer-nav-icon footer-nav-icon--trade" aria-hidden="true"></span>
-                <span>Trade</span>
-            </a>
-
-            <a class="footer-nav-link" href="history.html">
-                <span class="footer-nav-icon footer-nav-icon--history" aria-hidden="true"></span>
-                <span>History</span>
-            </a>
-
-            <a class="footer-nav-link" href="finance.html">
-                <span class="footer-nav-icon footer-nav-icon--accounting" aria-hidden="true"></span>
-                <span>Finance</span>
-            </a>
-        </nav>
-    </footer>
-
-    <!-- Full-screen loading layer. JavaScript shows it for five seconds
+<footer class="footer">
+<nav aria-label="Primary navigation" class="footer-nav">
+<a class="footer-nav-link" href="home.html">
+<span aria-hidden="true" class="footer-nav-icon footer-nav-icon--profile"></span>
+<span>Home</span>
+</a>
+<a aria-current="page" class="footer-nav-link footer-nav-link--active" href="index.html">
+<span aria-hidden="true" class="footer-nav-icon footer-nav-icon--trade"></span>
+<span>Trade</span>
+</a>
+<a class="footer-nav-link" href="history.html">
+<span aria-hidden="true" class="footer-nav-icon footer-nav-icon--history"></span>
+<span>History</span>
+</a>
+<a class="footer-nav-link" href="finance.html">
+<span aria-hidden="true" class="footer-nav-icon footer-nav-icon--accounting"></span>
+<span>Finance</span>
+</a>
+</nav>
+</footer>
+<!-- Full-screen loading layer. JavaScript shows it for five seconds
          whenever a ruby or emerald gem button is clicked. -->
-    <div class="loading-overlay" aria-hidden="true">
-        <div class="loading-overlay-content">
-            <img class="loading-overlay-logo" src="assets/logo.png" alt="">
-            <p class="loading-overlay-text">Kariz Gold Gallery</p>
-        </div>
-    </div>
+
+<div class="trade-modal" data-trade-modal="" hidden="">
+<div aria-labelledby="trade-modal-title" aria-modal="true" class="trade-modal-card" role="dialog">
+<button aria-label="Close" class="trade-modal-close" data-trade-modal-close="" type="button">×</button>
+<div class="trade-modal-form" data-trade-modal-form="">
+<h2 class="trade-modal-title" data-trade-modal-title="" id="trade-modal-title"></h2>
+<p class="trade-modal-unit-price">Unit price: <span data-trade-unit-price=""></span></p>
+<label class="trade-modal-field">
+<span data-trade-input-label="">Quantity</span>
+<input data-trade-input="" min="0.01" step="0.01" type="number" value="1"/>
+</label>
+<div class="trade-modal-total">
+<span>Finalized price</span>
+<strong data-trade-total=""></strong>
+</div>
+<button class="trade-modal-confirm" data-trade-confirm="" type="button">Confirm</button>
+</div>
+<div class="trade-modal-waiting" data-trade-modal-waiting="" hidden="">
+<div aria-hidden="true" class="trade-modal-spinner"></div>
+<h2 class="trade-modal-title">Waiting for the result</h2>
+<p>Please wait while the request is finalized.</p>
+</div>
+<div class="trade-modal-success" data-trade-modal-success="" hidden="">
+<h2 class="trade-modal-title">Confirmed</h2>
+<p data-trade-confirmation=""></p>
+<button class="trade-modal-finish" data-trade-modal-finish="" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="loading-overlay">
+<div class="loading-overlay-content">
+<img alt="" class="loading-overlay-logo" src="assets/logo.png"/>
+<p class="loading-overlay-text">Kariz Gold Gallery</p>
+</div>
+</div>
 </body>
 </html>

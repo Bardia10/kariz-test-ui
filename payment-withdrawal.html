@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History</title>
+    <title>Payment and Withdrawal</title>
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
 </head>
@@ -47,16 +47,19 @@
         </header>
 
         <main class="content">
-            <h1 class="section-page-title">History</h1>
-            <section class="history-menu" aria-label="History options">
-                <a class="history-menu-button" href="trade-history.html">Trade History</a>
-                <a class="history-menu-button" href="payment-history.html">Payment History</a>
+            <section class="history-table-page">
+                <a class="history-back-link" href="finance.html" aria-label="Back to Finance" title="Back to Finance">&larr;</a>
+                <h1 class="section-page-title">Payment and Withdrawal</h1>
+                <section class="history-menu" aria-label="Payment and withdrawal options">
+                    <button class="history-menu-button history-menu-button--inactive" type="button">Pay Us</button>
+                    <button class="history-menu-button history-menu-button--inactive" type="button">Request Money From Us</button>
+                </section>
             </section>
         </main>
     </div>
 
     <!-- LAYER 4: fixed footer navigation.
-         Trade History is the active page in this file. -->
+         Finance is the active section in this file. -->
     <footer class="footer">
         <nav class="footer-nav" aria-label="Primary navigation">
             <a class="footer-nav-link" href="home.html">
@@ -69,12 +72,12 @@
                 <span>Trade</span>
             </a>
 
-            <a class="footer-nav-link footer-nav-link--active" href="history.html" aria-current="page">
+            <a class="footer-nav-link" href="history.html">
                 <span class="footer-nav-icon footer-nav-icon--history" aria-hidden="true"></span>
                 <span>History</span>
             </a>
 
-            <a class="footer-nav-link" href="finance.html">
+            <a class="footer-nav-link footer-nav-link--active" href="finance.html" aria-current="page">
                 <span class="footer-nav-icon footer-nav-icon--accounting" aria-hidden="true"></span>
                 <span>Finance</span>
             </a>

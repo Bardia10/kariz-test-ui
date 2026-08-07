@@ -74,10 +74,14 @@ color that you can change freely without breaking anything.
     --home-tint-strength: 0;
     --home-content-max-width: 1000px;
     --home-section-gap: 28px;
+    --home-card-min-width: 420px;
+    --home-card-max-width: 100%;
+    --home-actions-max-width: 760px;
+    --home-contact-max-width: 900px;
     --home-card-padding: 26px;
     --home-card-radius: 8px;
     --home-card-text: 248, 248, 248;
-    --home-card-heading: 239, 194, 82;
+    --home-card-heading: 250, 206, 96;
     --home-map-height: 320px;
     --home-action-hover-scale: 1.035;
     --home-action-transition: 220ms;
@@ -85,20 +89,20 @@ color that you can change freely without breaking anything.
     /* Home logo positioning is independent from every other page.
     Positive vertical values move only the Home logo downward. */
     --home-logo-height: 60px;
-    --home-logo-left-offset: 9px;
-    --home-logo-vertical-offset: 0px;
+    --home-logo-left-offset: 6px;
+    --home-logo-vertical-offset: 5px;
 
     /* Home-only navigation, announcement, and expand-icon colors. */
-    --home-footer-nav-default: 245, 245, 245;
+    --home-footer-nav-default: 190, 194, 200;
     --home-footer-nav-hover: 0, 0, 0;
     --home-footer-nav-active: 255, 202, 65;
-    --home-announcement-color: 245, 245, 245;
+    --home-announcement-color: 190, 194, 200;
     --home-expand-icon-color: 190, 194, 200;
     --home-expand-icon-hover: 255, 255, 255;
 
     /* Dedicated image files for Home section headings and inputs. */
-    /* --home-title-image: url("assets/home-page-section-title-background.png");
-    --home-input-image: url("assets/home-page-input-background.png"); */
+    --home-title-image: url("assets/home-page-section-title-background.png");
+    --home-input-image: url("assets/home-page-input-background.png");
 
     /* ---- Home glass header and footer ---- */
     /* Glass color is RGB. Opacity controls color intensity, blur
@@ -217,6 +221,17 @@ color that you can change freely without breaking anything.
     --loading-text-size: 22px;
     --loading-content-gap: 16px;
     --loading-overlay-transition: 180ms;
+
+    /* ---- Trade confirmation modal ---- */
+    --trade-modal-overlay-color: 0, 0, 0;
+    --trade-modal-overlay-strength: 0.72;
+    --trade-modal-blur: 7px;
+    --trade-modal-max-width: 560px;
+    --trade-modal-radius: 18px;
+    --trade-modal-text: 10, 10, 10;
+    --trade-modal-gold: 126, 83, 10;
+    --trade-modal-accent: 255, 202, 65;
+    --trade-modal-wait-pulse: 900ms;
 
     /* ---- History menu and table ---- */
     --history-menu-max-width: 760px;
@@ -1607,7 +1622,7 @@ translucent base behind them so the card remains visually complete. */
 
 .home-card-title {
     margin: 0 0 20px;
-    color: rgba(245,245,245);
+    color: rgba(var(--home-card-heading), 1);
     font-size: clamp(21px, 2.4vw, 30px);
     text-align: center;
 }
@@ -2097,5 +2112,263 @@ ACCOUNT CHANGE REQUEST FORM
 @media (max-width: 720px) {
     .home-edit-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+
+/* ============================================================
+V11 HOME INTRINSIC SIZING
+
+Home cards now size toward their content instead of automatically
+stretching across the complete content column. Pixel minimums protect
+readability; max-width keeps every card inside narrow viewports.
+============================================================ */
+.home-content {
+    justify-items: center;
+}
+
+.home-card {
+    width: fit-content;
+    min-width: min(100%, var(--home-card-min-width));
+    max-width: var(--home-card-max-width);
+    justify-self: center;
+}
+
+.home-details {
+    width: fit-content;
+    max-width: 100%;
+}
+
+.home-actions {
+    width: fit-content;
+    max-width: min(100%, var(--home-actions-max-width));
+    justify-self: center;
+}
+
+.home-contact-card {
+    width: min(100%, var(--home-contact-max-width));
+}
+
+/* Section title artwork hugs only the title text. It no longer spans
+the full width of the card or the expandable summary row. */
+.home-card-title,
+.home-details-title {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    padding: 12px 18px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: var(--home-title-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+.home-details summary {
+    background-image: none;
+}
+
+.home-details-title {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* The detailed My Info panel owns the edit/request form. Account Info
+is intentionally read-only. */
+.home-user-view,
+.home-user-form {
+    display: grid;
+    gap: 20px;
+}
+
+.home-user-view[hidden],
+.home-user-form[hidden] {
+    display: none;
+}
+
+/* ============================================================
+SHARED PAGE TITLES
+============================================================ */
+.section-page-title {
+    width: fit-content;
+    max-width: 100%;
+    margin: 24px auto 36px;
+    padding: 10px 24px;
+    color: rgba(var(--category-title-color), 1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(25px, 3.2vw, 38px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+/* ============================================================
+TRADE CONFIRMATION MODAL
+============================================================ */
+.trade-modal[hidden] {
+    display: none;
+}
+
+.trade-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 140;
+    padding: 24px;
+
+    display: grid;
+    place-items: center;
+
+    background-color: rgba(
+        var(--trade-modal-overlay-color),
+        var(--trade-modal-overlay-strength)
+    );
+    -webkit-backdrop-filter: blur(var(--trade-modal-blur));
+    backdrop-filter: blur(var(--trade-modal-blur));
+}
+
+.trade-modal-card {
+    position: relative;
+    width: min(100%, var(--trade-modal-max-width));
+    padding: 30px;
+    color: rgba(var(--trade-modal-text), 1);
+
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: url("assets/div-tile-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--trade-modal-radius);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.58);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.trade-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.72);
+    font-size: 23px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.trade-modal-title {
+    margin: 0 36px 24px;
+    color: rgba(var(--trade-modal-gold), 1);
+    font-size: clamp(22px, 3vw, 31px);
+    line-height: 1.25;
+    text-align: center;
+}
+
+.trade-modal-form,
+.trade-modal-waiting,
+.trade-modal-success {
+    display: grid;
+    gap: 20px;
+    justify-items: center;
+}
+
+.trade-modal-form[hidden],
+.trade-modal-waiting[hidden],
+.trade-modal-success[hidden] {
+    display: none;
+}
+
+.trade-modal-unit-price {
+    margin: 0;
+    font-weight: 700;
+}
+
+.trade-modal-field {
+    width: min(100%, 340px);
+    display: grid;
+    gap: 8px;
+    color: rgba(var(--trade-modal-gold), 1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.trade-modal-field input {
+    width: 100%;
+    height: 54px;
+    padding: 8px 14px;
+    border: 1px solid rgba(var(--trade-modal-gold), 0.65);
+    border-radius: 9px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.78);
+    font: 700 19px Arial, Helvetica, sans-serif;
+}
+
+.trade-modal-total {
+    width: min(100%, 380px);
+    padding: 16px;
+    display: grid;
+    gap: 7px;
+    border-radius: 10px;
+    color: rgba(var(--trade-modal-accent), 1);
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+}
+
+.trade-modal-total strong {
+    font-size: clamp(22px, 4vw, 32px);
+    overflow-wrap: anywhere;
+}
+
+.trade-modal-confirm,
+.trade-modal-finish {
+    min-height: 52px;
+    padding: 10px 28px;
+    border: 0;
+    border-radius: 9px;
+    color: #090909;
+    background-color: rgba(var(--trade-modal-accent), 1);
+    font: 700 17px Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.trade-modal-spinner {
+    width: 74px;
+    height: 74px;
+    border: 7px solid rgba(var(--trade-modal-gold), 0.22);
+    border-top-color: rgba(var(--trade-modal-accent), 1);
+    border-radius: 50%;
+    animation: trade-modal-spin var(--trade-modal-wait-pulse) linear infinite;
+}
+
+.trade-modal-waiting p,
+.trade-modal-success p {
+    margin: 0;
+    max-width: 42ch;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+}
+
+@keyframes trade-modal-spin {
+    to { transform: rotate(360deg); }
+}
+
+body.trade-modal-open {
+    overflow: hidden;
+}
+
+@media (max-width: 720px) {
+    .trade-modal {
+        padding: 14px;
+    }
+
+    .trade-modal-card {
+        padding: 26px 18px;
     }
 }

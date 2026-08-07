@@ -1,12 +1,14 @@
-PRODUCT LAYOUT V10
+PRODUCT LAYOUT V11
 
 PAGE FILES
 - index.html       Trade page (current main page)
 - home.html        Home page (replaces Profile)
 - history.html     History menu page
 - trade-history.html Deeper paginated trade-history table
+- payment-history.html Paginated payment/withdrawal records
 - finance.html      Finance menu page
 - possessions.html  Paginated possessions/account-statement table
+- payment-withdrawal.html Pay/request-money choice page
 
 SHARED FILES
 - style.css
@@ -124,3 +126,17 @@ HOME-ONLY COLORS
 Footer navigation is silver by default, black on hover, and gold when active.
 The Home announcement is silver. My Info uses silver mask icons that become
 white on hover; its title and Home action buttons change from white to gold.
+
+V11 CHANGES
+- Account Info is read-only again; editing belongs to expandable My Info
+- Home cards and title-image spans use fit-content with viewport limits
+- Trade, History, and Finance now have page titles
+- Every Buy/Sell opens a calculated confirmation modal
+- Confirmation changes to a five-second waiting state and then succeeds
+- Payment History now has its own paginated table
+- Finance Payment and Withdrawal now opens a two-button choice page
+
+TRADE MODAL
+The five-second delay is controlled by body[data-trade-confirm-duration] on
+index.html. The current JavaScript is a front-end demonstration; replace the
+timeout with a backend transaction request for production.
