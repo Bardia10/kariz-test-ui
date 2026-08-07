@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body class="home-page" data-loading-duration="5000">
+    <!-- HOME PAGE: no decorative frame or content-shadow overlay. -->
+
+    <!-- LAYER 1: all scrollable page content. -->
+    <div class="page-content">
+        <header class="header">
+            <!-- Display-only logo. It is intentionally a plain image,
+                 not a link or button, so it cannot be clicked. -->
+            <img class="header-logo" src="assets/logo.png" alt="Company logo">
+
+            <!-- The announcement is confined to its own clipped area,
+                 so it can never travel underneath the transparent logo. -->
+            <div class="header-announcement" aria-label="Market announcement">
+                <span class="header-announcement-text">
+                    Wholesale rates may change based on market movement.
+                </span>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="home-content">
+                <!-- ACCOUNT INFO: brief system-level account details. -->
+                <section class="home-card" aria-labelledby="account-info-title">
+                    <h1 class="home-card-title" id="account-info-title">Account Info</h1>
+                    <div class="home-info-grid">
+                        <div class="home-info-item">
+                            <span class="home-info-label">Username</span>
+                            <span class="home-info-value">kariz_member</span>
+                        </div>
+                        <div class="home-info-item">
+                            <span class="home-info-label">User ID</span>
+                            <span class="home-info-value">KG-10482</span>
+                        </div>
+                        <div class="home-info-item">
+                            <span class="home-info-label">Account Status</span>
+                            <!-- Replace the modifier with --normal or --banned when needed. -->
+                            <span class="account-status account-status--premium">Premium</span>
+                        </div>
+                        <div class="home-info-item">
+                            <span class="home-info-label">Member Since</span>
+                            <span class="home-info-value">January 2024</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MY INFO: native expandable details panel. -->
+                <details class="home-card home-details">
+                    <summary>My Info</summary>
+                    <div class="home-details-body">
+                        <div class="home-info-grid">
+                            <div class="home-info-item">
+                                <span class="home-info-label">First Name</span>
+                                <span class="home-info-value">Sample</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">Last Name</span>
+                                <span class="home-info-value">Customer</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">Phone</span>
+                                <span class="home-info-value">+971 50 000 0000</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">Email</span>
+                                <span class="home-info-value">customer@example.com</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">National ID</span>
+                                <span class="home-info-value">784-0000-0000000-0</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">City</span>
+                                <span class="home-info-value">Dubai</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">Address</span>
+                                <span class="home-info-value">Gold Souk Extension, Deira, Dubai, UAE</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">Postal Code</span>
+                                <span class="home-info-value">00000</span>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- HOME ACTIONS: first link is active; payments is reserved. -->
+                <section class="home-actions" aria-label="Account actions">
+                    <a class="home-action-button" href="possessions.html">My Possessions</a>
+                    <button class="home-action-button home-action-button--inactive" type="button">
+                        My Payments Info
+                    </button>
+                </section>
+
+                <!-- CONTACT US: text address and matching Google Maps embed. -->
+                <section class="home-card" aria-labelledby="contact-us-title">
+                    <h2 class="home-card-title" id="contact-us-title">Contact Us</h2>
+                    <div class="home-contact-layout">
+                        <div class="home-contact-list">
+                            <p class="home-contact-item">
+                                <strong>Phone</strong>
+                                +971 4 000 0000
+                            </p>
+                            <p class="home-contact-item">
+                                <strong>Email</strong>
+                                support@karizgold.example
+                            </p>
+                            <p class="home-contact-item">
+                                <strong>Working Hours</strong>
+                                Saturday–Thursday, 9:00 AM–7:00 PM
+                            </p>
+                            <p class="home-contact-item">
+                                <strong>Address</strong>
+                                Gold Souk Extension, Deira, Dubai, UAE
+                            </p>
+                        </div>
+
+                        <div class="home-map">
+                            <iframe
+                                title="Map showing Kariz Gold Gallery location"
+                                src="https://www.google.com/maps?q=Gold+Souk+Extension,+Deira,+Dubai,+UAE&amp;output=embed"
+                                loading="lazy"
+                                allowfullscreen
+                                referrerpolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- LAYER 4: fixed footer navigation.
+         Home is the active page in this file. -->
+    <footer class="footer">
+        <nav class="footer-nav" aria-label="Primary navigation">
+            <a class="footer-nav-link footer-nav-link--active" href="home.html" aria-current="page">
+                <span class="footer-nav-icon footer-nav-icon--profile" aria-hidden="true"></span>
+                <span>Home</span>
+            </a>
+
+            <a class="footer-nav-link" href="index.html">
+                <span class="footer-nav-icon footer-nav-icon--trade" aria-hidden="true"></span>
+                <span>Trade</span>
+            </a>
+
+            <a class="footer-nav-link" href="history.html">
+                <span class="footer-nav-icon footer-nav-icon--history" aria-hidden="true"></span>
+                <span>History</span>
+            </a>
+
+            <a class="footer-nav-link" href="finance.html">
+                <span class="footer-nav-icon footer-nav-icon--accounting" aria-hidden="true"></span>
+                <span>Finance</span>
+            </a>
+        </nav>
+    </footer>
+
+    <!-- Full-screen loading layer. JavaScript shows it for five seconds
+         whenever a ruby or emerald gem button is clicked. -->
+    <div class="loading-overlay" aria-hidden="true">
+        <div class="loading-overlay-content">
+            <img class="loading-overlay-logo" src="assets/logo.png" alt="">
+            <p class="loading-overlay-text">Kariz Gold Gallery</p>
+        </div>
+    </div>
+</body>
+</html>

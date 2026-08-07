@@ -68,6 +68,20 @@ color that you can change freely without breaking anything.
     --category-divider-height: 38px;
     --category-divider-gap: 18px;
 
+    /* ---- Home page ---- */
+    /* Home intentionally uses its own wallpaper, header, and card art. */
+    --home-tint-color: 20, 34, 45;
+    --home-tint-strength: 0.42;
+    --home-content-max-width: 1000px;
+    --home-section-gap: 28px;
+    --home-card-padding: 26px;
+    --home-card-radius: 8px;
+    --home-card-text: 15, 15, 15;
+    --home-card-heading: 92, 58, 8;
+    --home-map-height: 320px;
+    --home-action-hover-scale: 1.035;
+    --home-action-transition: 220ms;
+
     /* ---- Opening information card ---- */
     /* Controls the introductory tile shown before the product lists. */
     --info-card-max-width: 380px;
@@ -1193,7 +1207,9 @@ This applies to tiled panels, the history table, and history buttons.
 .info-card,
 .page-placeholder,
 .history-menu-button,
-.history-table-scroll {
+.history-table-scroll,
+.home-card,
+.home-action-button {
     background-color: rgba(
         var(--tile-panel-underlay-color),
         var(--tile-panel-underlay-strength)
@@ -1452,4 +1468,250 @@ columns receive a faint gray tint, and row hover/press overrides it.
 Trade History, but its three columns need a smaller minimum width. */
 .possessions-table {
     min-width: 640px;
+}
+
+
+/* ============================================================
+HOME PAGE
+
+Home deliberately breaks from the rest of the site: it has its own
+wallpaper and header artwork, while the decorative frame and inward
+content-shadow overlay are disabled. Required files:
+- assets/home-page-background.png
+- assets/home-page-header.png
+- assets/home-page-div-background.png
+============================================================ */
+body.home-page {
+    background-image:
+        linear-gradient(
+            rgba(var(--home-tint-color), var(--home-tint-strength)),
+            rgba(var(--home-tint-color), var(--home-tint-strength))
+        ),
+        url("assets/home-page-background.webp");
+    background-repeat: repeat;
+}
+
+body.home-page .header {
+    background-image: url("assets/home-page-header.png");
+}
+
+/* Defensive selectors: home.html omits both elements completely, but
+these rules ensure no frame appears if old shared markup is pasted in. */
+body.home-page .frame,
+body.home-page .content-shadow {
+    display: none;
+}
+
+.home-content {
+    width: min(100%, var(--home-content-max-width));
+    margin: 24px auto;
+    display: grid;
+    gap: var(--home-section-gap);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Every Home section uses its dedicated PNG plus the standard shadow
+underlay. As with other decorative images, transparent pixels need the
+translucent base behind them so the card remains visually complete. */
+.home-card {
+    padding: var(--home-card-padding);
+    color: rgba(var(--home-card-text), 1);
+    background-image: url("assets/home-page-div-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--home-card-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.36);
+}
+
+.home-card-title {
+    margin: 0 0 20px;
+    color: rgba(var(--home-card-heading), 1);
+    font-size: clamp(21px, 2.4vw, 30px);
+    text-align: center;
+}
+
+.home-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 24px;
+}
+
+.home-info-item {
+    min-width: 0;
+    display: grid;
+    gap: 5px;
+}
+
+.home-info-label {
+    color: rgba(var(--home-card-heading), 0.86);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.home-info-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Change only the status modifier class in home.html. Supported states:
+account-status--normal, account-status--premium, account-status--banned. */
+.account-status {
+    width: fit-content;
+    padding: 5px 12px;
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.account-status--normal {
+    background-color: #55715c;
+}
+
+.account-status--premium {
+    color: #1a1203;
+    background-color: #e4b934;
+}
+
+.account-status--banned {
+    background-color: #9d1e2c;
+}
+
+/* Native <details> supplies reliable keyboard and mobile expansion
+without JavaScript. Only the summary row is visible while collapsed. */
+.home-details {
+    padding: 0;
+}
+
+.home-details summary {
+    min-height: 78px;
+    padding: 20px var(--home-card-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    color: rgba(var(--home-card-heading), 1);
+    cursor: pointer;
+    font-size: clamp(21px, 2.4vw, 30px);
+    font-weight: 700;
+    list-style: none;
+}
+
+.home-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.home-details summary::after {
+    content: "+";
+    flex: 0 0 auto;
+    font-size: 34px;
+    line-height: 1;
+}
+
+.home-details[open] summary::after {
+    content: "−";
+}
+
+.home-details-body {
+    padding: 0 var(--home-card-padding) var(--home-card-padding);
+}
+
+.home-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.home-action-button {
+    min-height: 76px;
+    padding: 16px 22px;
+    border: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(var(--home-card-heading), 1);
+    background-image: url("assets/home-page-div-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--home-card-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.36);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform var(--home-action-transition) ease;
+}
+
+.home-action-button:hover,
+.home-action-button:focus-visible {
+    transform: scale(var(--home-action-hover-scale));
+}
+
+.home-action-button--inactive {
+    cursor: default;
+}
+
+.home-contact-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.8fr) minmax(320px, 1.2fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+.home-contact-list {
+    display: grid;
+    align-content: start;
+    gap: 16px;
+}
+
+.home-contact-item {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.home-contact-item strong {
+    display: block;
+    color: rgba(var(--home-card-heading), 1);
+    margin-bottom: 3px;
+}
+
+.home-map {
+    min-height: var(--home-map-height);
+    overflow: hidden;
+    border-radius: var(--home-card-radius);
+    box-shadow: inset 0 0 0 1px rgba(var(--home-card-heading), 0.4);
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+.home-map iframe {
+    display: block;
+    width: 100%;
+    height: var(--home-map-height);
+    border: 0;
+}
+
+@media (max-width: 720px) {
+    .home-info-grid,
+    .home-actions,
+    .home-contact-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .home-card,
+    .home-details summary,
+    .home-details-body {
+        --home-card-padding: 20px;
+    }
 }

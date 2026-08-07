@@ -1,8 +1,8 @@
-PRODUCT LAYOUT V8
+PRODUCT LAYOUT V9
 
 PAGE FILES
 - index.html       Trade page (current main page)
-- profile.html     Profile page
+- home.html        Home page (replaces Profile)
 - history.html     History menu page
 - trade-history.html Deeper paginated trade-history table
 - finance.html      Finance menu page
@@ -63,3 +63,25 @@ growth uses --back-button-hover-scale and --back-button-hover-duration.
 PAGINATION
 trade-history.html and possessions.html both use the shared pagination code in
 app.js. Change data-page-size on either table to adjust rows per page.
+
+HOME PAGE
+The first footer section is now Home and links to home.html. Home intentionally
+omits the decorative frame and content-shadow markup. It uses its own wallpaper,
+header, and card artwork.
+
+NEW REQUIRED HOME ASSETS
+- home-page-background.png
+- home-page-header.png
+- home-page-div-background.png
+
+The existing profile.svg footer icon is retained for Home.
+
+HOME CONTENT
+- Account Info with username, user ID, status, and membership date
+- Expandable My Info using native HTML details/summary
+- My Possessions link to possessions.html
+- My Payments Info button intentionally inactive
+- Contact information and a Google Maps embed matching the displayed address
+
+All personal details and contact values in home.html are sample placeholders.
+Replace them with live account data before production use.
