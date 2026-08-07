@@ -67,6 +67,10 @@ color that you can change freely without breaking anything.
     --category-divider-color: 242, 238, 232;
     --category-divider-height: 38px;
     --category-divider-gap: 5px;
+    /* Set to none to hide category SVG ornaments. Set back to block to show them. */
+    --category-separator-display: block;
+    /* Set to none to hide main-page-title SVG ornaments. */
+    --page-title-separator-display: block;
 
     /* ---- Home page ---- */
     /* Home uses its own wallpaper, dark cards, and glass islands. */
@@ -80,8 +84,13 @@ color that you can change freely without breaking anything.
     --home-contact-max-width: 900px;
     --home-card-padding: 26px;
     --home-card-radius: 8px;
+    /* Inner spacing for Account Info, My Info, and other Home cards. */
+    --home-card-title-gap: 30px;
+    --home-info-row-gap: 24px;
+    --home-info-column-gap: 38px;
+    --home-info-label-value-gap: 9px;
     --home-card-text: 248, 248, 248;
-    --home-card-heading: 250, 206, 96;
+    --home-card-heading: 239, 194, 82;
     --home-map-height: 320px;
     --home-action-hover-scale: 1.035;
     --home-action-transition: 220ms;
@@ -101,8 +110,8 @@ color that you can change freely without breaking anything.
     --home-expand-icon-hover: 255, 255, 255;
 
     /* Dedicated image files for Home section headings and inputs. */
-    --home-title-image: url("assets/home-page-section-title-background.png");
-    --home-input-image: url("assets/home-page-input-background.png");
+    --home-title-image: url("assets/home-page-section-title-background.webp");
+    --home-input-image: url("assets/home-page-input-background.webp");
 
     /* ---- Home glass header and footer ---- */
     /* Glass color is RGB. Opacity controls color intensity, blur
@@ -2370,5 +2379,132 @@ body.trade-modal-open {
 
     .trade-modal-card {
         padding: 26px 18px;
+    }
+}
+
+
+/* ============================================================
+V12 HOME INNER SPACING
+
+These values increase breathing room between titles, fields, labels,
+and values inside Home section cards. Adjust the variables in :root.
+============================================================ */
+.home-card-title {
+    margin-bottom: var(--home-card-title-gap);
+}
+
+.home-info-grid {
+    row-gap: var(--home-info-row-gap);
+    column-gap: var(--home-info-column-gap);
+}
+
+.home-info-item {
+    gap: var(--home-info-label-value-gap);
+}
+
+.home-details-body,
+.home-user-view,
+.home-user-form,
+.home-contact-layout,
+.home-contact-list {
+    gap: var(--home-info-row-gap);
+}
+
+/* ============================================================
+EXTRA-THIN TRADE SCROLLBARS
+
+The horizontal scrollbar is retained as the final overflow fallback,
+but reduced to the smallest practical visible track in WebKit browsers.
+Firefox exposes only auto/thin, so thin is used there.
+============================================================ */
+.product-name,
+.product-price,
+.info-card-metric-value {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--footer-nav-gold), 0.68) transparent;
+}
+
+.product-name::-webkit-scrollbar,
+.product-price::-webkit-scrollbar,
+.info-card-metric-value::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+
+.product-name::-webkit-scrollbar-track,
+.product-price::-webkit-scrollbar-track,
+.info-card-metric-value::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.product-name::-webkit-scrollbar-thumb,
+.product-price::-webkit-scrollbar-thumb,
+.info-card-metric-value::-webkit-scrollbar-thumb {
+    min-width: 8px;
+    border-radius: 999px;
+    background-color: rgba(var(--footer-nav-gold), 0.68);
+}
+
+/* ============================================================
+MAIN PAGE TITLE ORNAMENTS
+
+Every main page title uses the same ornamental SVG as the Trade
+categories. To compare either design without ornaments, change one of
+these settings in :root:
+
+--page-title-separator-display: none;
+--category-separator-display: none;
+============================================================ */
+.main-title-row {
+    width: min(100%, 1200px);
+    margin: 24px auto 36px;
+    display: grid;
+    grid-template-columns: minmax(80px, 1fr) auto minmax(80px, 1fr);
+    align-items: center;
+    gap: var(--category-divider-gap);
+    color: rgba(var(--category-divider-color), 1);
+}
+
+.main-title-row--table {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.main-title-row svg {
+    display: var(--page-title-separator-display);
+    width: 100%;
+    height: var(--category-divider-height);
+    overflow: visible;
+}
+
+.main-title-divider--right {
+    transform: scaleX(-1);
+}
+
+.main-title-row .section-page-title,
+.main-title-row .history-table-heading {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 10px 18px;
+    white-space: nowrap;
+}
+
+/* Independent category control. Empty side tracks intentionally remain
+when hidden so the category title stays perfectly centered. */
+.category-title-row svg {
+    display: var(--category-separator-display);
+}
+
+@media (max-width: 720px) {
+    .main-title-row {
+        grid-template-columns: minmax(28px, 1fr) auto minmax(28px, 1fr);
+    }
+
+    .main-title-row .section-page-title,
+    .main-title-row .history-table-heading {
+        padding-left: 10px;
+        padding-right: 10px;
+        white-space: normal;
     }
 }

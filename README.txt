@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V11
+PRODUCT LAYOUT V12
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -140,3 +140,21 @@ TRADE MODAL
 The five-second delay is controlled by body[data-trade-confirm-duration] on
 index.html. The current JavaScript is a front-end demonstration; replace the
 timeout with a backend transaction request for production.
+
+V12 CHANGES
+- Increased configurable spacing inside Home section cards
+- Added 2px WebKit scrollbars and Firefox thin scrollbars to Trade pieces
+- Added category-style SVG ornaments around every main page title
+- Added independent CSS controls for page-title and category ornaments
+
+ORNAMENT VISIBILITY
+In style.css :root, use:
+--page-title-separator-display: none;  Hide main-title SVGs
+--category-separator-display: none;    Hide category SVGs
+Change either value back to block to show that ornament group.
+
+HOME INNER SPACING
+--home-card-title-gap controls title-to-content space.
+--home-info-row-gap controls vertical field spacing.
+--home-info-column-gap controls horizontal field spacing.
+--home-info-label-value-gap controls the label-to-value gap.
