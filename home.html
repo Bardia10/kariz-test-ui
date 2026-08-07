@@ -31,25 +31,59 @@
                 <!-- ACCOUNT INFO: brief system-level account details. -->
                 <section class="home-card" aria-labelledby="account-info-title">
                     <h1 class="home-card-title" id="account-info-title">Account Info</h1>
-                    <div class="home-info-grid">
-                        <div class="home-info-item">
-                            <span class="home-info-label">Username</span>
-                            <span class="home-info-value">kariz_member</span>
+
+                    <div class="home-account-view" data-account-view>
+                        <div class="home-info-grid">
+                            <div class="home-info-item">
+                                <span class="home-info-label">Username</span>
+                                <span class="home-info-value" data-account-value="username">kariz_member</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">User ID</span>
+                                <span class="home-info-value" data-account-value="userId">KG-10482</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">Account Status</span>
+                                <span class="account-status account-status--premium" data-account-value="status">Premium</span>
+                            </div>
+                            <div class="home-info-item">
+                                <span class="home-info-label">Member Since</span>
+                                <span class="home-info-value" data-account-value="memberSince">January 2024</span>
+                            </div>
                         </div>
-                        <div class="home-info-item">
-                            <span class="home-info-label">User ID</span>
-                            <span class="home-info-value">KG-10482</span>
-                        </div>
-                        <div class="home-info-item">
-                            <span class="home-info-label">Account Status</span>
-                            <!-- Replace the modifier with --normal or --banned when needed. -->
-                            <span class="account-status account-status--premium">Premium</span>
-                        </div>
-                        <div class="home-info-item">
-                            <span class="home-info-label">Member Since</span>
-                            <span class="home-info-value">January 2024</span>
-                        </div>
+                        <button class="home-edit-button" type="button" data-account-edit>Edit</button>
                     </div>
+
+                    <form class="home-account-form" data-account-form hidden>
+                        <div class="home-edit-grid">
+                            <label class="home-edit-field">
+                                <span>Username</span>
+                                <input name="username" value="kariz_member" autocomplete="username">
+                            </label>
+                            <label class="home-edit-field">
+                                <span>User ID</span>
+                                <input name="userId" value="KG-10482">
+                            </label>
+                            <label class="home-edit-field">
+                                <span>Account Status</span>
+                                <select name="status">
+                                    <option value="normal">Normal</option>
+                                    <option value="premium" selected>Premium</option>
+                                    <option value="banned">Banned</option>
+                                </select>
+                            </label>
+                            <label class="home-edit-field">
+                                <span>Member Since</span>
+                                <input name="memberSince" value="January 2024">
+                            </label>
+                        </div>
+                        <div class="home-form-actions">
+                            <button type="button" data-account-cancel>Cancel</button>
+                            <button type="submit">Submit Change Info Request</button>
+                        </div>
+                    </form>
+
+                    <p class="home-request-status" data-account-status-message aria-live="polite"></p>
                 </section>
 
                 <!-- MY INFO: native expandable details panel. -->

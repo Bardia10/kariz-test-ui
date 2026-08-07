@@ -118,3 +118,98 @@ This script shows one page at a time and creates numbered page buttons.
 
     render();
 })();
+
+
+/* ============================================================
+HOME ACCOUNT CHANGE REQUEST
+
+The demo updates the visible values locally and confirms submission.
+Replace the submit body with a real API request when a backend exists.
+============================================================ */
+(() => {
+    const view = document.querySelector("[data-account-view]");
+    const form = document.querySelector("[data-account-form]");
+
+    if (!view || !form) {
+        return;
+    }
+
+    const editButton = document.querySelector("[data-account-edit]");
+    const cancelButton = document.querySelector("[data-account-cancel]");
+    const message = document.querySelector("[data-account-status-message]");
+
+    const setEditing = (isEditing) => {
+        view.hidden = isEditing;
+        form.hidden = !isEditing;
+        if (isEditing) {
+            form.querySelector("input, select")?.focus();
+        }
+    };
+
+    editButton.addEventListener("click", () => {
+        message.textContent = "";
+        setEditing(true);
+    });
+
+    cancelButton.addEventListener("click", () => {
+        form.reset();
+        message.textContent = "";
+        setEditing(false);
+    });
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const statusValue = String(data.get("status"));
+        const statusLabel = statusValue.charAt(0).toUpperCase() + statusValue.slice(1);
+
+        document.querySelector('[data-account-value="username"]').textContent = data.get("username");
+        document.querySelector('[data-account-value="userId"]').textContent = data.get("userId");
+        document.querySelector('[data-account-value="memberSince"]').textContent = data.get("memberSince");
+
+        const status = document.querySelector('[data-account-value="status"]');
+        status.textContent = statusLabel;
+        status.className = `account-status account-status--${statusValue}`;
+        status.dataset.accountValue = "status";
+
+        message.textContent = "Change request submitted.";
+        setEditing(false);
+    });
+})();
+
+/* ============================================================
+DYNAMIC GEM PRICE TEXT FITTING
+
+Each price starts at --gem-price-max-font-size and shrinks by the
+configured step until it fits, stopping at --gem-price-min-font-size.
+============================================================ */
+(() => {
+    const buttons = Array.from(
+        document.querySelectorAll(".product-price:not(.info-card-sell)")
+    );
+
+    if (buttons.length === 0) {
+        return;
+    }
+
+    const rootStyle = getComputedStyle(document.documentElement);
+    const minimum = parseFloat(rootStyle.getPropertyValue("--gem-price-min-font-size")) || 12;
+    const maximum = parseFloat(rootStyle.getPropertyValue("--gem-price-max-font-size")) || 21;
+    const step = parseFloat(rootStyle.getPropertyValue("--gem-price-fit-step")) || 0.5;
+
+    const fitButton = (button) => {
+        let size = maximum;
+        button.style.fontSize = `${size}px`;
+
+        while (button.scrollWidth > button.clientWidth + 1 && size > minimum) {
+            size = Math.max(minimum, size - step);
+            button.style.fontSize = `${size}px`;
+        }
+    };
+
+    const fitAll = () => buttons.forEach(fitButton);
+    const observer = new ResizeObserver(fitAll);
+    buttons.forEach((button) => observer.observe(button));
+    document.fonts?.ready.then(fitAll);
+    fitAll();
+})();

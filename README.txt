@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V9.1
+PRODUCT LAYOUT V10
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -99,3 +99,28 @@ HOME COLORS AND EXPANSION CONTROL
 Home card values use --home-card-text (white by default); headings and labels
 use --home-card-heading (gold by default). My Info shows V while collapsed and
 X while expanded.
+
+V10 CHANGES
+- Trade opening card bottom space: --info-card-bottom-margin
+- Independent Home logo controls: --home-logo-height, --home-logo-left-offset,
+  --home-logo-vertical-offset
+- Content-sized table panel: --history-table-min-width and
+  --history-table-max-width
+- Pagination now lives inside the table background panel
+- Translucent vertical separators use --history-table-vertical-line-width and
+  --history-table-vertical-line-strength
+- Back arrow changes color instead of size
+- Account Info has Edit, Cancel, and Submit Change Info Request states
+- Gem price text dynamically fits between the configured min/max sizes
+
+USER-CONFIRMED HOME ASSETS
+- home-page-background.webp
+- home-page-div-background.webp
+- xhome-page-div-background.png
+- home-page-section-title-background.webp
+- home-page-input-background.webp
+
+HOME-ONLY COLORS
+Footer navigation is silver by default, black on hover, and gold when active.
+The Home announcement is silver. My Info uses silver mask icons that become
+white on hover; its title and Home action buttons change from white to gold.

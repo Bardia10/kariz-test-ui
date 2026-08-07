@@ -71,7 +71,7 @@ color that you can change freely without breaking anything.
     /* ---- Home page ---- */
     /* Home uses its own wallpaper, dark cards, and glass islands. */
     --home-tint-color: 20, 34, 45;
-    --home-tint-strength: 0.0;
+    --home-tint-strength: 0;
     --home-content-max-width: 1000px;
     --home-section-gap: 28px;
     --home-card-padding: 26px;
@@ -81,6 +81,24 @@ color that you can change freely without breaking anything.
     --home-map-height: 320px;
     --home-action-hover-scale: 1.035;
     --home-action-transition: 220ms;
+
+    /* Home logo positioning is independent from every other page.
+    Positive vertical values move only the Home logo downward. */
+    --home-logo-height: 60px;
+    --home-logo-left-offset: 9px;
+    --home-logo-vertical-offset: 0px;
+
+    /* Home-only navigation, announcement, and expand-icon colors. */
+    --home-footer-nav-default: 245, 245, 245;
+    --home-footer-nav-hover: 0, 0, 0;
+    --home-footer-nav-active: 255, 202, 65;
+    --home-announcement-color: 245, 245, 245;
+    --home-expand-icon-color: 190, 194, 200;
+    --home-expand-icon-hover: 255, 255, 255;
+
+    /* Dedicated image files for Home section headings and inputs. */
+    /* --home-title-image: url("assets/home-page-section-title-background.png");
+    --home-input-image: url("assets/home-page-input-background.png"); */
 
     /* ---- Home glass header and footer ---- */
     /* Glass color is RGB. Opacity controls color intensity, blur
@@ -109,6 +127,7 @@ color that you can change freely without breaking anything.
     --info-metric-radius: 10px;
     --info-gold-color: 255, 215, 92;
     --info-sell-width: 90px;
+    --info-card-bottom-margin: 56px;
 
     /* Same small down-right shadow language used by product pieces. */
     --info-card-shadow-x: 3px;
@@ -147,6 +166,12 @@ color that you can change freely without breaking anything.
     Duration controls how quickly the button grows and returns. */
     --gem-hover-scale: 1.06;
     --gem-hover-duration: 400ms;
+
+    /* Gem prices begin at the maximum and JavaScript reduces them
+    only when necessary to fit the available button width. */
+    --gem-price-min-font-size: 12px;
+    --gem-price-max-font-size: 21px;
+    --gem-price-fit-step: 0.5;
 
     /* ---- Product hover glow ---- */
     /* This translucent panel is created BEHIND each complete product.
@@ -204,8 +229,12 @@ color that you can change freely without breaking anything.
     --history-row-hover-strength: 0.18;
     --history-table-heading-color: 126, 83, 10;
     --history-table-text: 0, 0, 0;
+    --history-table-min-width: 640px;
+    --history-table-max-width: 96%;
+    --history-table-vertical-line-width: 2px;
+    --history-table-vertical-line-strength: 0.34;
     --back-button-color: 255, 255, 255;
-    --back-button-hover-scale: 1.24;
+    --back-button-hover-color: 255, 202, 65;
     --back-button-hover-duration: 220ms;
 
     /* ---- Content-opening shadow ---- */
@@ -1307,7 +1336,7 @@ Their second choices are deliberately inactive for now.
     align-items: center;
     justify-content: center;
 
-    color: rgba(0,0,0);
+    color: rgba(var(--footer-nav-gold), 1);
 
     /* The shared translucent shadow underlay remains behind this PNG
     and fills any transparent parts of the button artwork. */
@@ -1326,8 +1355,7 @@ Their second choices are deliberately inactive for now.
 }
 
 .history-menu-button:hover {
-    /* color: rgba(var(--footer-nav-bronze), 1); */
-    color: rgba(var(--footer-nav-gold), 1);
+    color: rgba(var(--footer-nav-bronze), 1);
 }
 
 .history-menu-button--inactive {
@@ -1579,7 +1607,7 @@ translucent base behind them so the card remains visually complete. */
 
 .home-card-title {
     margin: 0 0 20px;
-    color: rgba(var(--home-card-heading), 1);
+    color: rgba(245,245,245);
     font-size: clamp(21px, 2.4vw, 30px);
     text-align: center;
 }
@@ -1693,9 +1721,8 @@ make the same control clearly read as the close/collapse action. */
     align-items: center;
     justify-content: center;
 
-    /* color: rgba(var(--home-card-heading), 1); */
-    color: rgba(245,245,245);
-    background-image: url("assets/xhome-page-div-background.png");
+    color: rgba(var(--home-card-heading), 1);
+    background-image: url("assets/home-page-div-background.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -1771,5 +1798,304 @@ make the same control clearly read as the close/collapse action. */
     .home-details summary,
     .home-details-body {
         --home-card-padding: 20px;
+    }
+}
+
+
+/* ============================================================
+V10 TARGETED OVERRIDES
+============================================================ */
+
+/* More breathing room after the opening Trade information card. */
+.info-card {
+    margin: 24px auto var(--info-card-bottom-margin);
+}
+
+/* Larger gem text starts at the configured maximum. app.js shrinks it
+only when the content would overflow, leaving horizontal scroll as the
+last fallback below the minimum size. */
+.product-price:not(.info-card-sell) {
+    font-size: var(--gem-price-max-font-size);
+}
+
+/* ============================================================
+CONTENT-SIZED TABLE PANEL
+
+The image-backed panel now owns both the scrollable table and its
+pagination. It follows the table's intrinsic content width, never grows
+beyond the percentage maximum, and keeps a pixel minimum for readability.
+============================================================ */
+.history-table-panel {
+    width: fit-content;
+    min-width: min(100%, var(--history-table-min-width));
+    max-width: var(--history-table-max-width);
+    margin: 0 auto;
+
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: url("assets/div-tile-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.36);
+}
+
+.history-table-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    background: none;
+    box-shadow: none;
+}
+
+.trade-history-table {
+    width: max-content;
+    min-width: var(--history-table-min-width);
+    max-width: none;
+}
+
+.possessions-table {
+    min-width: var(--history-table-min-width);
+}
+
+/* Thicker but translucent vertical separators. Horizontal row lines
+remain unchanged. The last column deliberately has no right divider. */
+.trade-history-table th:not(:last-child),
+.trade-history-table td:not(:last-child) {
+    border-right:
+        var(--history-table-vertical-line-width)
+        solid
+        rgba(
+            var(--history-gold-line),
+            var(--history-table-vertical-line-strength)
+        );
+}
+
+/* Pagination is inside the image-backed panel rather than below it. */
+.history-table-panel .history-pagination {
+    margin: 0;
+    padding: 18px 16px;
+}
+
+/* Back arrows now change color only; they do not grow. */
+.history-back-link {
+    transform: none;
+    transition: color var(--back-button-hover-duration) ease;
+}
+
+.history-back-link:hover,
+.history-back-link:focus-visible {
+    color: rgba(var(--back-button-hover-color), 1);
+    transform: none;
+}
+
+/* ============================================================
+HOME-SPECIFIC POSITIONING AND COLORS
+============================================================ */
+body.home-page .header-logo {
+    left: var(--home-logo-left-offset);
+    top: calc(50% + var(--home-logo-vertical-offset));
+    height: var(--home-logo-height);
+}
+
+body.home-page .header-announcement {
+    color: rgba(var(--home-announcement-color), 1);
+}
+
+body.home-page .footer-nav-link {
+    color: rgba(var(--home-footer-nav-default), 1);
+}
+
+body.home-page .footer-nav-link:hover {
+    color: rgba(var(--home-footer-nav-hover), 1);
+}
+
+body.home-page .footer-nav-link--active,
+body.home-page .footer-nav-link[aria-current="page"],
+body.home-page .footer-nav-link--active:hover,
+body.home-page .footer-nav-link[aria-current="page"]:hover {
+    color: rgba(var(--home-footer-nav-active), 1);
+}
+
+/* User-confirmed Home asset filenames. */
+body.home-page {
+    background-image:
+        linear-gradient(
+            rgba(var(--home-tint-color), var(--home-tint-strength)),
+            rgba(var(--home-tint-color), var(--home-tint-strength))
+        ),
+        url("assets/home-page-background.webp");
+}
+
+.home-card {
+    background-image: url("assets/home-page-div-background.webp");
+}
+
+.home-action-button {
+    color: rgba(var(--home-card-text), 1);
+    background-image: url("assets/xhome-page-div-background.png");
+    transform: none;
+    transition: color var(--home-action-transition) ease;
+}
+
+.home-action-button:hover,
+.home-action-button:focus-visible {
+    color: rgba(var(--home-card-heading), 1);
+    transform: none;
+}
+
+/* Section headings use a dedicated adjustable image. */
+.home-card-title,
+.home-details summary {
+    background-image: var(--home-title-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+.home-card-title {
+    padding: 12px 18px;
+}
+
+/* My Info defaults to white, becomes gold on hover, and uses real
+mask icons instead of V/X text glyphs. */
+.home-details summary {
+    color: rgba(var(--home-card-text), 1);
+    transition: color 180ms ease;
+}
+
+.home-details summary:hover,
+.home-details summary:focus-visible {
+    color: rgba(var(--home-card-heading), 1);
+}
+
+.home-details summary::after {
+    content: "";
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    background-color: rgba(var(--home-expand-icon-color), 1);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 8l7 8 7-8' fill='none' stroke='black' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 8l7 8 7-8' fill='none' stroke='black' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    transition: background-color 180ms ease;
+}
+
+.home-details[open] summary::after {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-color: rgba(var(--home-expand-icon-color), 1);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6L6 18' fill='none' stroke='black' stroke-width='2.8' stroke-linecap='round'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6L6 18' fill='none' stroke='black' stroke-width='2.8' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.home-details summary:hover::after,
+.home-details summary:focus-visible::after {
+    background-color: rgba(var(--home-expand-icon-hover), 1);
+}
+
+/* ============================================================
+ACCOUNT CHANGE REQUEST FORM
+============================================================ */
+.home-account-view,
+.home-account-form {
+    display: grid;
+    gap: 20px;
+}
+
+.home-account-view[hidden],
+.home-account-form[hidden] {
+    display: none;
+}
+
+.home-edit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 24px;
+}
+
+.home-edit-field {
+    min-width: 0;
+    display: grid;
+    gap: 7px;
+    color: rgba(var(--home-card-heading), 1);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.home-edit-field input,
+.home-edit-field select {
+    min-width: 0;
+    width: 100%;
+    height: 50px;
+    padding: 8px 14px;
+    border: 0;
+    color: rgba(var(--home-card-text), 1);
+    background-color: rgba(0, 0, 0, 0.45);
+    background-image: var(--home-input-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    font: 700 16px Arial, Helvetica, sans-serif;
+    outline: none;
+}
+
+.home-edit-field input:focus,
+.home-edit-field select:focus {
+    box-shadow: 0 0 0 2px rgba(var(--home-card-heading), 0.8);
+}
+
+.home-edit-button,
+.home-account-form button {
+    min-height: 48px;
+    padding: 10px 18px;
+    border: 0;
+    color: rgba(var(--home-card-text), 1);
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: url("assets/xhome-page-div-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    font: 700 15px Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.home-edit-button {
+    justify-self: end;
+}
+
+.home-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.home-edit-button:hover,
+.home-account-form button:hover {
+    color: rgba(var(--home-card-heading), 1);
+}
+
+.home-request-status {
+    min-height: 1.4em;
+    margin: 0;
+    color: rgba(var(--home-card-heading), 1);
+    font-weight: 700;
+    text-align: center;
+}
+
+@media (max-width: 720px) {
+    .home-edit-grid {
+        grid-template-columns: 1fr;
     }
 }
