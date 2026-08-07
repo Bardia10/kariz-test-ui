@@ -64,9 +64,9 @@ color that you can change freely without breaking anything.
     --category-space: 64px;
     --category-title-color: 242, 238, 232;
     --category-title-size: 30px;
-    --category-divider-color: 255, 202, 65;
+    --category-divider-color: 242, 238, 232;
     --category-divider-height: 38px;
-    --category-divider-gap: 18px;
+    --category-divider-gap: 5px;
 
     /* ---- Home page ---- */
     /* Home uses its own wallpaper, dark cards, and glass islands. */
@@ -1307,7 +1307,7 @@ Their second choices are deliberately inactive for now.
     align-items: center;
     justify-content: center;
 
-    color: rgba(var(--footer-nav-gold), 1);
+    color: rgba(0,0,0);
 
     /* The shared translucent shadow underlay remains behind this PNG
     and fills any transparent parts of the button artwork. */
@@ -1326,7 +1326,8 @@ Their second choices are deliberately inactive for now.
 }
 
 .history-menu-button:hover {
-    color: rgba(var(--footer-nav-bronze), 1);
+    /* color: rgba(var(--footer-nav-bronze), 1); */
+    color: rgba(var(--footer-nav-gold), 1);
 }
 
 .history-menu-button--inactive {
@@ -1692,7 +1693,8 @@ make the same control clearly read as the close/collapse action. */
     align-items: center;
     justify-content: center;
 
-    color: rgba(var(--home-card-heading), 1);
+    /* color: rgba(var(--home-card-heading), 1); */
+    color: rgba(245,245,245);
     background-image: url("assets/xhome-page-div-background.png");
     background-repeat: no-repeat;
     background-position: center;
