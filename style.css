@@ -55,17 +55,19 @@ color that you can change freely without breaking anything.
     controls the smaller space between a title and its two buttons. */
     --product-row-gap: 36px;
     --product-column-gap: 48px;
-    --product-piece-gap: 8px;
-    --product-piece-height: 58px;
+    --product-piece-gap: 4px;
+    --product-piece-height: 48px;
 
     /* ---- Product categories ---- */
     /* Category wrappers remain visually empty. These values control
     only the spacing, centered title, and ornamental divider. */
-    --category-space: 64px;
+    --category-space: 24px;
     --category-title-color: 242, 238, 232;
     --category-title-size: 30px;
     --category-divider-color: 242, 238, 232;
-    --category-divider-height: 38px;
+    --category-divider-height: 110px;
+    /* Maximum ornament width; lower this to make the flourishes smaller. */
+    --category-divider-max-width: 360px;
     --category-divider-gap: 5px;
     /* Set to none to hide category PNG ornaments. Set back to block to show them. */
     --category-separator-display: block;
@@ -331,13 +333,16 @@ color that you can change freely without breaking anything.
     --mobile-footer-nav-gap: 3px;
     --mobile-footer-nav-font-size: 10px;
 
-    --mobile-separator-height: 20px;
+    --mobile-separator-height: 62px;
+    --mobile-separator-max-width: 150px;
     --mobile-separator-gap: 3px;
     --mobile-page-title-size: 23px;
     --mobile-category-title-size: 22px;
 
     --mobile-products-max-width: 560px;
     --mobile-product-row-gap: 22px;
+    --mobile-product-piece-gap: 2px;
+    --mobile-product-piece-height: 34px;
     --mobile-product-name-font-size: 14px;
     --mobile-gem-price-min-font-size: 10px;
     --mobile-gem-price-max-font-size: 16px;
@@ -1087,7 +1092,8 @@ The pseudo-element is invisible until the product is hovered. */
 
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100% 100%;
+    /* Preserve the source artwork's aspect ratio. */
+    background-size: 100% auto;
 
     /* A plain bold sans-serif stack. Arial is attempted first,
     Helvetica second, then the browser's standard sans-serif font. */
@@ -1377,9 +1383,11 @@ Spacing and a centered ornamental heading are their only structure.
 }
 
 .category-title-row {
+    /* Category labels (for example Bars and Coins) are intentionally hidden. */
+    display: none;
     width: 100%;
     margin-bottom: 28px;
-    display: grid;
+    /* Kept in the stylesheet for reference; the row is hidden above. */
     grid-template-columns: minmax(80px, 1fr) auto minmax(80px, 1fr);
     align-items: center;
     gap: var(--category-divider-gap);
@@ -1390,10 +1398,18 @@ Spacing and a centered ornamental heading are their only structure.
     display: block;
     width: 100%;
     height: var(--category-divider-height);
+    max-width: var(--category-divider-max-width);
+    object-fit: contain;
     overflow: visible;
 }
 
+.category-title-row .category-title-divider:first-child {
+    justify-self: end;
+    transform: none;
+}
+
 .category-title-row .category-divider--right {
+    justify-self: start;
     transform: scaleX(-1);
 }
 
@@ -2534,8 +2550,8 @@ these settings in :root:
 .main-title-row {
     width: min(100%, 1200px);
     margin: 24px auto 36px;
-    display: grid;
-    grid-template-columns: minmax(80px, 1fr) auto minmax(80px, 1fr);
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: var(--category-divider-gap);
     color: rgba(var(--category-divider-color), 1);
@@ -2550,10 +2566,18 @@ these settings in :root:
     display: var(--page-title-separator-display);
     width: 100%;
     height: var(--category-divider-height);
+    max-width: var(--category-divider-max-width);
+    object-fit: contain;
     overflow: visible;
 }
 
+.main-title-divider:first-child {
+    justify-self: end;
+    transform: none;
+}
+
 .main-title-divider--right {
+    justify-self: start;
     transform: scaleX(-1);
 }
 
@@ -2594,7 +2618,6 @@ reference. Required file: assets/ornamental-text-divider.png
 ============================================================ */
 .category-title-row img,
 .main-title-row img {
-    object-fit: fill;
     object-position: center;
     pointer-events: none;
     user-select: none;
@@ -2721,6 +2744,16 @@ breakpoint here if needed; change individual measurements in :root.
     .category-title-row img,
     .main-title-row img {
         height: var(--mobile-separator-height);
+        max-width: var(--mobile-separator-max-width);
+    }
+
+    .product {
+        column-gap: var(--mobile-product-piece-gap);
+    }
+
+    .product-name,
+    .product-price {
+        height: var(--mobile-product-piece-height);
     }
 
     .main-title-row .section-page-title,
