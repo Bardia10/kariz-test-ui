@@ -119,6 +119,12 @@ color that you can change freely without breaking anything.
     --unified-card-shadow-strength: 0.42;
     --unified-category-padding: 26px;
     --unified-product-radius: 9px;
+    /* New filenames: deliberately different from the old gem assets. */
+    --trade-sell-action-image: url("assets/trade-sell-action-background.png");
+    --trade-buy-action-image: url("assets/trade-buy-action-background.png");
+    --unified-page-title-color: 0, 0, 0;
+    --unified-back-button-color: 0, 0, 0;
+    --unified-back-button-hover-color: 239, 194, 82;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 320px;
@@ -3153,4 +3159,44 @@ all pages, not only Home. */
     body.unified-home-theme .product-category {
         padding: 18px;
     }
+}
+
+
+/* ============================================================
+V15 DISTINCT BUY / SELL ARTWORK AND BLACK NAVIGATION TITLES
+============================================================ */
+/* Product name bars keep the Home action artwork. Sell and Buy receive
+independent new files, with names that do not reuse the former gem assets. */
+body.unified-home-theme .product-price--sell,
+body.unified-home-theme .info-card-sell {
+    background-image: var(--trade-sell-action-image);
+}
+
+body.unified-home-theme .product-price--buy {
+    background-image: var(--trade-buy-action-image);
+}
+
+/* The modal confirmation follows the operation that opened it. */
+body.unified-home-theme .trade-modal[data-trade-operation="sell"] .trade-modal-confirm {
+    background-image: var(--trade-sell-action-image);
+}
+
+body.unified-home-theme .trade-modal[data-trade-operation="buy"] .trade-modal-confirm {
+    background-image: var(--trade-buy-action-image);
+}
+
+/* Page-level titles are black. Category and Home section headings remain
+on their existing gold setting because they are section titles, not pages. */
+body.unified-home-theme .main-title-row .section-page-title,
+body.unified-home-theme .main-title-row .history-table-heading {
+    color: rgba(var(--unified-page-title-color), 1);
+}
+
+body.unified-home-theme .history-back-link {
+    color: rgba(var(--unified-back-button-color), 1);
+}
+
+body.unified-home-theme .history-back-link:hover,
+body.unified-home-theme .history-back-link:focus-visible {
+    color: rgba(var(--unified-back-button-hover-color), 1);
 }

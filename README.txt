@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V14
+PRODUCT LAYOUT V15
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -198,3 +198,13 @@ UNIFIED THEME ASSETS
 - assets/home-page-input-background.webp
 
 The old ornament asset is no longer referenced by page HTML.
+
+V15 CHANGES
+- Sell actions use assets/trade-sell-action-background.png
+- Buy actions use assets/trade-buy-action-background.png
+- Modal confirmation uses the matching operation artwork
+- Page-level titles are black
+- Back arrows are black and change to gold on hover
+
+The new buy/sell filenames intentionally differ from the old
+product-sell-button.png and product-buy-button.png gem assets.

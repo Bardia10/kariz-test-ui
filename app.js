@@ -269,6 +269,7 @@ show the success state. Replace the timeout with a real API call later.
             unitPrice: Number(button.dataset.tradeUnitPrice),
             mode: button.dataset.tradeInputMode
         };
+        modal.dataset.tradeOperation = current.operation;
         input.value = "1";
         input.step = current.mode === "amount" ? "0.01" : "1";
         input.min = current.mode === "amount" ? "0.01" : "1";
@@ -285,6 +286,7 @@ show the success state. Replace the timeout with a real API call later.
         if (!waitingState.hidden) return;
         modal.hidden = true;
         body.classList.remove("trade-modal-open");
+        delete modal.dataset.tradeOperation;
         current = null;
     };
 
