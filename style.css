@@ -67,9 +67,9 @@ color that you can change freely without breaking anything.
     --category-divider-color: 242, 238, 232;
     --category-divider-height: 38px;
     --category-divider-gap: 5px;
-    /* Set to none to hide category SVG ornaments. Set back to block to show them. */
+    /* Set to none to hide category PNG ornaments. Set back to block to show them. */
     --category-separator-display: block;
-    /* Set to none to hide main-page-title SVG ornaments. */
+    /* Set to none to hide main-page-title PNG ornaments. */
     --page-title-separator-display: block;
 
     /* ---- Home page ---- */
@@ -89,6 +89,22 @@ color that you can change freely without breaking anything.
     --home-info-row-gap: 24px;
     --home-info-column-gap: 38px;
     --home-info-label-value-gap: 9px;
+
+    /* ---- My Info form action buttons ---- */
+    --home-form-button-gap: 14px;
+    --home-form-button-min-width: 150px;
+    --home-form-button-height: 52px;
+    --home-form-button-padding-x: 22px;
+    --home-form-button-font-size: 15px;
+    --home-form-button-radius: 9px;
+    --home-form-button-text: 248, 248, 248;
+    --home-form-button-hover-text: 255, 202, 65;
+    --home-form-button-underlay: 0, 0, 0;
+    --home-form-button-underlay-strength: 0.38;
+    --home-form-button-shadow-strength: 0.42;
+    --home-form-button-transition: 180ms;
+    --home-form-cancel-button-image: url("assets/home-form-cancel-button-background.png");
+    --home-form-submit-button-image: url("assets/home-form-submit-button-background.png");
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 320px;
@@ -98,8 +114,8 @@ color that you can change freely without breaking anything.
     /* Home logo positioning is independent from every other page.
     Positive vertical values move only the Home logo downward. */
     --home-logo-height: 60px;
-    --home-logo-left-offset: 6px;
-    --home-logo-vertical-offset: 5px;
+    --home-logo-left-offset: 9px;
+    --home-logo-vertical-offset: 0px;
 
     /* Home-only navigation, announcement, and expand-icon colors. */
     --home-footer-nav-default: 190, 194, 200;
@@ -287,6 +303,66 @@ color that you can change freely without breaking anything.
     1 = image fully hidden behind solid color.
     0.75 is arbitrary — chosen because it looked good. */
     --tint-strength: 0.75;
+
+    /* ========================================================
+       MOBILE SETTINGS
+       The breakpoint itself is the 720px media query near the end
+       of this file. Every mobile measurement is centralized here.
+       ======================================================== */
+    --mobile-pad-top: 10px;
+    --mobile-pad-right: 10px;
+    --mobile-pad-bottom: 10px;
+    --mobile-pad-left: 10px;
+    --mobile-side-width: 46px;
+    --mobile-top-frame-height: 70px;
+    --mobile-bottom-frame-height: 70px;
+
+    --mobile-header-height: 54px;
+    --mobile-footer-height: 58px;
+    --mobile-logo-height: 40px;
+    --mobile-home-logo-height: 40px;
+    --mobile-announcement-left: 66px;
+    --mobile-announcement-right: 8px;
+    --mobile-announcement-font-size: 12px;
+    --mobile-home-glass-side-inset: 2px;
+
+    --mobile-footer-horizontal-padding: 3px;
+    --mobile-footer-nav-icon-size: 15px;
+    --mobile-footer-nav-gap: 3px;
+    --mobile-footer-nav-font-size: 10px;
+
+    --mobile-separator-height: 20px;
+    --mobile-separator-gap: 3px;
+    --mobile-page-title-size: 23px;
+    --mobile-category-title-size: 22px;
+
+    --mobile-products-max-width: 560px;
+    --mobile-product-row-gap: 22px;
+    --mobile-product-name-font-size: 14px;
+    --mobile-gem-price-min-font-size: 10px;
+    --mobile-gem-price-max-font-size: 16px;
+
+    --mobile-info-card-padding: 18px;
+    --mobile-info-card-gap: 16px;
+    --mobile-info-title-size: 22px;
+    --mobile-info-description-size: 13px;
+    --mobile-info-metric-label-size: 11px;
+    --mobile-info-metric-value-size: 14px;
+    --mobile-info-sell-width: 68px;
+    --mobile-info-sell-height: 42px;
+    --mobile-info-sell-font-size: 12px;
+
+    --mobile-menu-max-width: 420px;
+    --mobile-menu-gap: 16px;
+    --mobile-menu-button-height: 62px;
+
+    --mobile-table-cell-padding-y: 9px;
+    --mobile-table-cell-padding-x: 8px;
+    --mobile-table-font-size: 12px;
+    --mobile-pagination-button-size: 30px;
+    --mobile-pagination-padding-y: 10px;
+    --mobile-pagination-padding-x: 8px;
+    --mobile-pagination-gap: 5px;
 }
 
 * {
@@ -1310,7 +1386,7 @@ Spacing and a centered ornamental heading are their only structure.
     color: rgba(var(--category-divider-color), 1);
 }
 
-.category-title-row svg {
+.category-title-row img {
     display: block;
     width: 100%;
     height: var(--category-divider-height);
@@ -2470,7 +2546,7 @@ these settings in :root:
     margin-bottom: 20px;
 }
 
-.main-title-row svg {
+.main-title-row img {
     display: var(--page-title-separator-display);
     width: 100%;
     height: var(--category-divider-height);
@@ -2492,7 +2568,7 @@ these settings in :root:
 
 /* Independent category control. Empty side tracks intentionally remain
 when hidden so the category title stays perfectly centered. */
-.category-title-row svg {
+.category-title-row img {
     display: var(--category-separator-display);
 }
 
@@ -2506,5 +2582,245 @@ when hidden so the category title stays perfectly centered. */
         padding-left: 10px;
         padding-right: 10px;
         white-space: normal;
+    }
+}
+
+
+/* ============================================================
+V13 PNG ORNAMENTS
+
+The separator artwork is now a normal PNG file rather than an SVG/use
+reference. Required file: assets/ornamental-text-divider.png
+============================================================ */
+.category-title-row img,
+.main-title-row img {
+    object-fit: fill;
+    object-position: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ============================================================
+MY INFO FORM ACTION BUTTONS
+
+Cancel and Submit can use independent artwork. Transparent pixels are
+filled by the adjustable underlay, matching the rest of the interface.
+============================================================ */
+.home-form-actions {
+    gap: var(--home-form-button-gap);
+}
+
+.home-form-actions button {
+    min-width: var(--home-form-button-min-width);
+    min-height: var(--home-form-button-height);
+    padding: 8px var(--home-form-button-padding-x);
+    border: 0;
+    border-radius: var(--home-form-button-radius);
+    color: rgba(var(--home-form-button-text), 1);
+    background-color: rgba(
+        var(--home-form-button-underlay),
+        var(--home-form-button-underlay-strength)
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, var(--home-form-button-shadow-strength));
+    font: 700 var(--home-form-button-font-size) Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition:
+        color var(--home-form-button-transition) ease,
+        filter var(--home-form-button-transition) ease;
+}
+
+.home-form-actions [data-user-info-cancel] {
+    background-image: var(--home-form-cancel-button-image);
+}
+
+.home-form-actions button[type="submit"] {
+    background-image: var(--home-form-submit-button-image);
+}
+
+.home-form-actions button:hover,
+.home-form-actions button:focus-visible {
+    color: rgba(var(--home-form-button-hover-text), 1);
+    filter: brightness(1.08);
+}
+
+/* ============================================================
+MOBILE LAYOUT
+
+All changes in this block apply only at 720px and below. Change the
+breakpoint here if needed; change individual measurements in :root.
+============================================================ */
+@media (max-width: 720px) {
+    :root {
+        --pad-top: var(--mobile-pad-top);
+        --pad-right: var(--mobile-pad-right);
+        --pad-bottom: var(--mobile-pad-bottom);
+        --pad-left: var(--mobile-pad-left);
+        --side-width: var(--mobile-side-width);
+        --top-height: var(--mobile-top-frame-height);
+        --bottom-height: var(--mobile-bottom-frame-height);
+
+        --header-height: var(--mobile-header-height);
+        --footer-height: var(--mobile-footer-height);
+        --logo-height: var(--mobile-logo-height);
+        --home-logo-height: var(--mobile-home-logo-height);
+        --announcement-left: var(--mobile-announcement-left);
+        --announcement-right: var(--mobile-announcement-right);
+        --announcement-font-size: var(--mobile-announcement-font-size);
+        --home-glass-side-inset: var(--mobile-home-glass-side-inset);
+
+        --footer-nav-icon-size: var(--mobile-footer-nav-icon-size);
+        --gem-price-min-font-size: var(--mobile-gem-price-min-font-size);
+        --gem-price-max-font-size: var(--mobile-gem-price-max-font-size);
+    }
+
+    /* Header/footer use more of the phone width and less height. */
+    .footer {
+        padding-left: var(--mobile-footer-horizontal-padding);
+        padding-right: var(--mobile-footer-horizontal-padding);
+    }
+
+    .footer-nav {
+        width: 100%;
+        max-width: none;
+    }
+
+    .footer-nav-link {
+        width: 100%;
+        gap: var(--mobile-footer-nav-gap);
+        padding: 0 1px;
+        font-size: var(--mobile-footer-nav-font-size);
+    }
+
+    body.home-page .header,
+    body.home-page .footer {
+        left: calc(var(--pad-left) + var(--mobile-home-glass-side-inset));
+        right: calc(var(--pad-right) + var(--mobile-home-glass-side-inset));
+    }
+
+    /* One complete product per row on phones. */
+    .products {
+        width: min(100%, var(--mobile-products-max-width));
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: var(--mobile-product-row-gap);
+        column-gap: 0;
+    }
+
+    .product-name {
+        font-size: var(--mobile-product-name-font-size);
+    }
+
+    /* Smaller PNG ornaments and smaller page/category titles. */
+    .category-title-row,
+    .main-title-row {
+        gap: var(--mobile-separator-gap);
+    }
+
+    .category-title-row img,
+    .main-title-row img {
+        height: var(--mobile-separator-height);
+    }
+
+    .main-title-row .section-page-title,
+    .main-title-row .history-table-heading {
+        font-size: var(--mobile-page-title-size);
+    }
+
+    .category-title {
+        font-size: var(--mobile-category-title-size);
+    }
+
+    /* Compact opening market card, including the Sell button box itself. */
+    .info-card {
+        padding: var(--mobile-info-card-padding);
+        gap: var(--mobile-info-card-gap);
+    }
+
+    .info-card-title {
+        font-size: var(--mobile-info-title-size);
+    }
+
+    .info-card-description {
+        font-size: var(--mobile-info-description-size);
+    }
+
+    .info-card-metric-label {
+        font-size: var(--mobile-info-metric-label-size);
+    }
+
+    .info-card-metric-value {
+        font-size: var(--mobile-info-metric-value-size);
+    }
+
+    .info-card-sell {
+        width: min(100%, var(--mobile-info-sell-width));
+        height: var(--mobile-info-sell-height);
+        font-size: var(--mobile-info-sell-font-size);
+    }
+
+    /* History and Finance landing choices stack vertically. */
+    .history-menu {
+        width: min(100%, var(--mobile-menu-max-width));
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--mobile-menu-gap);
+    }
+
+    .history-menu-button {
+        height: var(--mobile-menu-button-height);
+    }
+
+    /* Tables use their true intrinsic max-content width. Each column wraps
+    closely around its own non-wrapping content instead of a desktop minimum. */
+    .history-table-panel {
+        width: fit-content;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .trade-history-table,
+    .possessions-table {
+        width: max-content;
+        min-width: max-content;
+        table-layout: auto;
+        font-size: var(--mobile-table-font-size);
+    }
+
+    .trade-history-table th,
+    .trade-history-table td {
+        padding:
+            var(--mobile-table-cell-padding-y)
+            var(--mobile-table-cell-padding-x);
+    }
+
+    .history-table-panel .history-pagination {
+        padding:
+            var(--mobile-pagination-padding-y)
+            var(--mobile-pagination-padding-x);
+        gap: var(--mobile-pagination-gap);
+    }
+
+    .history-pagination-pages {
+        gap: var(--mobile-pagination-gap);
+    }
+
+    .history-pagination button {
+        min-width: var(--mobile-pagination-button-size);
+        min-height: var(--mobile-pagination-button-size);
+        padding: 4px 7px;
+        font-size: 11px;
+    }
+
+    .home-form-actions {
+        gap: 10px;
+    }
+
+    .home-form-actions button {
+        min-width: 0;
+        min-height: 44px;
+        padding-left: 12px;
+        padding-right: 12px;
+        font-size: 12px;
     }
 }

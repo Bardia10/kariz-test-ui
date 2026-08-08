@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V12
+PRODUCT LAYOUT V13
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -144,13 +144,13 @@ timeout with a backend transaction request for production.
 V12 CHANGES
 - Increased configurable spacing inside Home section cards
 - Added 2px WebKit scrollbars and Firefox thin scrollbars to Trade pieces
-- Added category-style SVG ornaments around every main page title
+- Added category-style PNG ornaments around every main page title
 - Added independent CSS controls for page-title and category ornaments
 
 ORNAMENT VISIBILITY
 In style.css :root, use:
---page-title-separator-display: none;  Hide main-title SVGs
---category-separator-display: none;    Hide category SVGs
+--page-title-separator-display: none;  Hide main-title PNG images
+--category-separator-display: none;    Hide category PNG images
 Change either value back to block to show that ornament group.
 
 HOME INNER SPACING
@@ -158,3 +158,24 @@ HOME INNER SPACING
 --home-info-row-gap controls vertical field spacing.
 --home-info-column-gap controls horizontal field spacing.
 --home-info-label-value-gap controls the label-to-value gap.
+
+V13 CHANGES
+- All category and page-title ornaments now use one PNG file
+- Redesigned My Info Cancel/Submit buttons with independent image settings
+- Added a centralized, adjustable mobile settings block
+- Mobile Trade uses one product column
+- Mobile header/footer/logo/icons are smaller and navigation fills the width
+- Mobile Home glass islands use smaller side insets
+- Mobile tables use intrinsic max-content column widths and smaller pagination
+- Mobile page titles, separators, announcement, and market-card text are smaller
+- Mobile market Sell button shrinks together with its text
+- Mobile History/Finance choices stack in one column
+
+NEW REQUIRED ASSETS
+- assets/ornamental-text-divider.png
+- assets/home-form-cancel-button-background.png
+- assets/home-form-submit-button-background.png
+
+MOBILE ADJUSTMENTS
+All --mobile-* variables are grouped near the bottom of :root in style.css.
+The responsive breakpoint is @media (max-width: 720px) near the end of the file.
