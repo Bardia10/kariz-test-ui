@@ -55,19 +55,17 @@ color that you can change freely without breaking anything.
     controls the smaller space between a title and its two buttons. */
     --product-row-gap: 36px;
     --product-column-gap: 48px;
-    --product-piece-gap: 4px;
-    --product-piece-height: 48px;
+    --product-piece-gap: 8px;
+    --product-piece-height: 58px;
 
     /* ---- Product categories ---- */
     /* Category wrappers remain visually empty. These values control
     only the spacing, centered title, and ornamental divider. */
-    --category-space: 24px;
+    --category-space: 64px;
     --category-title-color: 242, 238, 232;
     --category-title-size: 30px;
     --category-divider-color: 242, 238, 232;
-    --category-divider-height: 110px;
-    /* Maximum ornament width; lower this to make the flourishes smaller. */
-    --category-divider-max-width: 360px;
+    --category-divider-height: 38px;
     --category-divider-gap: 5px;
     /* Set to none to hide category PNG ornaments. Set back to block to show them. */
     --category-separator-display: block;
@@ -107,6 +105,20 @@ color that you can change freely without breaking anything.
     --home-form-button-transition: 180ms;
     --home-form-cancel-button-image: url("assets/home-form-cancel-button-background.png");
     --home-form-submit-button-image: url("assets/home-form-submit-button-background.png");
+
+    /* ---- Unified Home-style theme for every page ---- */
+    --unified-wallpaper-image: url("assets/home-page-background.webp");
+    --unified-section-image: url("assets/home-page-div-background.webp");
+    --unified-action-image: url("assets/xhome-page-div-background.png");
+    --unified-title-image: url("assets/home-page-section-title-background.webp");
+    --unified-input-image: url("assets/home-page-input-background.webp");
+    --unified-text-color: 248, 248, 248;
+    --unified-heading-color: 239, 194, 82;
+    --unified-action-hover-color: 239, 194, 82;
+    --unified-card-radius: 10px;
+    --unified-card-shadow-strength: 0.42;
+    --unified-category-padding: 26px;
+    --unified-product-radius: 9px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 320px;
@@ -116,8 +128,8 @@ color that you can change freely without breaking anything.
     /* Home logo positioning is independent from every other page.
     Positive vertical values move only the Home logo downward. */
     --home-logo-height: 60px;
-    --home-logo-left-offset: 9px;
-    --home-logo-vertical-offset: 0px;
+    --home-logo-left-offset: 6px;
+    --home-logo-vertical-offset: 5px;
 
     /* Home-only navigation, announcement, and expand-icon colors. */
     --home-footer-nav-default: 190, 194, 200;
@@ -333,16 +345,13 @@ color that you can change freely without breaking anything.
     --mobile-footer-nav-gap: 3px;
     --mobile-footer-nav-font-size: 10px;
 
-    --mobile-separator-height: 62px;
-    --mobile-separator-max-width: 150px;
+    --mobile-separator-height: 20px;
     --mobile-separator-gap: 3px;
     --mobile-page-title-size: 23px;
     --mobile-category-title-size: 22px;
 
     --mobile-products-max-width: 560px;
     --mobile-product-row-gap: 22px;
-    --mobile-product-piece-gap: 2px;
-    --mobile-product-piece-height: 34px;
     --mobile-product-name-font-size: 14px;
     --mobile-gem-price-min-font-size: 10px;
     --mobile-gem-price-max-font-size: 16px;
@@ -1092,8 +1101,7 @@ The pseudo-element is invisible until the product is hovered. */
 
     background-repeat: no-repeat;
     background-position: center;
-    /* Preserve the source artwork's aspect ratio. */
-    background-size: 100% auto;
+    background-size: 100% 100%;
 
     /* A plain bold sans-serif stack. Arial is attempted first,
     Helvetica second, then the browser's standard sans-serif font. */
@@ -1383,11 +1391,9 @@ Spacing and a centered ornamental heading are their only structure.
 }
 
 .category-title-row {
-    /* Category labels (for example Bars and Coins) are intentionally hidden. */
-    display: none;
     width: 100%;
     margin-bottom: 28px;
-    /* Kept in the stylesheet for reference; the row is hidden above. */
+    display: grid;
     grid-template-columns: minmax(80px, 1fr) auto minmax(80px, 1fr);
     align-items: center;
     gap: var(--category-divider-gap);
@@ -1398,18 +1404,10 @@ Spacing and a centered ornamental heading are their only structure.
     display: block;
     width: 100%;
     height: var(--category-divider-height);
-    max-width: var(--category-divider-max-width);
-    object-fit: contain;
     overflow: visible;
 }
 
-.category-title-row .category-title-divider:first-child {
-    justify-self: end;
-    transform: none;
-}
-
 .category-title-row .category-divider--right {
-    justify-self: start;
     transform: scaleX(-1);
 }
 
@@ -2550,8 +2548,8 @@ these settings in :root:
 .main-title-row {
     width: min(100%, 1200px);
     margin: 24px auto 36px;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: minmax(80px, 1fr) auto minmax(80px, 1fr);
     align-items: center;
     gap: var(--category-divider-gap);
     color: rgba(var(--category-divider-color), 1);
@@ -2566,18 +2564,10 @@ these settings in :root:
     display: var(--page-title-separator-display);
     width: 100%;
     height: var(--category-divider-height);
-    max-width: var(--category-divider-max-width);
-    object-fit: contain;
     overflow: visible;
 }
 
-.main-title-divider:first-child {
-    justify-self: end;
-    transform: none;
-}
-
 .main-title-divider--right {
-    justify-self: start;
     transform: scaleX(-1);
 }
 
@@ -2618,6 +2608,7 @@ reference. Required file: assets/ornamental-text-divider.png
 ============================================================ */
 .category-title-row img,
 .main-title-row img {
+    object-fit: fill;
     object-position: center;
     pointer-events: none;
     user-select: none;
@@ -2744,16 +2735,6 @@ breakpoint here if needed; change individual measurements in :root.
     .category-title-row img,
     .main-title-row img {
         height: var(--mobile-separator-height);
-        max-width: var(--mobile-separator-max-width);
-    }
-
-    .product {
-        column-gap: var(--mobile-product-piece-gap);
-    }
-
-    .product-name,
-    .product-price {
-        height: var(--mobile-product-piece-height);
     }
 
     .main-title-row .section-page-title,
@@ -2855,5 +2836,321 @@ breakpoint here if needed; change individual measurements in :root.
         padding-left: 12px;
         padding-right: 12px;
         font-size: 12px;
+    }
+}
+
+
+/* ============================================================
+V14 UNIFIED HOME-STYLE THEME
+
+Every page now shares Home's wallpaper, frameless body, glass islands,
+dark section artwork, white text, and gold highlights.
+============================================================ */
+body.unified-home-theme {
+    background-image:
+        linear-gradient(
+            rgba(var(--home-tint-color), var(--home-tint-strength)),
+            rgba(var(--home-tint-color), var(--home-tint-strength))
+        ),
+        var(--unified-wallpaper-image);
+    background-repeat: repeat;
+}
+
+body.unified-home-theme .frame,
+body.unified-home-theme .content-shadow {
+    display: none;
+}
+
+/* Home-style glass header/footer on every page. */
+body.unified-home-theme .header,
+body.unified-home-theme .footer {
+    left: calc(var(--pad-left) + var(--home-glass-side-inset));
+    right: calc(var(--pad-right) + var(--home-glass-side-inset));
+    width: auto;
+
+    background-image: none;
+    background-color: rgba(
+        var(--home-glass-color),
+        var(--home-glass-opacity)
+    );
+    -webkit-backdrop-filter:
+        blur(var(--home-glass-blur))
+        saturate(var(--home-glass-saturation));
+    backdrop-filter:
+        blur(var(--home-glass-blur))
+        saturate(var(--home-glass-saturation));
+
+    border: 1px solid rgba(
+        var(--home-glass-border-color),
+        var(--home-glass-border-strength)
+    );
+    border-radius: var(--home-glass-radius);
+    box-shadow: 0 10px 28px rgba(
+        var(--home-glass-shadow-color),
+        var(--home-glass-shadow-strength)
+    );
+    overflow: hidden;
+}
+
+body.unified-home-theme .footer::before {
+    background-image: none;
+    background-color: transparent;
+    transform: none;
+}
+
+body.unified-home-theme .header-logo {
+    left: var(--home-logo-left-offset);
+    top: calc(50% + var(--home-logo-vertical-offset));
+    height: var(--home-logo-height);
+}
+
+body.unified-home-theme .header-announcement {
+    color: rgba(var(--home-announcement-color), 1);
+}
+
+body.unified-home-theme .footer-nav-link {
+    color: rgba(var(--home-footer-nav-default), 1);
+}
+
+body.unified-home-theme .footer-nav-link:hover {
+    color: rgba(var(--home-footer-nav-hover), 1);
+}
+
+body.unified-home-theme .footer-nav-link--active,
+body.unified-home-theme .footer-nav-link[aria-current="page"],
+body.unified-home-theme .footer-nav-link--active:hover,
+body.unified-home-theme .footer-nav-link[aria-current="page"]:hover {
+    color: rgba(var(--home-footer-nav-active), 1);
+}
+
+/* ============================================================
+ORNAMENT-FREE TITLES
+============================================================ */
+body.unified-home-theme .main-title-row,
+body.unified-home-theme .category-title-row {
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgba(var(--unified-heading-color), 1);
+}
+
+body.unified-home-theme .main-title-row .section-page-title,
+body.unified-home-theme .main-title-row .history-table-heading,
+body.unified-home-theme .category-title {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 11px 20px;
+    color: rgba(var(--unified-heading-color), 1);
+    background-image: var(--unified-title-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    text-align: center;
+}
+
+/* ============================================================
+HOME-STYLE PRODUCT CATEGORIES AND PRODUCTS
+============================================================ */
+body.unified-home-theme .product-category {
+    padding: var(--unified-category-padding);
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-section-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--unified-card-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, var(--unified-card-shadow-strength));
+}
+
+body.unified-home-theme .category-title-row {
+    margin-bottom: 28px;
+}
+
+/* Product names, sell prices, and buy prices now use the same artwork as
+Home's My Payments Info action button. */
+body.unified-home-theme .product-name,
+body.unified-home-theme .product-price {
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-action-image);
+    border-radius: var(--unified-product-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, var(--unified-card-shadow-strength));
+}
+
+body.unified-home-theme .product-price {
+    transform: none;
+    transition: color var(--home-action-transition) ease;
+}
+
+body.unified-home-theme .product-price:hover,
+body.unified-home-theme .product-price:focus-visible {
+    color: rgba(var(--unified-action-hover-color), 1);
+    transform: none;
+}
+
+body.unified-home-theme .product::before {
+    display: none;
+}
+
+/* The market information card keeps its existing tile, metrics, and text.
+Only its Sell button changes to the unified Home action artwork. */
+body.unified-home-theme .info-card-sell {
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-action-image);
+    border-radius: var(--unified-product-radius);
+}
+
+body.unified-home-theme .info-card-sell:hover,
+body.unified-home-theme .info-card-sell:focus-visible {
+    color: rgba(var(--unified-action-hover-color), 1);
+}
+
+/* ============================================================
+HOME-STYLE MENUS, TABLES, AND SECONDARY PANELS
+============================================================ */
+body.unified-home-theme .history-menu-button,
+body.unified-home-theme .page-placeholder {
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-action-image);
+    border-radius: var(--unified-product-radius);
+}
+
+body.unified-home-theme .history-menu-button:hover,
+body.unified-home-theme .history-menu-button:focus-visible {
+    color: rgba(var(--unified-action-hover-color), 1);
+}
+
+body.unified-home-theme .history-table-panel {
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-section-image);
+    border-radius: var(--unified-card-radius);
+}
+
+body.unified-home-theme .trade-history-table {
+    color: rgba(var(--unified-text-color), 1);
+}
+
+body.unified-home-theme .trade-history-table th {
+    color: rgba(var(--unified-heading-color), 1);
+}
+
+body.unified-home-theme .trade-history-table th:nth-child(even),
+body.unified-home-theme .trade-history-table td:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.055);
+}
+
+body.unified-home-theme .trade-history-table tbody tr:hover td,
+body.unified-home-theme .trade-history-table tbody tr:active td {
+    background-color: rgba(255, 255, 255, 0.13);
+}
+
+body.unified-home-theme .history-pagination button {
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-action-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-color: rgba(var(--home-card-heading), 0.62);
+    border-radius: 7px;
+}
+
+body.unified-home-theme .history-pagination button:hover,
+body.unified-home-theme .history-pagination button[aria-current="page"] {
+    color: rgba(var(--unified-heading-color), 1);
+    background-color: rgba(0, 0, 0, 0.42);
+}
+
+body.unified-home-theme .history-back-link {
+    color: rgba(var(--home-footer-nav-default), 1);
+}
+
+body.unified-home-theme .history-back-link:hover,
+body.unified-home-theme .history-back-link:focus-visible {
+    color: rgba(var(--unified-heading-color), 1);
+}
+
+/* ============================================================
+HOME-STYLE TRADE MODAL
+============================================================ */
+body.unified-home-theme .trade-modal-card {
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-section-image);
+}
+
+body.unified-home-theme .trade-modal-title,
+body.unified-home-theme .trade-modal-field {
+    color: rgba(var(--unified-heading-color), 1);
+}
+
+body.unified-home-theme .trade-modal-field input {
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(0, 0, 0, 0.62);
+    background-image: var(--unified-input-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+body.unified-home-theme .trade-modal-confirm,
+body.unified-home-theme .trade-modal-finish {
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-action-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+body.unified-home-theme .trade-modal-confirm:hover,
+body.unified-home-theme .trade-modal-finish:hover {
+    color: rgba(var(--unified-action-hover-color), 1);
+}
+
+/* Keep the existing V13 mobile behavior while applying glass islands to
+all pages, not only Home. */
+@media (max-width: 720px) {
+    body.unified-home-theme .header,
+    body.unified-home-theme .footer {
+        left: calc(var(--pad-left) + var(--mobile-home-glass-side-inset));
+        right: calc(var(--pad-right) + var(--mobile-home-glass-side-inset));
+    }
+
+    body.unified-home-theme .product-category {
+        padding: 18px;
     }
 }

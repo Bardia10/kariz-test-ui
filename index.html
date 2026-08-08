@@ -8,25 +8,13 @@
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="app.js"></script>
 </head>
-<body data-loading-duration="5000" data-trade-confirm-duration="5000">
+<body class="unified-home-theme" data-loading-duration="5000" data-trade-confirm-duration="5000">
 <!-- LAYER 3: the decorative frame.
          Pure decoration: aria-hidden tells screen readers to skip it,
          and pointer-events:none in the CSS lets clicks pass through it. -->
-<div aria-hidden="true" class="frame">
-<!-- Top row -->
-<div class="frame-piece top-left"></div>
-<div class="frame-piece top-edge"></div>
-<div class="frame-piece top-right"></div>
-<!-- Middle row (sides only — the center stays empty for content) -->
-<div class="frame-piece left-edge"></div>
-<div class="frame-piece right-edge"></div>
-<!-- Bottom row -->
-<div class="frame-piece bottom-left"></div>
-<div class="frame-piece bottom-edge"></div>
-<div class="frame-piece bottom-right"></div>
-</div>
+
 <!-- LAYER 2: the inward shadow cast onto the content opening. -->
-<div aria-hidden="true" class="content-shadow"></div>
+
 <!-- LAYER 1: all scrollable page content. -->
 <div class="page-content">
 <header class="header">
@@ -42,8 +30,10 @@
 </div>
 </header>
 <main class="content"><div class="main-title-row">
-                <h1 class="section-page-title">Trade</h1>
-            </div>
+
+<h1 class="section-page-title">Trade</h1>
+
+</div>
 <!-- Shared tiled panel: div-tile-background.png paints above
                  the translucent black underlay defined in style.css. -->
 <section aria-labelledby="info-card-title" class="info-card">
@@ -63,7 +53,13 @@
 </div>
 <button class="product-price product-price--sell info-card-sell" data-trade-input-mode="amount" data-trade-item="Gold" data-trade-operation="sell" data-trade-unit-price="18323232" type="button">Sell</button>
 </section>
-<section aria-label="Coin products" class="product-category">
+<!-- Categories have no visible panel, border, or background. -->
+<section aria-labelledby="coins-title" class="product-category">
+<div class="category-title-row">
+
+<h2 class="category-title" id="coins-title">Coins</h2>
+
+</div>
 <div class="products">
 <article class="product">
 <div class="product-name">Full Gold Coin</div>
@@ -87,7 +83,12 @@
 </article>
 </div>
 </section>
-<section aria-label="Gold bar products" class="product-category">
+<section aria-labelledby="bars-title" class="product-category">
+<div class="category-title-row">
+
+<h2 class="category-title" id="bars-title">Bars</h2>
+
+</div>
 <div class="products">
 <article class="product">
 <div class="product-name">1-Gram Gold Bar</div>
@@ -137,7 +138,6 @@
 </footer>
 <!-- Full-screen loading layer. JavaScript shows it for five seconds
          whenever a ruby or emerald gem button is clicked. -->
-
 <div class="trade-modal" data-trade-modal="" hidden="">
 <div aria-labelledby="trade-modal-title" aria-modal="true" class="trade-modal-card" role="dialog">
 <button aria-label="Close" class="trade-modal-close" data-trade-modal-close="" type="button">×</button>

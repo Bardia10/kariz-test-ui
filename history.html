@@ -1,95 +1,75 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>History</title>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="app.js"></script>
 </head>
-<body data-loading-duration="5000">
-    <!-- LAYER 3: the decorative frame.
+<body class="unified-home-theme" data-loading-duration="5000">
+<!-- LAYER 3: the decorative frame.
          Pure decoration: aria-hidden tells screen readers to skip it,
          and pointer-events:none in the CSS lets clicks pass through it. -->
-    <div class="frame" aria-hidden="true">
-        <!-- Top row -->
-        <div class="frame-piece top-left"></div>
-        <div class="frame-piece top-edge"></div>
-        <div class="frame-piece top-right"></div>
 
-        <!-- Middle row (sides only — the center stays empty for content) -->
-        <div class="frame-piece left-edge"></div>
-        <div class="frame-piece right-edge"></div>
+<!-- LAYER 2: the inward shadow cast onto the content opening. -->
 
-        <!-- Bottom row -->
-        <div class="frame-piece bottom-left"></div>
-        <div class="frame-piece bottom-edge"></div>
-        <div class="frame-piece bottom-right"></div>
-    </div>
-
-    <!-- LAYER 2: the inward shadow cast onto the content opening. -->
-    <div class="content-shadow" aria-hidden="true"></div>
-
-    <!-- LAYER 1: all scrollable page content. -->
-    <div class="page-content">
-        <header class="header">
-            <!-- Display-only logo. It is intentionally a plain image,
+<!-- LAYER 1: all scrollable page content. -->
+<div class="page-content">
+<header class="header">
+<!-- Display-only logo. It is intentionally a plain image,
                  not a link or button, so it cannot be clicked. -->
-            <img class="header-logo" src="assets/logo.png" alt="Company logo">
-
-            <!-- The announcement is confined to its own clipped area,
+<img alt="Company logo" class="header-logo" src="assets/logo.png"/>
+<!-- The announcement is confined to its own clipped area,
                  so it can never travel underneath the transparent logo. -->
-            <div class="header-announcement" aria-label="Market announcement">
-                <span class="header-announcement-text">
+<div aria-label="Market announcement" class="header-announcement">
+<span class="header-announcement-text">
                     Wholesale rates may change based on market movement.
                 </span>
-            </div>
-        </header>
+</div>
+</header>
+<main class="content">
+<div class="main-title-row">
 
-        <main class="content">
-            <div class="main-title-row">
-                <h1 class="section-page-title">History</h1>
-            </div>
-            <section class="history-menu" aria-label="History options">
-                <a class="history-menu-button" href="trade-history.html">Trade History</a>
-                <a class="history-menu-button" href="payment-history.html">Payment History</a>
-            </section>
-        </main>
-    </div>
+<h1 class="section-page-title">History</h1>
 
-    <!-- LAYER 4: fixed footer navigation.
+</div>
+<section aria-label="History options" class="history-menu">
+<a class="history-menu-button" href="trade-history.html">Trade History</a>
+<a class="history-menu-button" href="payment-history.html">Payment History</a>
+</section>
+</main>
+</div>
+<!-- LAYER 4: fixed footer navigation.
          Trade History is the active page in this file. -->
-    <footer class="footer">
-        <nav class="footer-nav" aria-label="Primary navigation">
-            <a class="footer-nav-link" href="home.html">
-                <span class="footer-nav-icon footer-nav-icon--profile" aria-hidden="true"></span>
-                <span>Home</span>
-            </a>
-
-            <a class="footer-nav-link" href="index.html">
-                <span class="footer-nav-icon footer-nav-icon--trade" aria-hidden="true"></span>
-                <span>Trade</span>
-            </a>
-
-            <a class="footer-nav-link footer-nav-link--active" href="history.html" aria-current="page">
-                <span class="footer-nav-icon footer-nav-icon--history" aria-hidden="true"></span>
-                <span>History</span>
-            </a>
-
-            <a class="footer-nav-link" href="finance.html">
-                <span class="footer-nav-icon footer-nav-icon--accounting" aria-hidden="true"></span>
-                <span>Finance</span>
-            </a>
-        </nav>
-    </footer>
-
-    <!-- Full-screen loading layer. JavaScript shows it for five seconds
+<footer class="footer">
+<nav aria-label="Primary navigation" class="footer-nav">
+<a class="footer-nav-link" href="home.html">
+<span aria-hidden="true" class="footer-nav-icon footer-nav-icon--profile"></span>
+<span>Home</span>
+</a>
+<a class="footer-nav-link" href="index.html">
+<span aria-hidden="true" class="footer-nav-icon footer-nav-icon--trade"></span>
+<span>Trade</span>
+</a>
+<a aria-current="page" class="footer-nav-link footer-nav-link--active" href="history.html">
+<span aria-hidden="true" class="footer-nav-icon footer-nav-icon--history"></span>
+<span>History</span>
+</a>
+<a class="footer-nav-link" href="finance.html">
+<span aria-hidden="true" class="footer-nav-icon footer-nav-icon--accounting"></span>
+<span>Finance</span>
+</a>
+</nav>
+</footer>
+<!-- Full-screen loading layer. JavaScript shows it for five seconds
          whenever a ruby or emerald gem button is clicked. -->
-    <div class="loading-overlay" aria-hidden="true">
-        <div class="loading-overlay-content">
-            <img class="loading-overlay-logo" src="assets/logo.png" alt="">
-            <p class="loading-overlay-text">Kariz Gold Gallery</p>
-        </div>
-    </div>
+<div aria-hidden="true" class="loading-overlay">
+<div class="loading-overlay-content">
+<img alt="" class="loading-overlay-logo" src="assets/logo.png"/>
+<p class="loading-overlay-text">Kariz Gold Gallery</p>
+</div>
+</div>
 </body>
 </html>

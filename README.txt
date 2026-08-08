@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V13
+PRODUCT LAYOUT V14
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -179,3 +179,22 @@ NEW REQUIRED ASSETS
 MOBILE ADJUSTMENTS
 All --mobile-* variables are grouped near the bottom of :root in style.css.
 The responsive breakpoint is @media (max-width: 720px) near the end of the file.
+
+V14 MASSIVE VISUAL REDESIGN
+- Removed every decorative frame and content-shadow overlay
+- Removed all category and page-title ornaments
+- Applied Home wallpaper and glass-island header/footer to every page
+- Applied Home navigation colors to every page
+- Product names and buy/sell prices use the My Payments Info button artwork
+- Coins/Bars sections use the Home section-card artwork
+- The market information card is preserved; only its Sell button changed
+- History/Finance menu buttons, tables, pagination, and trade modal now follow the Home visual system
+
+UNIFIED THEME ASSETS
+- assets/home-page-background.webp
+- assets/home-page-div-background.webp
+- assets/xhome-page-div-background.png
+- assets/home-page-section-title-background.webp
+- assets/home-page-input-background.webp
+
+The old ornament asset is no longer referenced by page HTML.
