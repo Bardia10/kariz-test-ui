@@ -125,6 +125,15 @@ color that you can change freely without breaking anything.
     --unified-page-title-color: 0, 0, 0;
     --unified-back-button-color: 0, 0, 0;
     --unified-back-button-hover-color: 239, 194, 82;
+    --page-title-icon-size: 28px;
+    --page-title-icon-gap: 10px;
+    --mobile-page-title-icon-size: 19px;
+    --mobile-content-horizontal-padding: 2px;
+    --mobile-section-horizontal-padding: 8px;
+    --mobile-home-card-horizontal-padding: 14px;
+    --mobile-product-piece-gap: 4px;
+    --mobile-full-width-control-gap: 10px;
+    --back-button-block-gap: 10px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 320px;
@@ -330,9 +339,9 @@ color that you can change freely without breaking anything.
        of this file. Every mobile measurement is centralized here.
        ======================================================== */
     --mobile-pad-top: 10px;
-    --mobile-pad-right: 10px;
+    --mobile-pad-right: 4px;
     --mobile-pad-bottom: 10px;
-    --mobile-pad-left: 10px;
+    --mobile-pad-left: 4px;
     --mobile-side-width: 46px;
     --mobile-top-frame-height: 70px;
     --mobile-bottom-frame-height: 70px;
@@ -3199,4 +3208,163 @@ body.unified-home-theme .history-back-link {
 body.unified-home-theme .history-back-link:hover,
 body.unified-home-theme .history-back-link:focus-visible {
     color: rgba(var(--unified-back-button-hover-color), 1);
+}
+
+
+/* ============================================================
+V16 PAGE TITLE ICONS
+============================================================ */
+body.unified-home-theme .main-title-row .section-page-title,
+body.unified-home-theme .main-title-row .history-table-heading {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--page-title-icon-gap);
+}
+
+.page-title-icon {
+    flex: 0 0 auto;
+    width: var(--page-title-icon-size);
+    height: var(--page-title-icon-size);
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.page-title-icon--trade {
+    -webkit-mask-image: url("assets/trade.svg");
+    mask-image: url("assets/trade.svg");
+}
+
+.page-title-icon--history {
+    -webkit-mask-image: url("assets/history.svg");
+    mask-image: url("assets/history.svg");
+}
+
+.page-title-icon--finance {
+    -webkit-mask-image: url("assets/account-statement.svg");
+    mask-image: url("assets/account-statement.svg");
+}
+
+/* ============================================================
+BLOCK-FLOW BACK BUTTON
+
+The back arrow is no longer absolutely positioned. It owns a complete
+row before the page title, so it cannot overlap or sit underneath titles,
+tables, or controls on Trade History and other detail pages.
+============================================================ */
+.history-back-link {
+    position: static;
+    top: auto;
+    left: auto;
+    display: grid;
+    place-items: center;
+    margin: 0 0 var(--back-button-block-gap);
+    transform: none;
+}
+
+.history-back-link:hover,
+.history-back-link:focus-visible {
+    transform: none;
+}
+
+/* ============================================================
+MOBILE WIDTH UTILIZATION
+
+Horizontal padding is intentionally much smaller on phones. Content,
+menus, Home cards, and action controls are allowed to use nearly all of
+the available viewport width. All values remain adjustable in :root.
+============================================================ */
+@media (max-width: 720px) {
+    .page-content {
+        padding-left: var(--mobile-content-horizontal-padding);
+        padding-right: var(--mobile-content-horizontal-padding);
+    }
+
+    body.unified-home-theme .product-category {
+        padding-left: var(--mobile-section-horizontal-padding);
+        padding-right: var(--mobile-section-horizontal-padding);
+    }
+
+    .product {
+        column-gap: var(--mobile-product-piece-gap);
+    }
+
+    .home-content {
+        width: 100%;
+        max-width: none;
+    }
+
+    .home-card,
+    .home-details,
+    .home-actions,
+    .home-contact-card {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .home-card:not(.home-details) {
+        padding-left: var(--mobile-home-card-horizontal-padding);
+        padding-right: var(--mobile-home-card-horizontal-padding);
+    }
+
+    .home-details summary {
+        padding-left: var(--mobile-home-card-horizontal-padding);
+        padding-right: var(--mobile-home-card-horizontal-padding);
+    }
+
+    .home-details-body {
+        padding-left: var(--mobile-home-card-horizontal-padding);
+        padding-right: var(--mobile-home-card-horizontal-padding);
+    }
+
+    .home-actions,
+    .home-form-actions {
+        gap: var(--mobile-full-width-control-gap);
+    }
+
+    .home-action-button,
+    .home-form-actions button {
+        width: 100%;
+    }
+
+    .home-form-actions button {
+        flex: 1 1 0;
+    }
+
+    .history-menu {
+        width: 100%;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .history-table-page {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .trade-modal {
+        padding-left: var(--mobile-content-horizontal-padding);
+        padding-right: var(--mobile-content-horizontal-padding);
+    }
+
+    .page-title-icon {
+        width: var(--mobile-page-title-icon-size);
+        height: var(--mobile-page-title-icon-size);
+    }
+
+    .history-back-link {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 6px;
+        font-size: 42px;
+    }
 }

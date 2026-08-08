@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V15
+PRODUCT LAYOUT V16
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -208,3 +208,16 @@ V15 CHANGES
 
 The new buy/sell filenames intentionally differ from the old
 product-sell-button.png and product-buy-button.png gem assets.
+
+V16 CHANGES
+- Added the matching Trade, History, or Finance icon beside every page title
+- Home remains intentionally without a page title
+- Reduced mobile outer and inner horizontal padding
+- Expanded mobile Home cards, menus, actions, and form controls to available width
+- Reduced mobile product-piece gaps
+- Changed detail-page back arrows from absolute positioning to their own block row
+
+TITLE ICON FILES
+- Trade pages: assets/trade.svg
+- History pages: assets/history.svg
+- Finance pages: assets/account-statement.svg
