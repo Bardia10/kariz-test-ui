@@ -159,6 +159,15 @@ color that you can change freely without breaking anything.
     --mobile-product-piece-min-height: 38px;
     --mobile-product-piece-fluid-height: 12vw;
     --mobile-product-piece-max-height: 46px;
+    /* ---- Finance action groups ---- */
+    --finance-actions-max-width: 900px;
+    --finance-section-gap: 24px;
+    --finance-section-padding: 24px;
+    --finance-button-gap: 14px;
+    --finance-button-min-height: 64px;
+    --finance-button-font-size: 16px;
+    --finance-mobile-section-padding: 12px;
+    --finance-mobile-button-gap: 10px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 320px;
@@ -1159,7 +1168,7 @@ The pseudo-element is invisible until the product is hovered. */
     overflow-x: auto;
     overflow-y: hidden;
     justify-content: safe center;
-    scrollbar-width: none;
+    scrollbar-width: thin;
 
     /* A small down-right shadow suggests a light source above and to
     the left. The short distance and tight blur keep each piece resting
@@ -3514,5 +3523,136 @@ FLUID MOBILE PRODUCT PROPORTIONS
     body.trade-page .product-price {
         height: var(--product-piece-height);
         min-height: 0;
+    }
+}
+
+
+/* ============================================================
+V18 COMPLETELY HIDDEN SCROLLBARS
+
+Scrolling remains fully functional through mouse wheels, trackpads,
+touch, keyboard navigation, and JavaScript. Only the native visual bars
+are removed from the page and all nested elements.
+============================================================ */
+html,
+body,
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+    display: none !important;
+    background: transparent !important;
+}
+
+/* ============================================================
+FINANCE ACTION GROUPS
+============================================================ */
+.finance-actions {
+    width: min(100%, var(--finance-actions-max-width));
+    margin: 0 auto 48px;
+    display: grid;
+    gap: var(--finance-section-gap);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.finance-action-section {
+    padding: var(--finance-section-padding);
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-section-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--unified-card-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, var(--unified-card-shadow-strength));
+}
+
+.finance-action-heading {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 22px;
+    padding: 10px 18px;
+    color: rgba(var(--unified-heading-color), 1);
+    background-image: var(--unified-title-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    font-size: clamp(20px, 2.3vw, 28px);
+    text-align: center;
+}
+
+.finance-action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--finance-button-gap);
+}
+
+.finance-action-button {
+    min-width: 0;
+    min-height: var(--finance-button-min-height);
+    padding: 12px 18px;
+    border: 0;
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-action-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--unified-product-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, var(--unified-card-shadow-strength));
+    font: 700 var(--finance-button-font-size) Arial, Helvetica, sans-serif;
+    line-height: 1.25;
+    text-align: center;
+    cursor: default;
+}
+
+.finance-action-button:hover,
+.finance-action-button:focus-visible {
+    color: rgba(var(--unified-action-hover-color), 1);
+}
+
+@media (max-width: 720px) {
+    .finance-actions {
+        width: 100%;
+        gap: var(--finance-mobile-button-gap);
+    }
+
+    .finance-action-section {
+        padding: var(--finance-mobile-section-padding);
+    }
+
+    .finance-action-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--finance-mobile-button-gap);
+    }
+
+    .finance-action-button {
+        width: 100%;
+        min-height: 54px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 14px;
     }
 }

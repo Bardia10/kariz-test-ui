@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V17
+PRODUCT LAYOUT V18
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -235,3 +235,15 @@ Firefox uses scrollbar-width: thin, its smallest supported standard value.
 MOBILE PRODUCT HEIGHT
 Adjust --mobile-product-piece-min-height, --mobile-product-piece-fluid-height,
 and --mobile-product-piece-max-height in :root.
+
+V18 CHANGES
+- Completely hid page and nested-element scrollbars while preserving scrolling
+- Added Deposit & Withdrawal and Transfers action groups to Finance
+- Preserved each Persian source phrase in an adjacent HTML comment
+- Renamed the History page and every footer navigation label to Possessions
+- Kept history.html as the filename so existing links remain valid
+
+FINANCE TRANSLATIONS
+Deposit & Withdrawal = واریز و برداشت
+Transfers = حواله
+The detailed button translations are documented directly in finance.html comments.
