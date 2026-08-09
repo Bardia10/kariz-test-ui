@@ -27,7 +27,7 @@
 <main class="content">
 <div class="home-content">
 <!-- ACCOUNT INFO: brief system-level account details. -->
-<section aria-labelledby="account-info-title" class="home-card">
+<section aria-labelledby="account-info-title" class="home-card home-account-card">
 <h1 class="home-card-title" id="account-info-title">Account Info</h1>
 <div class="home-info-grid">
 <div class="home-info-item">
@@ -109,12 +109,17 @@
 </div>
 </details>
 <!-- HOME ACTIONS: first link is active; payments is reserved. -->
-<section aria-label="Account actions" class="home-actions">
+
+<section aria-labelledby="dashboard-title" class="home-card home-dashboard">
+<h2 class="home-card-title" id="dashboard-title">Dashboard</h2>
+<div class="home-dashboard-actions">
 <a class="home-action-button" href="possessions.html">My Possessions</a>
-<button class="home-action-button home-action-button--inactive" type="button">
-                        My Payments Info
-                    </button>
+<a class="home-action-button" href="index.html">Buying and Selling Gold</a>
+<a class="home-action-button" href="trade-history.html">Trade History</a>
+<a class="home-action-button" href="finance.html">Deposit &amp; Withdrawal</a>
+</div>
 </section>
+
 <!-- CONTACT US: text address and matching Google Maps embed. -->
 <section aria-labelledby="contact-us-title" class="home-card home-contact-card">
 <h2 class="home-card-title" id="contact-us-title">Contact Us</h2>

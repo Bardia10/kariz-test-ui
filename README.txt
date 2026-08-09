@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V19
+PRODUCT LAYOUT V20
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -257,3 +257,14 @@ V19 CHANGES
 - Changed My Info to gold by default and white on hover
 - Changed Home section-title artwork to the My Possessions button image
 - Added an end-of-page Trade History link to Trade
+
+V20 CHANGES
+- Trade History now highlights Trade and returns to Trade
+- Added a Trade History text link to successful trade confirmations
+- Added a three-second loading phase before Buy/Sell modals open
+- Replaced Home actions with a four-link Dashboard section
+- Reduced map height to 240px
+- Made Account Info one row on desktop and widened My Info consistently
+- Improved Current Gold Market title, description, and metric colors
+- Changed the shared gold to a brighter 255,223,88
+- Changed announcement and default navigation colors to white

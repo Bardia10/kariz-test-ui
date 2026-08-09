@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="-10 -10 532 532"
+     viewBox="0 0 512 512"
      role="img"
      aria-labelledby="finance-title"
      color="#ffffff"
@@ -8,10 +8,10 @@
 
   <circle cx="256" cy="256" r="235"
           stroke="currentColor"
-          stroke-width="48"/>
+          stroke-width="20"/>
 
   <g stroke="currentColor"
-     stroke-width="56"
+     stroke-width="22"
      stroke-linecap="round"
      stroke-linejoin="round">
     <path d="M333 181

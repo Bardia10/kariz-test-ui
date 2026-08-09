@@ -1,22 +1,16 @@
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 24 24"
-  width="24"
-  height="24"
-  role="img"
-  aria-label="Trade"
-  style="width:var(--icon-size,24px);height:var(--icon-size,24px);color:var(--icon-color,#f4bd27)"
->
-  <g
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M4 8h14"/>
-    <path d="m15 5 3 3-3 3"/>
-    <path d="M20 16H6"/>
-    <path d="m9 13-3 3 3 3"/>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 512 512"
+     role="img"
+     aria-labelledby="trade-title"
+     color="#ffffff"
+     fill="none">
+  <title id="trade-title">Trade</title>
+
+  <g stroke="currentColor"
+     stroke-width="52"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+    <path d="M48 158H426M338 70L426 158L338 246"/>
+    <path d="M464 354H86M174 266L86 354L174 442"/>
   </g>
 </svg>

@@ -10,7 +10,10 @@
      stroke-width="52"
      stroke-linecap="round"
      stroke-linejoin="round">
-    <!-- Minimal roof, walls and doorway. -->
+    <!-- Chimney sits behind the roofline. -->
+    <path d="M360 151V82H440V212"/>
+
+    <!-- Roof, walls and doorway. -->
     <path d="M35 247L256 27L477 247H428V459
              Q428 476 411 476H307
              Q296 476 296 465V338H216V465

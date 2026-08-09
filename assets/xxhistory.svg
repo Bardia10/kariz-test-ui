@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="-25 -25 710 550"
+     viewBox="0 0 660 500"
      role="img"
      aria-labelledby="gold-bars-title"
      color="#ffffff"
@@ -7,7 +7,7 @@
   <title id="gold-bars-title">Gold bars</title>
 
   <g stroke="currentColor"
-     stroke-width="60"
+     stroke-width="15"
      stroke-linecap="round"
      stroke-linejoin="round">
     <!-- Upper bar: top, front and right faces -->

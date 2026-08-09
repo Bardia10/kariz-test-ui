@@ -269,6 +269,12 @@ show the success state. Replace the timeout with a real API call later.
     }
 
     const body = document.body;
+    const loadingOverlay = document.querySelector(".loading-overlay");
+    const requestedPreModalDelay = Number(body.dataset.tradeModalLoadingDuration);
+    const preModalDelay = Number.isFinite(requestedPreModalDelay)
+        ? requestedPreModalDelay
+        : 3000;
+    let preModalTimer = null;
     const formState = modal.querySelector("[data-trade-modal-form]");
     const waitingState = modal.querySelector("[data-trade-modal-waiting]");
     const successState = modal.querySelector("[data-trade-modal-success]");
@@ -334,8 +340,24 @@ show the success state. Replace the timeout with a real API call later.
         current = null;
     };
 
+    const openModalAfterLoading = (button) => {
+        if (preModalTimer !== null) return;
+
+        loadingOverlay?.classList.add("is-active");
+        loadingOverlay?.setAttribute("aria-hidden", "false");
+        body.classList.add("is-loading");
+
+        preModalTimer = window.setTimeout(() => {
+            loadingOverlay?.classList.remove("is-active");
+            loadingOverlay?.setAttribute("aria-hidden", "true");
+            body.classList.remove("is-loading");
+            preModalTimer = null;
+            openModal(button);
+        }, preModalDelay);
+    };
+
     triggers.forEach((button) => {
-        button.addEventListener("click", () => openModal(button));
+        button.addEventListener("click", () => openModalAfterLoading(button));
     });
     input.addEventListener("input", updateCalculation);
 

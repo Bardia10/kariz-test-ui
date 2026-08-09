@@ -1,0 +1,22 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width="24"
+  height="24"
+  role="img"
+  aria-label="Account Statement"
+  style="width:var(--icon-size,24px);height:var(--icon-size,24px);color:var(--icon-color,#bfc0c4)"
+>
+  <g
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <rect x="5.5" y="3.5" width="13" height="17" rx="1"/>
+    <path d="M8.5 8h7"/>
+    <path d="M8.5 12h7"/>
+    <path d="M8.5 16h5"/>
+  </g>
+</svg>

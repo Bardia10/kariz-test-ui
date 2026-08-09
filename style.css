@@ -183,9 +183,18 @@ color that you can change freely without breaking anything.
     --mobile-product-title-max-font-size: 14px;
     --mobile-product-inline-min-font-size: 11px;
     --trade-history-cta-max-width: 420px;
+    /* ---- V20 Home and gold refinements ---- */
+    --bright-gold: 255, 223, 88;
+    --home-account-section-width: 980px;
+    --home-info-section-width: 820px;
+    --home-dashboard-max-width: 900px;
+    --home-dashboard-gap: 18px;
+    --trade-info-description-size: 18px;
+    --trade-info-title-padding-y: 10px;
+    --trade-info-title-padding-x: 18px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
-    --home-map-height: 320px;
+    --home-map-height: 240px;
     --home-action-hover-scale: 1.035;
     --home-action-transition: 220ms;
 
@@ -3827,6 +3836,121 @@ TRADE HISTORY END-OF-PAGE LINK
         width: 100%;
         min-height: 52px;
         padding: 10px 14px;
+        font-size: 15px;
+    }
+}
+
+
+/* ============================================================
+V20 BRIGHTER GOLD + WHITE CHROME TEXT
+============================================================ */
+:root {
+    --home-card-heading: var(--bright-gold);
+    --unified-heading-color: var(--bright-gold);
+    --unified-action-hover-color: var(--bright-gold);
+    --footer-nav-gold: var(--bright-gold);
+    --home-footer-nav-active: var(--bright-gold);
+    --home-glass-border-color: var(--bright-gold);
+    --info-gold-color: var(--bright-gold);
+    --loading-text-color: var(--bright-gold);
+    --history-gold-line: var(--bright-gold);
+    --trade-modal-accent: var(--bright-gold);
+    --unified-back-button-hover-color: var(--bright-gold);
+    --home-form-button-hover-text: var(--bright-gold);
+
+    --home-announcement-color: 255, 255, 255;
+    --home-footer-nav-default: 255, 255, 255;
+}
+
+/* ============================================================
+TRADE SUCCESS HISTORY LINK
+============================================================ */
+.trade-modal-history-link {
+    color: rgba(var(--bright-gold), 1);
+    font: 700 16px Arial, Helvetica, sans-serif;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+.trade-modal-history-link:hover,
+.trade-modal-history-link:focus-visible {
+    color: #ffffff;
+}
+
+/* ============================================================
+HOME DASHBOARD AND DESKTOP INFORMATION WIDTHS
+============================================================ */
+.home-dashboard {
+    width: min(100%, var(--home-dashboard-max-width));
+}
+
+.home-dashboard-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--home-dashboard-gap);
+}
+
+.home-account-card {
+    width: min(100%, var(--home-account-section-width));
+}
+
+.home-account-card .home-info-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home-details {
+    width: min(100%, var(--home-info-section-width));
+    min-width: min(100%, var(--home-info-section-width));
+}
+
+/* ============================================================
+CURRENT GOLD MARKET REFINEMENTS
+============================================================ */
+body.trade-page .info-card-title {
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding:
+        var(--trade-info-title-padding-y)
+        var(--trade-info-title-padding-x);
+    color: rgba(var(--bright-gold), 1);
+    background-image: var(--unified-action-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+body.trade-page .info-card-description {
+    color: #ffffff;
+    font-size: var(--trade-info-description-size);
+    font-weight: 600;
+}
+
+body.trade-page .info-card-metric-label {
+    color: rgba(var(--bright-gold), 1);
+}
+
+body.trade-page .info-card-metric-value {
+    color: #ffffff;
+}
+
+@media (max-width: 720px) {
+    .home-dashboard-actions,
+    .home-account-card .home-info-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .home-account-card,
+    .home-details,
+    .home-dashboard {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    body.trade-page .info-card-description {
         font-size: 15px;
     }
 }
