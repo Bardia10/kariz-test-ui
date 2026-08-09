@@ -122,40 +122,84 @@ This script shows one page at a time and creates numbered page buttons.
 
 
 /* ============================================================
-DYNAMIC GEM PRICE TEXT FITTING
+PER-PRODUCT RESPONSIVE TEXT AND LAYOUT
 
-Each price starts at --gem-price-max-font-size and shrinks by the
-configured step until it fits, stopping at --gem-price-min-font-size.
+Each product is measured independently. Its title and prices shrink only
+to their inline thresholds. If any one still cannot fit, only that product
+switches to a two-row layout: title above, Sell and Buy below.
 ============================================================ */
 (() => {
-    const buttons = Array.from(
-        document.querySelectorAll(".product-price:not(.info-card-sell)")
-    );
+    const products = Array.from(document.querySelectorAll(".product"));
 
-    if (buttons.length === 0) {
+    if (products.length === 0) {
         return;
     }
 
-    const rootStyle = getComputedStyle(document.documentElement);
-    const minimum = parseFloat(rootStyle.getPropertyValue("--gem-price-min-font-size")) || 12;
-    const maximum = parseFloat(rootStyle.getPropertyValue("--gem-price-max-font-size")) || 21;
-    const step = parseFloat(rootStyle.getPropertyValue("--gem-price-fit-step")) || 0.5;
+    const readNumber = (name, fallback) => {
+        const value = parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue(name)
+        );
+        return Number.isFinite(value) ? value : fallback;
+    };
 
-    const fitButton = (button) => {
+    const fitText = (element, maximum, minimum, step) => {
         let size = maximum;
-        button.style.fontSize = `${size}px`;
-
-        while (button.scrollWidth > button.clientWidth + 1 && size > minimum) {
+        element.style.fontSize = `${size}px`;
+        while (element.scrollWidth > element.clientWidth + 1 && size > minimum) {
             size = Math.max(minimum, size - step);
-            button.style.fontSize = `${size}px`;
+            element.style.fontSize = `${size}px`;
+        }
+        return element.scrollWidth <= element.clientWidth + 1;
+    };
+
+    const layoutProduct = (product) => {
+        const title = product.querySelector(".product-name");
+        const prices = Array.from(product.querySelectorAll(".product-price"));
+        const titleMaximum = readNumber("--product-title-max-font-size", 18);
+        const titleInlineMinimum = readNumber("--product-title-inline-min-font-size", 12);
+        const priceMaximum = readNumber("--gem-price-max-font-size", 21);
+        const priceInlineMinimum = readNumber("--product-price-inline-min-font-size", 12);
+        const stackedMinimum = readNumber("--product-stacked-min-font-size", 10);
+        const step = readNumber("--product-text-fit-step", 0.5);
+
+        product.classList.remove("product--stacked");
+        const titleFitsInline = fitText(title, titleMaximum, titleInlineMinimum, step);
+        const pricesFitInline = prices.every((price) =>
+            fitText(price, priceMaximum, priceInlineMinimum, step)
+        );
+
+        if (!titleFitsInline || !pricesFitInline) {
+            product.classList.add("product--stacked");
+            fitText(title, titleMaximum, stackedMinimum, step);
+            prices.forEach((price) =>
+                fitText(price, priceMaximum, stackedMinimum, step)
+            );
         }
     };
 
-    const fitAll = () => buttons.forEach(fitButton);
-    const observer = new ResizeObserver(fitAll);
-    buttons.forEach((button) => observer.observe(button));
-    document.fonts?.ready.then(fitAll);
-    fitAll();
+    let frame = null;
+    const layoutAll = () => {
+        if (frame !== null) cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+            products.forEach(layoutProduct);
+            frame = null;
+        });
+    };
+
+    const observer = new ResizeObserver(layoutAll);
+    products.forEach((product) => observer.observe(product));
+
+    /* Re-run when live product names or prices are replaced by API data. */
+    const contentObserver = new MutationObserver(layoutAll);
+    products.forEach((product) => contentObserver.observe(product, {
+        childList: true,
+        characterData: true,
+        subtree: true
+    }));
+
+    document.fonts?.ready.then(layoutAll);
+    window.addEventListener("orientationchange", layoutAll);
+    layoutAll();
 })();
 
 

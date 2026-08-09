@@ -168,6 +168,21 @@ color that you can change freely without breaking anything.
     --finance-button-font-size: 16px;
     --finance-mobile-section-padding: 12px;
     --finance-mobile-button-gap: 10px;
+    /* ---- Per-product adaptive layout ---- */
+    --product-shell-image: url("assets/xhome-page-div-background.png");
+    --product-shell-padding: 8px;
+    --product-shell-radius: 10px;
+    --product-shell-shadow-strength: 0.42;
+    --product-title-max-font-size: 18px;
+    --product-title-inline-min-font-size: 12px;
+    --product-price-inline-min-font-size: 12px;
+    --product-stacked-min-font-size: 10px;
+    --product-text-fit-step: 0.5;
+    --product-stacked-row-gap: 6px;
+    --mobile-product-shell-padding: 4px;
+    --mobile-product-title-max-font-size: 14px;
+    --mobile-product-inline-min-font-size: 11px;
+    --trade-history-cta-max-width: 420px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 320px;
@@ -3654,5 +3669,164 @@ FINANCE ACTION GROUPS
         padding-left: 10px;
         padding-right: 10px;
         font-size: 14px;
+    }
+}
+
+
+/* ============================================================
+V19 PRODUCT SHELL AND PER-ITEM ADAPTIVE LAYOUT
+
+The former product-title image now belongs to the entire product shell.
+The title itself is transparent. JavaScript adds .product--stacked only
+to an individual product whose title or prices cannot fit above their
+configured inline minimum font size.
+============================================================ */
+body.trade-page .product {
+    padding: var(--product-shell-padding);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--product-shell-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--product-shell-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, var(--product-shell-shadow-strength));
+}
+
+body.trade-page .product-name {
+    padding-left: var(--trade-piece-padding-x);
+    padding-right: var(--trade-piece-padding-x);
+    color: rgba(var(--unified-text-color), 1);
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+body.trade-page .product--stacked {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--product-stacked-row-gap);
+}
+
+body.trade-page .product--stacked .product-name {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+body.trade-page .product--stacked .product-price {
+    width: 100%;
+}
+
+/* ============================================================
+HOME-STYLE MARKET INFORMATION CARD
+============================================================ */
+body.trade-page .info-card {
+    color: rgba(var(--unified-heading-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-section-image);
+    border-radius: var(--unified-card-radius);
+}
+
+body.trade-page .info-card-title,
+body.trade-page .info-card-description {
+    color: rgba(var(--unified-heading-color), 1);
+}
+
+body.trade-page .info-card-metric {
+    color: rgba(var(--unified-heading-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--product-shell-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--product-shell-radius);
+}
+
+/* ============================================================
+HOME SECTION TITLE ARTWORK AND MY INFO COLORS
+============================================================ */
+body.home-page .home-card-title,
+body.home-page .home-details-title {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    background-image: var(--unified-action-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+body.home-page .home-details summary {
+    color: rgba(var(--home-card-heading), 1);
+}
+
+body.home-page .home-details summary:hover,
+body.home-page .home-details summary:focus-visible {
+    color: rgba(var(--home-card-text), 1);
+}
+
+/* ============================================================
+TRADE HISTORY END-OF-PAGE LINK
+============================================================ */
+.trade-history-cta {
+    width: min(100%, var(--trade-history-cta-max-width));
+    margin: 54px auto 24px;
+}
+
+.trade-history-cta-link {
+    min-height: 66px;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(var(--unified-text-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-action-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border-radius: var(--unified-product-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, var(--unified-card-shadow-strength));
+    font: 700 19px Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+.trade-history-cta-link:hover,
+.trade-history-cta-link:focus-visible {
+    color: rgba(var(--unified-action-hover-color), 1);
+}
+
+@media (max-width: 720px) {
+    :root {
+        --product-title-max-font-size: var(--mobile-product-title-max-font-size);
+        --product-title-inline-min-font-size: var(--mobile-product-inline-min-font-size);
+        --product-price-inline-min-font-size: var(--mobile-product-inline-min-font-size);
+    }
+
+    body.trade-page .product {
+        padding: var(--mobile-product-shell-padding);
+    }
+
+    .trade-history-cta {
+        width: 100%;
+        margin-top: 34px;
+    }
+
+    .trade-history-cta-link {
+        width: 100%;
+        min-height: 52px;
+        padding: 10px 14px;
+        font-size: 15px;
     }
 }

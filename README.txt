@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V18
+PRODUCT LAYOUT V19
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -247,3 +247,13 @@ FINANCE TRANSLATIONS
 Deposit & Withdrawal = واریز و برداشت
 Transfers = حواله
 The detailed button translations are documented directly in finance.html comments.
+
+V19 CHANGES
+- Possessions footer navigation now links directly to possessions.html
+- Removed the two legacy Finance menu buttons
+- Moved product-title artwork behind each complete product
+- Added independent title/price fitting and per-product stacked fallback
+- Restyled Current Gold Market with Home section/product artwork and gold text
+- Changed My Info to gold by default and white on hover
+- Changed Home section-title artwork to the My Possessions button image
+- Added an end-of-page Trade History link to Trade
