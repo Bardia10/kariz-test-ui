@@ -4136,3 +4136,107 @@ body.trade-page .info-card {
         gap: var(--mobile-trade-info-card-expanded-gap);
     }
 }
+
+
+/* ============================================================
+V22 PERSIAN / RTL INTERFACE
+
+Implementation names stay English; all user-facing content is Persian.
+============================================================ */
+html {
+    direction: rtl;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: Tahoma, "Noto Sans Arabic", Arial, sans-serif;
+}
+
+body {
+    direction: rtl;
+    text-align: right;
+}
+
+input,
+textarea,
+select {
+    direction: rtl;
+    text-align: right;
+}
+
+.home-info-value,
+.trade-history-table td,
+.trade-history-table th,
+.info-card-metric-value,
+.product-price {
+    unicode-bidi: plaintext;
+}
+
+/* Remove V21's reserved update-label row from every ordinary page. */
+body.unified-home-theme .page-content {
+    padding-top: calc(var(--header-height) + var(--pad-top));
+}
+
+/* Reserve a small row only on Trade, where the label still exists. */
+body.trade-page .page-content {
+    padding-top: calc(
+        var(--header-height)
+        + var(--pad-top)
+        + 27px
+    );
+}
+
+/* Plain white text with a subtle black outline: no island/background. */
+body.trade-page .last-update-indicator {
+    top: calc(
+        var(--pad-top)
+        + var(--header-height)
+        + 8px
+    );
+    right: calc(var(--pad-right) + var(--home-glass-side-inset));
+    padding: 0;
+    color: #ffffff;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    -webkit-text-stroke: 0.35px #000000;
+    text-shadow:
+        -1px -1px 0 rgba(0, 0, 0, 0.78),
+         1px -1px 0 rgba(0, 0, 0, 0.78),
+        -1px  1px 0 rgba(0, 0, 0, 0.78),
+         1px  1px 0 rgba(0, 0, 0, 0.78);
+    font-family: Tahoma, "Noto Sans Arabic", Arial, sans-serif;
+}
+
+/* Keep layout-sensitive symbols and numeric references readable in RTL. */
+.trade-modal-close,
+.history-back-link {
+    direction: ltr;
+}
+
+@media (max-width: 720px) {
+    body.unified-home-theme .page-content {
+        padding-top: calc(var(--header-height) + var(--pad-top));
+    }
+
+    body.trade-page .page-content {
+        padding-top: calc(
+            var(--header-height)
+            + var(--pad-top)
+            + 23px
+        );
+    }
+
+    body.trade-page .last-update-indicator {
+        top: calc(var(--pad-top) + var(--header-height) + 6px);
+        right: calc(var(--pad-right) + var(--mobile-home-glass-side-inset));
+        padding: 0;
+        font-size: 10px;
+    }
+}

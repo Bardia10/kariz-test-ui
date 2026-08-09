@@ -97,8 +97,8 @@ This script shows one page at a time and creates numbered page buttons.
     for (let pageNumber = 1; pageNumber <= pageCount; pageNumber += 1) {
         const button = document.createElement("button");
         button.type = "button";
-        button.textContent = String(pageNumber);
-        button.setAttribute("aria-label", `Go to page ${pageNumber}`);
+        button.textContent = pageNumber.toLocaleString("fa-IR");
+        button.setAttribute("aria-label", `رفتن به صفحه ${pageNumber.toLocaleString("fa-IR")}`);
         button.addEventListener("click", () => {
             currentPage = pageNumber;
             render();
@@ -248,7 +248,7 @@ HOME MY INFO CHANGE REQUEST
             const target = document.querySelector(`[data-user-value="${field}"]`);
             target.textContent = String(data.get(field));
         });
-        message.textContent = "Change request submitted.";
+        message.textContent = "درخواست تغییر اطلاعات ثبت شد.";
         setEditing(false);
     });
 })();
@@ -291,7 +291,7 @@ show the success state. Replace the timeout with a real API call later.
     let current = null;
     let waitingTimer = null;
 
-    const formatPrice = (value) => Math.round(value).toLocaleString("en-US");
+    const formatPrice = (value) => Math.round(value).toLocaleString("fa-IR");
 
     const setState = (state) => {
         formState.hidden = state !== "form";
@@ -302,14 +302,15 @@ show the success state. Replace the timeout with a real API call later.
     const updateCalculation = () => {
         if (!current) return;
         const value = Math.max(0, Number(input.value) || 0);
-        const operationWord = current.operation === "buy" ? "Buy" : "Sell";
-        const direction = current.operation === "buy" ? "from us" : "to us";
+        const operationWord = current.operation === "buy" ? "خرید" : "فروش";
+        const direction = current.operation === "buy" ? "از ما" : "به ما";
+        const localizedValue = value.toLocaleString("fa-IR");
         const amountText = current.mode === "amount"
-            ? `${value} ${value === 1 ? "gram" : "grams"} of ${current.item}`
-            : `${value} × ${current.item}`;
+            ? `${localizedValue} گرم ${current.item}`
+            : `${localizedValue} × ${current.item}`;
         title.textContent = `${operationWord} ${amountText} ${direction}`;
         totalText.textContent = formatPrice(value * current.unitPrice);
-        confirmButton.textContent = `Confirm ${current.operation}`;
+        confirmButton.textContent = `تأیید ${operationWord}`;
     };
 
     const openModal = (button) => {
@@ -323,7 +324,7 @@ show the success state. Replace the timeout with a real API call later.
         input.value = "1";
         input.step = current.mode === "amount" ? "0.01" : "1";
         input.min = current.mode === "amount" ? "0.01" : "1";
-        inputLabel.textContent = current.mode === "amount" ? "Amount (grams)" : "Quantity";
+        inputLabel.textContent = current.mode === "amount" ? "مقدار (گرم)" : "تعداد";
         unitPriceText.textContent = formatPrice(current.unitPrice);
         setState("form");
         updateCalculation();
@@ -369,8 +370,8 @@ show the success state. Replace the timeout with a real API call later.
         }
         setState("waiting");
         waitingTimer = window.setTimeout(() => {
-            const operationWord = current.operation === "buy" ? "purchase" : "sale";
-            confirmation.textContent = `Your ${operationWord} of ${current.item} has been confirmed.`;
+            const operationWord = current.operation === "buy" ? "خرید" : "فروش";
+            confirmation.textContent = `${operationWord} ${current.item} برای شما تأیید شد.`;
             setState("success");
             waitingTimer = null;
         }, confirmDelay);

@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V21
+PRODUCT LAYOUT V22
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -277,3 +277,10 @@ V21 CHANGES
 - Added a fixed last-update glass label below every header
 - Scaled the body wallpaper to width and restricted repetition to the vertical axis
 - Reduced product row gaps and increased Current Gold Market internal row spacing
+
+V22 CHANGES
+- Converted all production interface copy to Persian
+- Set all production documents to lang=fa and dir=rtl
+- Localized JavaScript-generated pagination, form, and trade-modal messages
+- Kept the last-update label only on Trade
+- Restyled the Trade update label as plain white text with a subtle black outline
