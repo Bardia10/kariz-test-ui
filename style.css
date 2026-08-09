@@ -125,15 +125,40 @@ color that you can change freely without breaking anything.
     --unified-page-title-color: 0, 0, 0;
     --unified-back-button-color: 0, 0, 0;
     --unified-back-button-hover-color: 239, 194, 82;
-    --page-title-icon-size: 28px;
+    --page-title-icon-size: 36px;
     --page-title-icon-gap: 10px;
-    --mobile-page-title-icon-size: 19px;
+    --mobile-page-title-icon-size: 26px;
     --mobile-content-horizontal-padding: 2px;
     --mobile-section-horizontal-padding: 8px;
     --mobile-home-card-horizontal-padding: 14px;
     --mobile-product-piece-gap: 4px;
     --mobile-full-width-control-gap: 10px;
     --back-button-block-gap: 10px;
+
+    /* ---- Compact Trade internals ---- */
+    --trade-section-padding: 18px;
+    --trade-title-padding-y: 8px;
+    --trade-title-padding-x: 14px;
+    --trade-info-card-padding: 18px;
+    --trade-info-card-gap: 18px;
+    --trade-info-metric-padding: 9px;
+    --trade-piece-padding-x: 4px;
+    --mobile-trade-section-padding: 4px;
+    --mobile-trade-info-card-padding: 12px;
+    --mobile-trade-info-metric-padding: 7px;
+    --mobile-trade-piece-padding-x: 2px;
+
+    /* ---- Universal ultra-thin scrollbars ---- */
+    --global-scrollbar-size: 2px;
+    --global-scrollbar-thumb: 255, 202, 65;
+    --global-scrollbar-thumb-strength: 0.72;
+    --global-scrollbar-track: 0, 0, 0;
+    --global-scrollbar-track-strength: 0.08;
+
+    /* Fluid mobile product height scales with viewport width. */
+    --mobile-product-piece-min-height: 38px;
+    --mobile-product-piece-fluid-height: 12vw;
+    --mobile-product-piece-max-height: 46px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 320px;
@@ -1134,7 +1159,7 @@ The pseudo-element is invisible until the product is hovered. */
     overflow-x: auto;
     overflow-y: hidden;
     justify-content: safe center;
-    scrollbar-width: thin;
+    scrollbar-width: none;
 
     /* A small down-right shadow suggests a light source above and to
     the left. The short distance and tight blur keep each piece resting
@@ -3366,5 +3391,128 @@ the available viewport width. All values remain adjustable in :root.
         height: 44px;
         margin-bottom: 6px;
         font-size: 42px;
+    }
+}
+
+
+/* ============================================================
+V17 COMPACT TRADE INTERNALS
+============================================================ */
+body.trade-page .product-category {
+    padding: var(--trade-section-padding);
+}
+
+body.trade-page .category-title {
+    padding:
+        var(--trade-title-padding-y)
+        var(--trade-title-padding-x);
+}
+
+body.trade-page .info-card {
+    padding: var(--trade-info-card-padding);
+    gap: var(--trade-info-card-gap);
+}
+
+body.trade-page .info-card-metric {
+    padding: var(--trade-info-metric-padding);
+}
+
+body.trade-page .product-price {
+    padding-left: var(--trade-piece-padding-x);
+    padding-right: var(--trade-piece-padding-x);
+}
+
+/* ============================================================
+UNIVERSAL ULTRA-THIN SCROLLBARS
+
+Applies to the page, tables, buttons, inputs, text containers, modal
+content, and every other scrollable element. Firefox supports only its
+thin preset; Chromium/Safari use the exact pixel setting below.
+============================================================ */
+html,
+body,
+* {
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(var(--global-scrollbar-thumb), var(--global-scrollbar-thumb-strength))
+        rgba(var(--global-scrollbar-track), var(--global-scrollbar-track-strength));
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    width: var(--global-scrollbar-size);
+    height: var(--global-scrollbar-size);
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+    background-color: rgba(
+        var(--global-scrollbar-track),
+        var(--global-scrollbar-track-strength)
+    );
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+    min-width: 4px;
+    min-height: 4px;
+    border: 0;
+    border-radius: 999px;
+    background-color: rgba(
+        var(--global-scrollbar-thumb),
+        var(--global-scrollbar-thumb-strength)
+    );
+}
+
+html::-webkit-scrollbar-button,
+body::-webkit-scrollbar-button,
+*::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner,
+*::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* ============================================================
+FLUID MOBILE PRODUCT PROPORTIONS
+============================================================ */
+@media (max-width: 720px) {
+    :root {
+        --product-piece-height: clamp(
+            var(--mobile-product-piece-min-height),
+            var(--mobile-product-piece-fluid-height),
+            var(--mobile-product-piece-max-height)
+        );
+    }
+
+    body.trade-page .product-category {
+        padding: var(--mobile-trade-section-padding);
+    }
+
+    body.trade-page .info-card {
+        padding: var(--mobile-trade-info-card-padding);
+    }
+
+    body.trade-page .info-card-metric {
+        padding: var(--mobile-trade-info-metric-padding);
+    }
+
+    body.trade-page .product-price {
+        padding-left: var(--mobile-trade-piece-padding-x);
+        padding-right: var(--mobile-trade-piece-padding-x);
+    }
+
+    body.trade-page .product-name,
+    body.trade-page .product-price {
+        height: var(--product-piece-height);
+        min-height: 0;
     }
 }

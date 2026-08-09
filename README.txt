@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V16
+PRODUCT LAYOUT V17
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -221,3 +221,17 @@ TITLE ICON FILES
 - Trade pages: assets/trade.svg
 - History pages: assets/history.svg
 - Finance pages: assets/account-statement.svg
+
+V17 CHANGES
+- Reduced padding inside Trade categories, market card, metrics, titles, and price controls
+- Applied one adjustable ultra-thin scrollbar system to the page and every nested element
+- Increased page-title icons to 36px desktop and 26px mobile
+- Added fluid mobile product-piece heights using clamp(38px, 12vw, 46px)
+
+SCROLLBAR CONTROL
+--global-scrollbar-size defaults to 2px for Chromium/Safari.
+Firefox uses scrollbar-width: thin, its smallest supported standard value.
+
+MOBILE PRODUCT HEIGHT
+Adjust --mobile-product-piece-min-height, --mobile-product-piece-fluid-height,
+and --mobile-product-piece-max-height in :root.
