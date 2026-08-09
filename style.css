@@ -192,6 +192,21 @@ color that you can change freely without breaking anything.
     --trade-info-description-size: 18px;
     --trade-info-title-padding-y: 10px;
     --trade-info-title-padding-x: 18px;
+    /* ---- V21 spacing and update indicator ---- */
+    --home-account-card-padding: 18px;
+    --home-account-column-gap: 16px;
+    --home-account-row-gap: 14px;
+    --home-account-item-max-width: 160px;
+    --last-update-font-size: 12px;
+    --last-update-padding-y: 6px;
+    --last-update-padding-x: 10px;
+    --last-update-offset: 7px;
+    --last-update-reserved-space: 38px;
+    --product-row-gap-compact: 20px;
+    --mobile-product-row-gap-compact: 14px;
+    --trade-info-card-expanded-gap: 26px;
+    --mobile-trade-info-card-expanded-gap: 20px;
+    --possessions-table-max-width: 900px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 240px;
@@ -3952,5 +3967,172 @@ body.trade-page .info-card-metric-value {
 
     body.trade-page .info-card-description {
         font-size: 15px;
+    }
+}
+
+
+/* ============================================================
+V21 ACCOUNT INFO ALIGNMENT
+============================================================ */
+.home-account-card {
+    width: min(100%, var(--home-info-section-width));
+    padding: var(--home-account-card-padding);
+}
+
+.home-account-card .home-info-grid {
+    grid-template-columns: repeat(
+        4,
+        minmax(120px, var(--home-account-item-max-width))
+    );
+    justify-content: center;
+    justify-items: center;
+    row-gap: var(--home-account-row-gap);
+    column-gap: var(--home-account-column-gap);
+}
+
+.home-account-card .home-info-item {
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.home-account-card .account-status {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================================
+FIXED LAST-UPDATE INDICATOR
+============================================================ */
+body.unified-home-theme .page-content {
+    padding-top: calc(
+        var(--header-height)
+        + var(--pad-top)
+        + var(--last-update-reserved-space)
+    );
+}
+
+.last-update-indicator {
+    position: fixed;
+    top: calc(
+        var(--pad-top)
+        + var(--header-height)
+        + var(--last-update-offset)
+    );
+    right: calc(var(--pad-right) + var(--home-glass-side-inset));
+    z-index: 5;
+    padding:
+        var(--last-update-padding-y)
+        var(--last-update-padding-x);
+    color: #ffffff;
+    background-color: rgba(
+        var(--home-glass-color),
+        var(--home-glass-opacity)
+    );
+    -webkit-backdrop-filter: blur(var(--home-glass-blur));
+    backdrop-filter: blur(var(--home-glass-blur));
+    border: 1px solid rgba(var(--bright-gold), 0.58);
+    border-radius: 999px;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.28);
+    font: 700 var(--last-update-font-size) Arial, Helvetica, sans-serif;
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* ============================================================
+WIDTH-MATCHED BODY WALLPAPER
+
+The wallpaper scales to exactly the viewport/body width. It repeats only
+vertically when a page is longer than one image, never horizontally.
+============================================================ */
+body.unified-home-theme {
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    background-position: top center;
+}
+
+/* ============================================================
+SINGLE-PAGE POSSESSIONS TABLE
+============================================================ */
+body.possessions-page .history-table-page {
+    width: min(100%, var(--possessions-table-max-width));
+}
+
+body.possessions-page .possessions-table-panel {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+}
+
+body.possessions-page .possessions-table-scroll {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+body.possessions-page .possessions-table {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    table-layout: auto;
+}
+
+body.possessions-page .possessions-table th,
+body.possessions-page .possessions-table td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* Tighter product rows; larger internal spacing in Current Gold Market. */
+body.trade-page .products {
+    row-gap: var(--product-row-gap-compact);
+}
+
+body.trade-page .info-card {
+    gap: var(--trade-info-card-expanded-gap);
+}
+
+@media (max-width: 720px) {
+    .home-account-card {
+        width: 100%;
+        padding-left: var(--mobile-home-card-horizontal-padding);
+        padding-right: var(--mobile-home-card-horizontal-padding);
+    }
+
+    .home-account-card .home-info-grid {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
+        row-gap: var(--home-account-row-gap);
+    }
+
+    .last-update-indicator {
+        top: calc(
+            var(--pad-top)
+            + var(--header-height)
+            + 5px
+        );
+        right: calc(var(--pad-right) + var(--mobile-home-glass-side-inset));
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
+    body.unified-home-theme .page-content {
+        padding-top: calc(
+            var(--header-height)
+            + var(--pad-top)
+            + 31px
+        );
+    }
+
+    body.trade-page .products {
+        row-gap: var(--mobile-product-row-gap-compact);
+    }
+
+    body.trade-page .info-card {
+        gap: var(--mobile-trade-info-card-expanded-gap);
     }
 }

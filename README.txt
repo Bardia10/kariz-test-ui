@@ -1,4 +1,4 @@
-PRODUCT LAYOUT V20
+PRODUCT LAYOUT V21
 
 PAGE FILES
 - index.html       Trade page (current main page)
@@ -268,3 +268,12 @@ V20 CHANGES
 - Improved Current Gold Market title, description, and metric colors
 - Changed the shared gold to a brighter 255,223,88
 - Changed announcement and default navigation colors to white
+
+V21 CHANGES
+- Matched Account Info width to My Info and centered its compact four-column row
+- Removed the Possessions back button and pagination
+- Limited sample Possessions data to ten visible rows with no nested scrolling
+- Changed the Possessions title icon to the footer Possessions icon
+- Added a fixed last-update glass label below every header
+- Scaled the body wallpaper to width and restricted repetition to the vertical axis
+- Reduced product row gaps and increased Current Gold Market internal row spacing

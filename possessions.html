@@ -8,7 +8,7 @@
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="app.js"></script>
 </head>
-<body class="unified-home-theme" data-loading-duration="5000">
+<body class="unified-home-theme possessions-page" data-loading-duration="5000">
 <!-- LAYER 3: the decorative frame.
          Pure decoration: aria-hidden tells screen readers to skip it,
          and pointer-events:none in the CSS lets clicks pass through it. -->
@@ -26,16 +26,16 @@
                     Wholesale rates may change based on market movement.
                 </span>
 </div>
-</header>
+</header><div aria-label="Last market update" class="last-update-indicator">last update at 2025/23/23 17:34</div>
 <main class="content">
 <section class="history-table-page">
-<a aria-label="Back to Finance" class="history-back-link" href="finance.html" title="Back to Finance">←</a>
+
 <div class="main-title-row main-title-row--table">
-<h1 class="history-table-heading"><span aria-hidden="true" class="page-title-icon page-title-icon--finance"></span>Your Possessions / Account Statement</h1>
+<h1 class="history-table-heading"><span aria-hidden="true" class="page-title-icon page-title-icon--history"></span>Your Possessions / Account Statement</h1>
 </div>
-<div class="history-table-panel">
-<div class="history-table-scroll">
-<table class="trade-history-table possessions-table" data-page-size="6" data-paginated-table="">
+<div class="history-table-panel possessions-table-panel">
+<div class="history-table-scroll possessions-table-scroll">
+<table class="trade-history-table possessions-table">
 <thead>
 <tr>
 <th>Name</th>
@@ -94,34 +94,14 @@
 <td>7</td>
 <td>We owe you</td>
 </tr>
-<tr data-history-row="">
-<td>Full Gold Coin</td>
-<td>2</td>
-<td>You owe us</td>
-</tr>
-<tr data-history-row="">
-<td>5-Gram Gold Bar</td>
-<td>3</td>
-<td>Settled</td>
-</tr>
-<tr data-history-row="">
-<td>One-Gram Gold Coin</td>
-<td>9</td>
-<td>You owe us</td>
-</tr>
-<tr data-history-row="">
-<td>10-Gram Gold Bar</td>
-<td>2</td>
-<td>We owe you</td>
-</tr>
+
+
+
+
 </tbody>
 </table>
 </div>
-<nav aria-label="Possessions pages" class="history-pagination">
-<button data-pagination-prev="" type="button">Previous</button>
-<div class="history-pagination-pages" data-pagination-pages=""></div>
-<button data-pagination-next="" type="button">Next</button>
-</nav>
+
 </div>
 </section>
 </main>
