@@ -269,8 +269,8 @@ color that you can change freely without breaking anything.
     --info-card-gap: 24px;
     --info-title-color: 5, 5, 5;
     --info-text-color: 5, 5, 5;
-    --info-metric-background: 0, 0, 0;
-    --info-metric-background-strength: 0.95;
+    --info-metric-background: 255, 255, 255;
+    --info-metric-background-strength: 0.78;
     --info-metric-radius: 10px;
     --info-gold-color: 255, 215, 92;
     --info-sell-width: 90px;
@@ -289,8 +289,9 @@ color that you can change freely without breaking anything.
     Decorative PNGs often contain transparent parts; without an
     underlay, those holes expose the page instead of reading as part
     of the shadowed component. The color paints BEHIND the image. */
-    --tile-panel-underlay-color: 0, 0, 0;
-    --tile-panel-underlay-strength: 0.28;
+    --tile-panel-underlay-color: 255, 255, 255;
+    --tile-panel-underlay-strength: 0.78;
+    --body-white-tint-strength: 0.34;
 
     /* ---- Gem button underlay ---- */
     /* This translucent color paints BEHIND each gem PNG. It is only
@@ -4396,6 +4397,17 @@ body.trade-page .info-card-title {
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.18),
         0 4px 10px rgba(0, 0, 0, 0.28);
+}
+
+/* White tint over the shared wallpaper while keeping the artwork visible. */
+body.unified-home-theme {
+    background-color: #ffffff;
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, var(--body-white-tint-strength)),
+            rgba(255, 255, 255, var(--body-white-tint-strength))
+        ),
+        var(--unified-wallpaper-image);
 }
 
 body.trade-page .last-update-indicator {
