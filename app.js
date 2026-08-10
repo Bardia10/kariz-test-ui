@@ -4,7 +4,7 @@ GEM-BUTTON LOADING OVERLAY
 Only elements with data-show-loading-overlay use this legacy layer.
 Gem buttons now open the transaction confirmation modal. Clicking one displays the full-screen loading overlay for
 the number of milliseconds stored in body[data-loading-duration].
-The default HTML value is 5000, which means five seconds.
+The default HTML value is 3000, which means three seconds.
 ============================================================ */
 (() => {
     const body = document.body;
@@ -19,7 +19,7 @@ The default HTML value is 5000, which means five seconds.
     const requestedDuration = Number(body.dataset.loadingDuration);
     const loadingDuration = Number.isFinite(requestedDuration)
         ? requestedDuration
-        : 5000;
+        : 3000;
 
     let loadingTimer = null;
 
@@ -49,6 +49,37 @@ The default HTML value is 5000, which means five seconds.
     gemButtons.forEach((button) => {
         button.addEventListener("click", showLoadingOverlay);
     });
+})();
+
+
+/* ============================================================
+PAGE-LOAD LOADING OVERLAY
+
+Every page shows the loading overlay once when its document becomes ready,
+including pages without buy/sell controls.
+============================================================ */
+(() => {
+    const body = document.body;
+    const overlay = document.querySelector(".loading-overlay");
+
+    if (!overlay || !body.classList.contains("trade-page")) {
+        return;
+    }
+
+    const requestedDuration = Number(body.dataset.loadingDuration);
+    const loadingDuration = Number.isFinite(requestedDuration)
+        ? requestedDuration
+        : 3000;
+
+    overlay.classList.add("is-active");
+    overlay.setAttribute("aria-hidden", "false");
+    body.classList.add("is-loading");
+
+    window.setTimeout(() => {
+        overlay.classList.remove("is-active");
+        overlay.setAttribute("aria-hidden", "true");
+        body.classList.remove("is-loading");
+    }, loadingDuration);
 })();
 
 
