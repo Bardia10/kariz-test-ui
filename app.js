@@ -120,6 +120,160 @@ This script shows one page at a time and creates numbered page buttons.
 })();
 
 
+/* ============================================================
+POSSESSIONS STATUS COLORS
+
+Status cells keep semantic classes in the DOM so their colors remain
+independent from the table's alternating column backgrounds.
+============================================================ */
+(() => {
+    const table = document.querySelector(".possessions-table");
+
+    if (!table) {
+        return;
+    }
+
+    table.querySelectorAll("tbody tr").forEach((row) => {
+        const statusCell = row.cells[row.cells.length - 1];
+
+        if (!statusCell) {
+            return;
+        }
+
+        const status = statusCell.textContent.trim();
+
+        if (status.includes("شما به ما")) {
+            statusCell.classList.add("possessions-status--owe-us");
+        } else if (status.includes("ما به شما")) {
+            statusCell.classList.add("possessions-status--we-owe");
+        }
+    });
+})();
+
+
+/* ============================================================
+HEADER ANNOUNCEMENT TOOLTIP
+
+Hovering previews the full announcement. Clicking or pressing Enter/Space
+pins it open until the close button or Escape is used.
+============================================================ */
+(() => {
+    const announcement = document.querySelector(".header-announcement");
+    const announcementText = announcement?.querySelector(
+        ".header-announcement-text"
+    );
+
+    if (!announcement || !announcementText) {
+        return;
+    }
+
+    announcement.setAttribute("role", "button");
+    announcement.setAttribute("tabindex", "0");
+    announcement.setAttribute("aria-expanded", "false");
+
+    const tooltip = document.createElement("div");
+    tooltip.className = "header-announcement-tooltip";
+    tooltip.setAttribute("role", "dialog");
+    tooltip.setAttribute("aria-label", "متن کامل پیام بازار");
+
+    const closeButton = document.createElement("button");
+    closeButton.className = "header-announcement-tooltip-close";
+    closeButton.type = "button";
+    closeButton.setAttribute("aria-label", "بستن پیام");
+    closeButton.textContent = "×";
+
+    const fullMessage = document.createElement("p");
+    fullMessage.className = "header-announcement-tooltip-message";
+    tooltip.append(closeButton, fullMessage);
+    document.body.append(tooltip);
+
+    let isPinned = false;
+    let hideTimer = null;
+
+    const cancelScheduledHide = () => {
+        if (hideTimer !== null) {
+            window.clearTimeout(hideTimer);
+            hideTimer = null;
+        }
+    };
+
+    const positionTooltip = () => {
+        const bounds = announcement.getBoundingClientRect();
+        const tooltipWidth = Math.min(420, window.innerWidth - 24);
+        const centeredLeft = bounds.left + (bounds.width - tooltipWidth) / 2;
+        const left = Math.max(
+            12,
+            Math.min(centeredLeft, window.innerWidth - tooltipWidth - 12)
+        );
+
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${Math.max(12, bounds.bottom + 8)}px`;
+    };
+
+    const showTooltip = () => {
+        cancelScheduledHide();
+        fullMessage.textContent = announcementText.textContent.trim();
+        positionTooltip();
+        tooltip.classList.add("is-visible");
+        announcement.setAttribute("aria-expanded", "true");
+    };
+
+    const hideTooltip = () => {
+        cancelScheduledHide();
+        if (isPinned) {
+            return;
+        }
+
+        tooltip.classList.remove("is-visible");
+        announcement.setAttribute("aria-expanded", "false");
+    };
+
+    const scheduleHide = () => {
+        cancelScheduledHide();
+        if (isPinned) {
+            return;
+        }
+
+        hideTimer = window.setTimeout(hideTooltip, 180);
+    };
+
+    announcement.addEventListener("mouseenter", showTooltip);
+    announcement.addEventListener("mouseleave", scheduleHide);
+    announcement.addEventListener("click", () => {
+        isPinned = !isPinned;
+        if (isPinned) {
+            showTooltip();
+        } else {
+            hideTooltip();
+        }
+    });
+
+    announcement.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            isPinned = true;
+            showTooltip();
+        } else if (event.key === "Escape") {
+            isPinned = false;
+            hideTooltip();
+        }
+    });
+
+    tooltip.addEventListener("mouseenter", cancelScheduledHide);
+    tooltip.addEventListener("mouseleave", scheduleHide);
+    closeButton.addEventListener("click", () => {
+        isPinned = false;
+        hideTooltip();
+    });
+
+    window.addEventListener("resize", () => {
+        if (tooltip.classList.contains("is-visible")) {
+            positionTooltip();
+        }
+    });
+})();
+
+
 
 /* ============================================================
 PER-PRODUCT RESPONSIVE TEXT AND LAYOUT
@@ -301,15 +455,21 @@ show the success state. Replace the timeout with a real API call later.
 
     const updateCalculation = () => {
         if (!current) return;
-        const value = Math.max(0, Number(input.value) || 0);
+        const hasValue = input.value.trim() !== "";
+        const value = hasValue ? Math.max(0, Number(input.value) || 0) : 0;
         const operationWord = current.operation === "buy" ? "خرید" : "فروش";
         const direction = current.operation === "buy" ? "از ما" : "به ما";
-        const localizedValue = value.toLocaleString("fa-IR");
-        const amountText = current.mode === "amount"
-            ? `${localizedValue} گرم ${current.item}`
-            : `${localizedValue} × ${current.item}`;
-        title.textContent = `${operationWord} ${amountText} ${direction}`;
-        totalText.textContent = formatPrice(value * current.unitPrice);
+        if (hasValue) {
+            const localizedValue = value.toLocaleString("fa-IR");
+            const amountText = current.mode === "amount"
+                ? `${localizedValue} گرم ${current.item}`
+                : `${localizedValue} × ${current.item}`;
+            title.textContent = `${operationWord} ${amountText} ${direction}`;
+            totalText.textContent = formatPrice(value * current.unitPrice);
+        } else {
+            title.textContent = `${operationWord} ${current.item} ${direction}`;
+            totalText.textContent = "—";
+        }
         confirmButton.textContent = `تأیید ${operationWord}`;
     };
 
@@ -321,9 +481,10 @@ show the success state. Replace the timeout with a real API call later.
             mode: button.dataset.tradeInputMode
         };
         modal.dataset.tradeOperation = current.operation;
-        input.value = "1";
+        input.value = "";
         input.step = current.mode === "amount" ? "0.01" : "1";
         input.min = current.mode === "amount" ? "0.01" : "1";
+        input.placeholder = current.mode === "amount" ? "مثلاً ۱٫۵" : "مثلاً ۱";
         inputLabel.textContent = current.mode === "amount" ? "مقدار (گرم)" : "تعداد";
         unitPriceText.textContent = formatPrice(current.unitPrice);
         setState("form");

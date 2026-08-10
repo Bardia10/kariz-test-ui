@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap");
+
 /* ============================================================
 MAIN SETTINGS
 Every knob you will ever want to turn lives in this block.
@@ -15,9 +17,9 @@ color that you can change freely without breaking anything.
     The header, the sticky footer, and any future content all
     respect this padding. Set a side to 0 and things will touch
     that edge. */
-    --pad-top: 25px;
+    --pad-top: 12px;
     --pad-right: 25px;
-    --pad-bottom: 18px;
+    --pad-bottom: 10px;
     --pad-left: 25px;
 
     /* ---- Header ---- */
@@ -42,12 +44,13 @@ color that you can change freely without breaking anything.
     --announcement-right: 18px;
     --announcement-color: 255, 211, 92;
     --announcement-font-size: 18px;
-    --announcement-duration: 18s;
-    --announcement-vertical-offset: -3px;
+    --announcement-duration: 26s;
+    --announcement-vertical-offset: 0px;
 
     /* Width of the invisible fade where the message approaches the
     logo. This is an alpha mask, not a colored shadow. */
     --announcement-logo-fade-width: 46px;
+    --announcement-edge-fade-width: 46px;
 
     /* ---- Product layout ---- */
     /* Products are arranged two per row. Product-column-gap controls
@@ -77,7 +80,7 @@ color that you can change freely without breaking anything.
     --home-tint-color: 20, 34, 45;
     --home-tint-strength: 0;
     --home-content-max-width: 1000px;
-    --home-section-gap: 28px;
+    --home-section-gap: 44px;
     --home-card-min-width: 420px;
     --home-card-max-width: 100%;
     --home-actions-max-width: 760px;
@@ -139,12 +142,12 @@ color that you can change freely without breaking anything.
     --trade-section-padding: 18px;
     --trade-title-padding-y: 8px;
     --trade-title-padding-x: 14px;
-    --trade-info-card-padding: 18px;
+    --trade-info-card-padding: 28px;
     --trade-info-card-gap: 18px;
     --trade-info-metric-padding: 9px;
     --trade-piece-padding-x: 4px;
     --mobile-trade-section-padding: 4px;
-    --mobile-trade-info-card-padding: 12px;
+    --mobile-trade-info-card-padding: 18px;
     --mobile-trade-info-metric-padding: 7px;
     --mobile-trade-piece-padding-x: 2px;
 
@@ -161,12 +164,13 @@ color that you can change freely without breaking anything.
     --mobile-product-piece-max-height: 46px;
     /* ---- Finance action groups ---- */
     --finance-actions-max-width: 900px;
-    --finance-section-gap: 24px;
+    --finance-section-gap: 44px;
     --finance-section-padding: 24px;
     --finance-button-gap: 14px;
     --finance-button-min-height: 64px;
     --finance-button-font-size: 16px;
     --finance-mobile-section-padding: 12px;
+    --finance-mobile-section-gap: 24px;
     --finance-mobile-button-gap: 10px;
     /* ---- Per-product adaptive layout ---- */
     --product-shell-image: url("assets/xhome-page-div-background.png");
@@ -197,16 +201,28 @@ color that you can change freely without breaking anything.
     --home-account-column-gap: 16px;
     --home-account-row-gap: 14px;
     --home-account-item-max-width: 160px;
-    --last-update-font-size: 12px;
+    --last-update-font-size: 17px;
     --last-update-padding-y: 6px;
     --last-update-padding-x: 10px;
     --last-update-offset: 7px;
     --last-update-reserved-space: 38px;
+    --last-update-right-offset: 64px;
+    --trade-last-update-reserved-space: 48px;
+    --trade-last-update-top-offset: 8px;
     --product-row-gap-compact: 20px;
     --mobile-product-row-gap-compact: 14px;
     --trade-info-card-expanded-gap: 26px;
     --mobile-trade-info-card-expanded-gap: 20px;
+    --trade-category-gap: 20px;
+    --mobile-trade-category-gap: 10px;
+    --trade-info-card-bottom-margin: 20px;
+    --mobile-trade-info-card-bottom-margin: 10px;
+    --trade-category-title-bottom-gap: 10px;
+    --mobile-trade-category-title-bottom-gap: 6px;
     --possessions-table-max-width: 900px;
+    --possessions-table-min-width: 360px;
+    --possessions-table-cell-padding-y: 8px;
+    --possessions-table-cell-padding-x: 10px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 240px;
@@ -217,7 +233,7 @@ color that you can change freely without breaking anything.
     Positive vertical values move only the Home logo downward. */
     --home-logo-height: 60px;
     --home-logo-left-offset: 6px;
-    --home-logo-vertical-offset: 5px;
+    --home-logo-vertical-offset: 0px;
 
     /* Home-only navigation, announcement, and expand-icon colors. */
     --home-footer-nav-default: 190, 194, 200;
@@ -378,6 +394,9 @@ color that you can change freely without breaking anything.
     --back-button-color: 255, 255, 255;
     --back-button-hover-color: 255, 202, 65;
     --back-button-hover-duration: 220ms;
+    --back-button-top-offset: -14px;
+    --back-button-size: 44px;
+    --back-button-font-size: 40px;
 
     /* ---- Content-opening shadow ---- */
     /* These values control the inward shadow cast by the fixed
@@ -411,9 +430,9 @@ color that you can change freely without breaking anything.
        The breakpoint itself is the 720px media query near the end
        of this file. Every mobile measurement is centralized here.
        ======================================================== */
-    --mobile-pad-top: 10px;
+    --mobile-pad-top: 6px;
     --mobile-pad-right: 4px;
-    --mobile-pad-bottom: 10px;
+    --mobile-pad-bottom: 6px;
     --mobile-pad-left: 4px;
     --mobile-side-width: 46px;
     --mobile-top-frame-height: 70px;
@@ -426,6 +445,10 @@ color that you can change freely without breaking anything.
     --mobile-announcement-left: 66px;
     --mobile-announcement-right: 8px;
     --mobile-announcement-font-size: 12px;
+    --mobile-announcement-duration: 22s;
+    --mobile-announcement-vertical-offset: 0px;
+    --mobile-logo-vertical-offset: 0px;
+    --mobile-home-logo-vertical-offset: 0px;
     --mobile-home-glass-side-inset: 2px;
 
     --mobile-footer-horizontal-padding: 3px;
@@ -446,6 +469,13 @@ color that you can change freely without breaking anything.
 
     --mobile-info-card-padding: 18px;
     --mobile-info-card-gap: 16px;
+    --mobile-last-update-font-size: 13px;
+    --mobile-last-update-right-offset: 24px;
+    --mobile-trade-last-update-reserved-space: 36px;
+    --mobile-trade-last-update-top-offset: 6px;
+    --mobile-possessions-table-min-width: 320px;
+    --mobile-possessions-table-cell-padding-y: 6px;
+    --mobile-possessions-table-cell-padding-x: 8px;
     --mobile-info-title-size: 22px;
     --mobile-info-description-size: 13px;
     --mobile-info-metric-label-size: 11px;
@@ -850,12 +880,13 @@ can never enter the logo territory or leave the header.
     pointer-events: none;
 }
 
-/* Padding places the message just beyond the right side of its
-private territory. The animation then carries it fully to the left. */
+/* Padding places the message just beyond the left side of its
+private territory. The animation then carries it fully to the right. */
 .header-announcement-text {
     display: inline-block;
     min-width: max-content;
-    padding-left: 100%;
+    padding-left: 0;
+    padding-right: 100%;
     animation: header-announcement-scroll
         var(--announcement-duration)
         linear
@@ -868,7 +899,7 @@ private territory. The animation then carries it fully to the left. */
     }
 
     to {
-        transform: translateX(-100%);
+        transform: translateX(100%);
     }
 }
 
@@ -942,7 +973,7 @@ turning the navigation icons and labels upside down. */
 .footer-nav-link + .footer-nav-link::before {
     content: "";
     position: absolute;
-    left: 0;
+    right: 0;
     top: 20%;
     bottom: 20%;
     width: 1px;
@@ -1633,12 +1664,15 @@ columns receive a faint gray tint, and row hover/press overrides it.
     min-width: 940px;
     border-collapse: collapse;
     color: rgba(var(--history-table-text), 1);
-    text-align: left;
+    direction: rtl;
+    text-align: right;
 }
 
 .trade-history-table th,
 .trade-history-table td {
     padding: 14px 16px;
+    direction: rtl;
+    text-align: right;
     white-space: nowrap;
 }
 
@@ -2002,7 +2036,6 @@ make the same control clearly read as the close/collapse action. */
         --home-card-padding: 20px;
     }
 }
-
 
 /* ============================================================
 V10 TARGETED OVERRIDES
@@ -2496,6 +2529,11 @@ TRADE CONFIRMATION MODAL
     font: 700 19px Arial, Helvetica, sans-serif;
 }
 
+.trade-modal-field input::placeholder {
+    color: rgba(255, 255, 255, 0.58);
+    opacity: 1;
+}
+
 .trade-modal-total {
     width: min(100%, 380px);
     padding: 16px;
@@ -2768,9 +2806,13 @@ breakpoint here if needed; change individual measurements in :root.
         --footer-height: var(--mobile-footer-height);
         --logo-height: var(--mobile-logo-height);
         --home-logo-height: var(--mobile-home-logo-height);
+        --logo-vertical-offset: var(--mobile-logo-vertical-offset);
+        --home-logo-vertical-offset: var(--mobile-home-logo-vertical-offset);
         --announcement-left: var(--mobile-announcement-left);
         --announcement-right: var(--mobile-announcement-right);
         --announcement-font-size: var(--mobile-announcement-font-size);
+        --announcement-duration: var(--mobile-announcement-duration);
+        --announcement-vertical-offset: var(--mobile-announcement-vertical-offset);
         --home-glass-side-inset: var(--mobile-home-glass-side-inset);
 
         --footer-nav-icon-size: var(--mobile-footer-nav-icon-size);
@@ -3675,7 +3717,7 @@ FINANCE ACTION GROUPS
 @media (max-width: 720px) {
     .finance-actions {
         width: 100%;
-        gap: var(--finance-mobile-button-gap);
+        gap: var(--finance-mobile-section-gap);
     }
 
     .finance-action-section {
@@ -4185,7 +4227,7 @@ body.trade-page .page-content {
     padding-top: calc(
         var(--header-height)
         + var(--pad-top)
-        + 27px
+        + var(--trade-last-update-reserved-space)
     );
 }
 
@@ -4194,9 +4236,13 @@ body.trade-page .last-update-indicator {
     top: calc(
         var(--pad-top)
         + var(--header-height)
-        + 8px
+        + var(--trade-last-update-top-offset)
     );
-    right: calc(var(--pad-right) + var(--home-glass-side-inset));
+    right: calc(
+        var(--pad-right)
+        + var(--home-glass-side-inset)
+        + var(--last-update-right-offset)
+    );
     padding: 0;
     color: #ffffff;
     background: transparent;
@@ -4229,14 +4275,218 @@ body.trade-page .last-update-indicator {
         padding-top: calc(
             var(--header-height)
             + var(--pad-top)
-            + 23px
+            + var(--mobile-trade-last-update-reserved-space)
         );
     }
 
     body.trade-page .last-update-indicator {
-        top: calc(var(--pad-top) + var(--header-height) + 6px);
-        right: calc(var(--pad-right) + var(--mobile-home-glass-side-inset));
+        top: calc(
+            var(--pad-top)
+            + var(--header-height)
+            + var(--mobile-trade-last-update-top-offset)
+        );
+        right: calc(
+            var(--pad-right)
+            + var(--mobile-home-glass-side-inset)
+            + var(--mobile-last-update-right-offset)
+        );
         padding: 0;
-        font-size: 10px;
+        font-size: var(--mobile-last-update-font-size);
+    }
+}
+
+/* Final visual overrides for the Persian interface. */
+body,
+body *,
+button,
+input,
+select,
+textarea {
+    font-family: "Vazirmatn", Tahoma, Arial, sans-serif !important;
+}
+
+table,
+.trade-history-table {
+    direction: rtl;
+}
+
+table th,
+table td,
+.trade-history-table th,
+.trade-history-table td {
+    direction: rtl;
+    text-align: right;
+}
+
+body.possessions-page .possessions-table-panel {
+    width: fit-content;
+    max-width: 100%;
+}
+
+body.possessions-page .possessions-table-scroll {
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+body.possessions-page .possessions-table {
+    width: max-content;
+    min-width: var(--possessions-table-min-width);
+    max-width: none;
+    table-layout: auto;
+}
+
+body.possessions-page .possessions-table th,
+body.possessions-page .possessions-table td {
+    direction: rtl;
+    text-align: right;
+    padding:
+        var(--possessions-table-cell-padding-y)
+        var(--possessions-table-cell-padding-x);
+    white-space: nowrap;
+}
+
+body.possessions-page .possessions-status--owe-us {
+    color: #ff4d5e;
+}
+
+body.possessions-page .possessions-status--we-owe {
+    color: #49e681;
+}
+
+body.trade-page .product-category + .product-category {
+    margin-top: var(--trade-category-gap);
+}
+
+body.trade-page .info-card {
+    margin-bottom: var(--trade-info-card-bottom-margin);
+}
+
+body.trade-page .category-title-row {
+    margin-bottom: var(--trade-category-title-bottom-gap);
+}
+
+body.trade-page .last-update-indicator {
+    color: #6fff00;
+    -webkit-text-stroke: 0px #ffffff;
+    text-shadow: none;
+}
+
+.header-announcement {
+    pointer-events: auto;
+    cursor: pointer;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        #000 var(--announcement-edge-fade-width),
+        #000 calc(100% - var(--announcement-edge-fade-width)),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        #000 var(--announcement-edge-fade-width),
+        #000 calc(100% - var(--announcement-edge-fade-width)),
+        transparent 100%
+    );
+}
+
+.header-announcement-tooltip {
+    position: fixed;
+    display: none;
+    width: min(420px, calc(100vw - 24px));
+    box-sizing: border-box;
+    padding: 18px 44px 18px 18px;
+    z-index: 20;
+    direction: rtl;
+    color: #171717;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.98);
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+    -webkit-backdrop-filter: blur(18px) saturate(125%);
+    backdrop-filter: blur(18px) saturate(125%);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.8;
+    text-align: right;
+}
+
+.header-announcement-tooltip.is-visible {
+    display: block;
+}
+
+.header-announcement-tooltip-message {
+    display: block;
+    margin: 0;
+}
+
+.header-announcement-tooltip-close {
+    position: absolute;
+    top: 7px;
+    left: 9px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    color: #202020;
+    background: rgba(0, 0, 0, 0.08);
+    border: 0;
+    border-radius: 50%;
+    font: 700 20px/1 Arial, sans-serif !important;
+    cursor: pointer;
+}
+
+.header-announcement-tooltip-close:hover,
+.header-announcement-tooltip-close:focus-visible {
+    color: #ffffff;
+    background: #202020;
+}
+
+.history-back-link {
+    position: absolute;
+    top: var(--back-button-top-offset);
+    left: 0;
+    right: auto;
+    width: var(--back-button-size);
+    height: var(--back-button-size);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    direction: ltr;
+    font-family: Arial, sans-serif !important;
+    font-size: var(--back-button-font-size);
+    font-weight: 900;
+    line-height: 1;
+}
+
+@media (max-width: 720px) {
+    :root {
+        --possessions-table-min-width: var(--mobile-possessions-table-min-width);
+    }
+
+    body.home-page .home-account-card .home-info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--home-account-column-gap);
+        row-gap: var(--home-account-row-gap);
+    }
+
+    body.trade-page .product-category + .product-category {
+        margin-top: var(--mobile-trade-category-gap);
+    }
+
+    body.trade-page .info-card {
+        margin-bottom: var(--mobile-trade-info-card-bottom-margin);
+    }
+
+    body.trade-page .category-title-row {
+        margin-bottom: var(--mobile-trade-category-title-bottom-gap);
+    }
+
+    body.possessions-page .possessions-table th,
+    body.possessions-page .possessions-table td {
+        padding:
+            var(--mobile-possessions-table-cell-padding-y)
+            var(--mobile-possessions-table-cell-padding-x);
     }
 }
