@@ -217,8 +217,8 @@ color that you can change freely without breaking anything.
     --mobile-trade-category-gap: 10px;
     --trade-info-card-bottom-margin: 20px;
     --mobile-trade-info-card-bottom-margin: 10px;
-    --trade-category-title-bottom-gap: 10px;
-    --mobile-trade-category-title-bottom-gap: 6px;
+    --trade-category-title-bottom-gap: 18px;
+    --mobile-trade-category-title-bottom-gap: 10px;
     --possessions-table-max-width: 900px;
     --possessions-table-min-width: 360px;
     --possessions-table-cell-padding-y: 8px;
@@ -4364,6 +4364,38 @@ body.trade-page .info-card {
 
 body.trade-page .category-title-row {
     margin-bottom: var(--trade-category-title-bottom-gap);
+}
+
+body.unified-home-theme .finance-action-heading {
+    color: rgba(var(--unified-heading-color), 1);
+    background-color: rgba(
+        var(--tile-panel-underlay-color),
+        var(--tile-panel-underlay-strength)
+    );
+    background-image: var(--unified-action-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+/* Experimental flat section-title treatment: keep the title shapes,
+   but replace their artwork with solid black. */
+body.unified-home-theme .category-title,
+body.unified-home-theme .home-card-title,
+body.unified-home-theme .home-details-title,
+body.unified-home-theme .finance-action-heading,
+body.trade-page .info-card-title {
+    background-image: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.02) 42%,
+        rgba(0, 0, 0, 0.18)
+    );
+    background-color: #000000;
+    border-radius: var(--unified-product-radius);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 4px 10px rgba(0, 0, 0, 0.28);
 }
 
 body.trade-page .last-update-indicator {
