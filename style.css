@@ -44,8 +44,8 @@ color that you can change freely without breaking anything.
     --announcement-right: 18px;
     --announcement-color: 255, 211, 92;
     --announcement-font-size: 18px;
-    --announcement-duration: 26s;
-    --announcement-vertical-offset: 0px;
+    --announcement-duration: 32s;
+    --announcement-vertical-offset: -3px;
 
     /* Width of the invisible fade where the message approaches the
     logo. This is an alpha mask, not a colored shadow. */
@@ -80,7 +80,7 @@ color that you can change freely without breaking anything.
     --home-tint-color: 20, 34, 45;
     --home-tint-strength: 0;
     --home-content-max-width: 1000px;
-    --home-section-gap: 44px;
+    --home-section-gap: 28px;
     --home-card-min-width: 420px;
     --home-card-max-width: 100%;
     --home-actions-max-width: 760px;
@@ -110,8 +110,8 @@ color that you can change freely without breaking anything.
     --home-form-submit-button-image: url("assets/home-form-submit-button-background.png");
 
     /* ---- Unified Home-style theme for every page ---- */
-    --unified-wallpaper-image: url("assets/home-page-background.webp");
-    --unified-section-image: url("assets/home-page-div-background.webp");
+    --unified-wallpaper-image: url("assets/home-page-background.png");
+    --unified-section-image: url("assets/div-tile-background.png");
     --unified-action-image: url("assets/xhome-page-div-background.png");
     --unified-title-image: url("assets/home-page-section-title-background.webp");
     --unified-input-image: url("assets/home-page-input-background.webp");
@@ -125,11 +125,12 @@ color that you can change freely without breaking anything.
     /* New filenames: deliberately different from the old gem assets. */
     --trade-sell-action-image: url("assets/trade-sell-action-background.png");
     --trade-buy-action-image: url("assets/trade-buy-action-background.png");
-    --unified-page-title-color: 0, 0, 0;
+    --unified-page-title-color: 255, 255, 255;
     --unified-back-button-color: 0, 0, 0;
     --unified-back-button-hover-color: 239, 194, 82;
     --page-title-icon-size: 36px;
     --page-title-icon-gap: 10px;
+    --section-title-font-size: 34px;
     --mobile-page-title-icon-size: 26px;
     --mobile-content-horizontal-padding: 2px;
     --mobile-section-horizontal-padding: 8px;
@@ -142,12 +143,12 @@ color that you can change freely without breaking anything.
     --trade-section-padding: 18px;
     --trade-title-padding-y: 8px;
     --trade-title-padding-x: 14px;
-    --trade-info-card-padding: 28px;
+    --trade-info-card-padding: 18px;
     --trade-info-card-gap: 18px;
     --trade-info-metric-padding: 9px;
     --trade-piece-padding-x: 4px;
     --mobile-trade-section-padding: 4px;
-    --mobile-trade-info-card-padding: 18px;
+    --mobile-trade-info-card-padding: 12px;
     --mobile-trade-info-metric-padding: 7px;
     --mobile-trade-piece-padding-x: 2px;
 
@@ -201,28 +202,16 @@ color that you can change freely without breaking anything.
     --home-account-column-gap: 16px;
     --home-account-row-gap: 14px;
     --home-account-item-max-width: 160px;
-    --last-update-font-size: 17px;
+    --last-update-font-size: 12px;
     --last-update-padding-y: 6px;
     --last-update-padding-x: 10px;
     --last-update-offset: 7px;
     --last-update-reserved-space: 38px;
-    --last-update-right-offset: 64px;
-    --trade-last-update-reserved-space: 48px;
-    --trade-last-update-top-offset: 8px;
     --product-row-gap-compact: 20px;
     --mobile-product-row-gap-compact: 14px;
     --trade-info-card-expanded-gap: 26px;
     --mobile-trade-info-card-expanded-gap: 20px;
-    --trade-category-gap: 20px;
-    --mobile-trade-category-gap: 10px;
-    --trade-info-card-bottom-margin: 20px;
-    --mobile-trade-info-card-bottom-margin: 10px;
-    --trade-category-title-bottom-gap: 18px;
-    --mobile-trade-category-title-bottom-gap: 10px;
     --possessions-table-max-width: 900px;
-    --possessions-table-min-width: 360px;
-    --possessions-table-cell-padding-y: 8px;
-    --possessions-table-cell-padding-x: 10px;
     --home-card-text: 248, 248, 248;
     --home-card-heading: 239, 194, 82;
     --home-map-height: 240px;
@@ -233,7 +222,7 @@ color that you can change freely without breaking anything.
     Positive vertical values move only the Home logo downward. */
     --home-logo-height: 60px;
     --home-logo-left-offset: 6px;
-    --home-logo-vertical-offset: 0px;
+    --home-logo-vertical-offset: -2px;
 
     /* Home-only navigation, announcement, and expand-icon colors. */
     --home-footer-nav-default: 190, 194, 200;
@@ -251,8 +240,8 @@ color that you can change freely without breaking anything.
     /* Glass color is RGB. Opacity controls color intensity, blur
     controls the strength of the frosted-glass effect, and saturation
     controls how vivid the wallpaper appears through the glass. */
-    --home-glass-color: 0, 96, 57;
-    --home-glass-opacity: 0.75;
+    --home-glass-color: 200, 200, 200;
+    --home-glass-opacity: 0.60;
     --home-glass-blur: 18px;
     --home-glass-saturation: 145%;
     --home-glass-border-color: 255, 202, 65;
@@ -269,8 +258,8 @@ color that you can change freely without breaking anything.
     --info-card-gap: 24px;
     --info-title-color: 5, 5, 5;
     --info-text-color: 5, 5, 5;
-    --info-metric-background: 255, 255, 255;
-    --info-metric-background-strength: 0.78;
+    --info-metric-background: 0, 0, 0;
+    --info-metric-background-strength: 0.95;
     --info-metric-radius: 10px;
     --info-gold-color: 255, 215, 92;
     --info-sell-width: 90px;
@@ -289,9 +278,8 @@ color that you can change freely without breaking anything.
     Decorative PNGs often contain transparent parts; without an
     underlay, those holes expose the page instead of reading as part
     of the shadowed component. The color paints BEHIND the image. */
-    --tile-panel-underlay-color: 255, 255, 255;
-    --tile-panel-underlay-strength: 0.78;
-    --body-white-tint-strength: 0.34;
+    --tile-panel-underlay-color: 0, 0, 0;
+    --tile-panel-underlay-strength: 0.28;
 
     /* ---- Gem button underlay ---- */
     /* This translucent color paints BEHIND each gem PNG. It is only
@@ -388,16 +376,16 @@ color that you can change freely without breaking anything.
     --history-row-hover-strength: 0.18;
     --history-table-heading-color: 126, 83, 10;
     --history-table-text: 0, 0, 0;
-    --history-table-min-width: 640px;
+    --history-table-min-width: 480px;
+    --possessions-table-min-width: 440px;
+    --history-table-cell-padding-y: 12px;
+    --history-table-cell-padding-x: 10px;
     --history-table-max-width: 96%;
     --history-table-vertical-line-width: 2px;
     --history-table-vertical-line-strength: 0.34;
     --back-button-color: 255, 255, 255;
     --back-button-hover-color: 255, 202, 65;
     --back-button-hover-duration: 220ms;
-    --back-button-top-offset: -14px;
-    --back-button-size: 44px;
-    --back-button-font-size: 40px;
 
     /* ---- Content-opening shadow ---- */
     /* These values control the inward shadow cast by the fixed
@@ -446,10 +434,6 @@ color that you can change freely without breaking anything.
     --mobile-announcement-left: 66px;
     --mobile-announcement-right: 8px;
     --mobile-announcement-font-size: 12px;
-    --mobile-announcement-duration: 22s;
-    --mobile-announcement-vertical-offset: 0px;
-    --mobile-logo-vertical-offset: 0px;
-    --mobile-home-logo-vertical-offset: 0px;
     --mobile-home-glass-side-inset: 2px;
 
     --mobile-footer-horizontal-padding: 3px;
@@ -461,6 +445,7 @@ color that you can change freely without breaking anything.
     --mobile-separator-gap: 3px;
     --mobile-page-title-size: 23px;
     --mobile-category-title-size: 22px;
+    --mobile-section-title-font-size: 27px;
 
     --mobile-products-max-width: 560px;
     --mobile-product-row-gap: 22px;
@@ -470,13 +455,6 @@ color that you can change freely without breaking anything.
 
     --mobile-info-card-padding: 18px;
     --mobile-info-card-gap: 16px;
-    --mobile-last-update-font-size: 13px;
-    --mobile-last-update-right-offset: 24px;
-    --mobile-trade-last-update-reserved-space: 36px;
-    --mobile-trade-last-update-top-offset: 6px;
-    --mobile-possessions-table-min-width: 320px;
-    --mobile-possessions-table-cell-padding-y: 6px;
-    --mobile-possessions-table-cell-padding-x: 8px;
     --mobile-info-title-size: 22px;
     --mobile-info-description-size: 13px;
     --mobile-info-metric-label-size: 11px;
@@ -881,13 +859,13 @@ can never enter the logo territory or leave the header.
     pointer-events: none;
 }
 
-/* Padding places the message just beyond the left side of its
-private territory. The animation then carries it fully to the right. */
+/* Padding places the message just beyond the right side of its
+private territory. The animation then carries it fully to the left. */
 .header-announcement-text {
     display: inline-block;
     min-width: max-content;
-    padding-left: 0;
-    padding-right: 100%;
+        padding-left: 0;
+        padding-right: 100%;
     animation: header-announcement-scroll
         var(--announcement-duration)
         linear
@@ -1665,15 +1643,12 @@ columns receive a faint gray tint, and row hover/press overrides it.
     min-width: 940px;
     border-collapse: collapse;
     color: rgba(var(--history-table-text), 1);
-    direction: rtl;
-    text-align: right;
+    text-align: left;
 }
 
 .trade-history-table th,
 .trade-history-table td {
     padding: 14px 16px;
-    direction: rtl;
-    text-align: right;
     white-space: nowrap;
 }
 
@@ -1768,7 +1743,7 @@ body.home-page {
             rgba(var(--home-tint-color), var(--home-tint-strength)),
             rgba(var(--home-tint-color), var(--home-tint-strength))
         ),
-        url("assets/home-page-background.webp");
+        url("assets/home-page-background.png");
     background-repeat: repeat;
 }
 
@@ -1834,7 +1809,7 @@ translucent base behind them so the card remains visually complete. */
 .home-card {
     padding: var(--home-card-padding);
     color: rgba(var(--home-card-text), 1);
-    background-image: url("assets/home-page-div-background.webp");
+    background-image: url("assets/div-tile-background.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -1959,7 +1934,7 @@ make the same control clearly read as the close/collapse action. */
     justify-content: center;
 
     color: rgba(var(--home-card-heading), 1);
-    background-image: url("assets/home-page-div-background.webp");
+    background-image: url("assets/div-tile-background.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -2162,11 +2137,11 @@ body.home-page {
             rgba(var(--home-tint-color), var(--home-tint-strength)),
             rgba(var(--home-tint-color), var(--home-tint-strength))
         ),
-        url("assets/home-page-background.webp");
+        url("assets/home-page-background.png");
 }
 
 .home-card {
-    background-image: url("assets/home-page-div-background.webp");
+    background-image: url("assets/div-tile-background.png");
 }
 
 .home-action-button {
@@ -2530,11 +2505,6 @@ TRADE CONFIRMATION MODAL
     font: 700 19px Arial, Helvetica, sans-serif;
 }
 
-.trade-modal-field input::placeholder {
-    color: rgba(255, 255, 255, 0.58);
-    opacity: 1;
-}
-
 .trade-modal-total {
     width: min(100%, 380px);
     padding: 16px;
@@ -2807,13 +2777,9 @@ breakpoint here if needed; change individual measurements in :root.
         --footer-height: var(--mobile-footer-height);
         --logo-height: var(--mobile-logo-height);
         --home-logo-height: var(--mobile-home-logo-height);
-        --logo-vertical-offset: var(--mobile-logo-vertical-offset);
-        --home-logo-vertical-offset: var(--mobile-home-logo-vertical-offset);
         --announcement-left: var(--mobile-announcement-left);
         --announcement-right: var(--mobile-announcement-right);
         --announcement-font-size: var(--mobile-announcement-font-size);
-        --announcement-duration: var(--mobile-announcement-duration);
-        --announcement-vertical-offset: var(--mobile-announcement-vertical-offset);
         --home-glass-side-inset: var(--mobile-home-glass-side-inset);
 
         --footer-nav-icon-size: var(--mobile-footer-nav-icon-size);
@@ -3673,7 +3639,7 @@ FINANCE ACTION GROUPS
     max-width: 100%;
     margin: 0 auto 22px;
     padding: 10px 18px;
-    color: rgba(var(--unified-heading-color), 1);
+    color: rgba(0,0,0, 1);
     background-image: var(--unified-title-image);
     background-repeat: no-repeat;
     background-position: center;
@@ -3911,7 +3877,7 @@ V20 BRIGHTER GOLD + WHITE CHROME TEXT
     --home-glass-border-color: var(--bright-gold);
     --info-gold-color: var(--bright-gold);
     --loading-text-color: var(--bright-gold);
-    --history-gold-line: var(--bright-gold);
+    --history-gold-line: 7, 92, 52;
     --trade-modal-accent: var(--bright-gold);
     --unified-back-button-hover-color: var(--bright-gold);
     --home-form-button-hover-text: var(--bright-gold);
@@ -4228,7 +4194,7 @@ body.trade-page .page-content {
     padding-top: calc(
         var(--header-height)
         + var(--pad-top)
-        + var(--trade-last-update-reserved-space)
+        + 27px
     );
 }
 
@@ -4237,13 +4203,9 @@ body.trade-page .last-update-indicator {
     top: calc(
         var(--pad-top)
         + var(--header-height)
-        + var(--trade-last-update-top-offset)
+        + 8px
     );
-    right: calc(
-        var(--pad-right)
-        + var(--home-glass-side-inset)
-        + var(--last-update-right-offset)
-    );
+    right: calc(var(--pad-right) + var(--home-glass-side-inset));
     padding: 0;
     color: #ffffff;
     background: transparent;
@@ -4276,23 +4238,15 @@ body.trade-page .last-update-indicator {
         padding-top: calc(
             var(--header-height)
             + var(--pad-top)
-            + var(--mobile-trade-last-update-reserved-space)
+            + 23px
         );
     }
 
     body.trade-page .last-update-indicator {
-        top: calc(
-            var(--pad-top)
-            + var(--header-height)
-            + var(--mobile-trade-last-update-top-offset)
-        );
-        right: calc(
-            var(--pad-right)
-            + var(--mobile-home-glass-side-inset)
-            + var(--mobile-last-update-right-offset)
-        );
+        top: calc(var(--pad-top) + var(--header-height) + 6px);
+        right: calc(var(--pad-right) + var(--mobile-home-glass-side-inset));
         padding: 0;
-        font-size: var(--mobile-last-update-font-size);
+        font-size: 10px;
     }
 }
 
@@ -4311,109 +4265,106 @@ table,
     direction: rtl;
 }
 
-table th,
-table td,
-.trade-history-table th,
-.trade-history-table td {
-    direction: rtl;
-    text-align: right;
+body.trade-page .last-update-indicator {
+    color: #ffdd00;
+    -webkit-text-stroke: 0px #ffffff;
+    text-shadow: none;
 }
 
-body.possessions-page .possessions-table-panel {
-    width: fit-content;
-    max-width: 100%;
-}
-
-body.possessions-page .possessions-table-scroll {
-    width: fit-content;
-    max-width: 100%;
-    overflow-x: auto;
-}
-
-body.possessions-page .possessions-table {
-    width: max-content;
-    min-width: var(--possessions-table-min-width);
-    max-width: none;
-    table-layout: auto;
-}
-
-body.possessions-page .possessions-table th,
-body.possessions-page .possessions-table td {
-    direction: rtl;
-    text-align: right;
-    padding:
-        var(--possessions-table-cell-padding-y)
-        var(--possessions-table-cell-padding-x);
-    white-space: nowrap;
-}
-
-body.possessions-page .possessions-status--owe-us {
-    color: #ff4d5e;
-}
-
-body.possessions-page .possessions-status--we-owe {
-    color: #49e681;
-}
-
-body.trade-page .product-category + .product-category {
-    margin-top: var(--trade-category-gap);
-}
-
-body.trade-page .info-card {
-    margin-bottom: var(--trade-info-card-bottom-margin);
-}
-
-body.trade-page .category-title-row {
-    margin-bottom: var(--trade-category-title-bottom-gap);
-}
-
-body.unified-home-theme .finance-action-heading {
-    color: rgba(var(--unified-heading-color), 1);
-    background-color: rgba(
-        var(--tile-panel-underlay-color),
-        var(--tile-panel-underlay-strength)
+.header-announcement {
+    -webkit-mask-image: linear-gradient(
+        to left,
+        transparent 0,
+        #000 var(--announcement-logo-fade-width),
+        #000 100%
     );
-    background-image: var(--unified-action-image);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
+    mask-image: linear-gradient(
+        to left,
+        transparent 0,
+        #000 var(--announcement-logo-fade-width),
+        #000 100%
+    );
 }
 
-/* Experimental flat section-title treatment: keep the title shapes,
-   but replace their artwork with solid black. */
+/* ============================================================
+FINAL WHITE-PANEL CONTRAST AND HEADER RESTORATION
+============================================================ */
+
+/* Page-level titles and their mask icons are white. */
+body.unified-home-theme .main-title-row .section-page-title,
+body.unified-home-theme .main-title-row .history-table-heading {
+    color: #ffffff;
+}
+
+body.unified-home-theme .main-title-row .page-title-icon {
+    background-color: #ffffff;
+}
+
+/* Section headings are larger plain black text with no image/background. */
 body.unified-home-theme .category-title,
 body.unified-home-theme .home-card-title,
 body.unified-home-theme .home-details-title,
 body.unified-home-theme .finance-action-heading,
 body.trade-page .info-card-title {
-    background-image: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.12),
-        rgba(255, 255, 255, 0.02) 42%,
-        rgba(0, 0, 0, 0.18)
-    );
-    background-color: #000000;
-    border-radius: var(--unified-product-radius);
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.18),
-        0 4px 10px rgba(0, 0, 0, 0.28);
+    color: #000000;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: clamp(28px, 3.2vw, var(--section-title-font-size));
+    font-weight: 800;
+    line-height: 1.3;
 }
 
-/* White tint over the shared wallpaper while keeping the artwork visible. */
-body.unified-home-theme {
-    background-color: #ffffff;
-    background-image:
-        linear-gradient(
-            rgba(255, 255, 255, var(--body-white-tint-strength)),
-            rgba(255, 255, 255, var(--body-white-tint-strength))
-        ),
-        var(--unified-wallpaper-image);
+body.trade-page .info-card-description {
+    color: #000000;
 }
 
-body.trade-page .last-update-indicator {
-    color: #6fff00;
-    -webkit-text-stroke: 0px #ffffff;
-    text-shadow: none;
+/* General text contrast for the white section artwork. */
+body.unified-home-theme .home-card,
+body.unified-home-theme .finance-action-section,
+body.unified-home-theme .info-card,
+body.unified-home-theme .history-table-panel,
+body.unified-home-theme .home-info-label,
+body.unified-home-theme .home-info-value,
+body.unified-home-theme .home-contact-item {
+    color: #000000;
+}
+
+/* Both shared tables use an actual RTL column/text flow. */
+table,
+.trade-history-table,
+.possessions-table {
+    direction: rtl;
+    text-align: right;
+}
+
+.trade-history-table th,
+.trade-history-table td,
+.possessions-table th,
+.possessions-table td {
+    direction: rtl;
+    text-align: right;
+    unicode-bidi: isolate;
+}
+
+body.unified-home-theme .trade-history-table,
+body.unified-home-theme .trade-history-table td,
+body.unified-home-theme .possessions-table td,
+body.possessions-page .possessions-status--owe-us,
+body.possessions-page .possessions-status--we-owe {
+    color: #000000;
+}
+
+body.unified-home-theme .trade-history-table th,
+body.unified-home-theme .possessions-table th {
+    color: #087a3e;
+    font-weight: 800;
+}
+
+/* Restore the logo position and interactive announcement. */
+body.unified-home-theme .header-logo {
+    top: calc(50% + var(--home-logo-vertical-offset));
 }
 
 .header-announcement {
@@ -4441,9 +4392,9 @@ body.trade-page .last-update-indicator {
     width: min(420px, calc(100vw - 24px));
     box-sizing: border-box;
     padding: 18px 44px 18px 18px;
-    z-index: 20;
+    z-index: 160;
     direction: rtl;
-    color: #171717;
+    color: #111111;
     background: rgba(255, 255, 255, 0.94);
     border: 1px solid rgba(255, 255, 255, 0.98);
     border-radius: 14px;
@@ -4486,51 +4437,164 @@ body.trade-page .last-update-indicator {
     background: #202020;
 }
 
-.history-back-link {
-    position: absolute;
-    top: var(--back-button-top-offset);
-    left: 0;
-    right: auto;
-    width: var(--back-button-size);
-    height: var(--back-button-size);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    direction: ltr;
-    font-family: Arial, sans-serif !important;
-    font-size: var(--back-button-font-size);
-    font-weight: 900;
-    line-height: 1;
+/* The modal uses black text against its current white artwork. */
+body.unified-home-theme .trade-modal-card,
+body.unified-home-theme .trade-modal-title,
+body.unified-home-theme .trade-modal-field,
+body.unified-home-theme .trade-modal-unit-price,
+body.unified-home-theme .trade-modal-total,
+body.unified-home-theme .trade-modal-total strong,
+body.unified-home-theme .trade-modal-waiting p,
+body.unified-home-theme .trade-modal-success p,
+body.unified-home-theme .trade-modal-history-link {
+    color: #000000;
+}
+
+body.unified-home-theme .trade-modal-field input {
+    color: #000000;
+    background-color: rgba(255, 255, 255, 0.92);
+    background-image: none;
+    border-color: rgba(0, 0, 0, 0.45);
+}
+
+body.unified-home-theme .trade-modal-field input::placeholder {
+    color: rgba(0, 0, 0, 0.55);
+    opacity: 1;
+}
+
+body.unified-home-theme .trade-modal-total {
+    color: #000000;
+    background-color: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+body.unified-home-theme .trade-modal-confirm,
+body.unified-home-theme .trade-modal-finish {
+    color: #000000;
+}
+
+body.unified-home-theme .trade-modal-close {
+    color: #000000;
+    background-color: rgba(255, 255, 255, 0.78);
 }
 
 @media (max-width: 720px) {
-    :root {
-        --possessions-table-min-width: var(--mobile-possessions-table-min-width);
+    body.unified-home-theme .category-title,
+    body.unified-home-theme .home-card-title,
+    body.unified-home-theme .home-details-title,
+    body.unified-home-theme .finance-action-heading,
+    body.trade-page .info-card-title {
+        font-size: var(--mobile-section-title-font-size);
     }
+}
 
+/* ============================================================
+FINAL TEXT CONTRAST, TABLE SIZING, AND CHROME POLISH
+============================================================ */
+
+/* Labels, displayed values, and editable values sit on white artwork. */
+body.unified-home-theme .home-info-item,
+body.unified-home-theme .home-info-label,
+body.unified-home-theme .home-info-value,
+body.unified-home-theme .home-contact-item,
+body.unified-home-theme .home-contact-item strong,
+body.unified-home-theme .home-edit-field,
+body.unified-home-theme .home-edit-field > span,
+body.unified-home-theme .home-edit-field input,
+body.unified-home-theme .home-edit-field select {
+    color: #000000;
+}
+
+/* A restrained dark shadow keeps the chrome text legible over the glass. */
+.header-announcement-text,
+body.unified-home-theme .footer-nav-link {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.52);
+}
+
+/* Let each table and its panel follow the intrinsic width of its content. */
+body.unified-home-theme .history-table-panel {
+    width: fit-content;
+    min-width: min(100%, var(--history-table-min-width));
+    max-width: 100%;
+}
+
+body.unified-home-theme .history-table-scroll {
+    width: 100%;
+    max-width: 100%;
+}
+
+body.unified-home-theme .trade-history-table {
+    width: max-content;
+    min-width: var(--history-table-min-width);
+    max-width: none;
+    table-layout: auto;
+}
+
+body.unified-home-theme .trade-history-table th,
+body.unified-home-theme .trade-history-table td {
+    width: 1%;
+    padding:
+        var(--history-table-cell-padding-y)
+        var(--history-table-cell-padding-x);
+    white-space: nowrap;
+}
+
+body.possessions-page .possessions-table-panel {
+    width: fit-content;
+    min-width: min(100%, var(--possessions-table-min-width));
+    max-width: 100%;
+}
+
+body.possessions-page .possessions-table-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+body.possessions-page .possessions-table {
+    width: max-content;
+    min-width: var(--possessions-table-min-width);
+    max-width: none;
+    table-layout: auto;
+}
+
+body.possessions-page .possessions-table th,
+body.possessions-page .possessions-table td {
+    width: 1%;
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+
+/* The final action is black, so its label remains white in every state. */
+body.unified-home-theme .trade-modal-finish,
+body.unified-home-theme .trade-modal-finish:hover,
+body.unified-home-theme .trade-modal-finish:focus-visible {
+    color: #ffffff;
+}
+
+/* Trade History returns to Trade with a consistently visible white arrow. */
+body.trade-history-page .history-back-link,
+body.trade-history-page .history-back-link:hover,
+body.trade-history-page .history-back-link:focus-visible {
+    color: #ffffff;
+}
+
+body.trade-history-page .history-back-link {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+/* The My Info disclosure symbol stays black on its white panel. */
+body.home-page .home-details summary::after,
+body.home-page .home-details summary:hover::after,
+body.home-page .home-details summary:focus-visible::after,
+body.home-page .home-details[open] summary::after {
+    color: #000000;
+    background-color: #000000;
+}
+
+@media (max-width: 720px) {
     body.home-page .home-account-card .home-info-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        column-gap: var(--home-account-column-gap);
-        row-gap: var(--home-account-row-gap);
-    }
-
-    body.trade-page .product-category + .product-category {
-        margin-top: var(--mobile-trade-category-gap);
-    }
-
-    body.trade-page .info-card {
-        margin-bottom: var(--mobile-trade-info-card-bottom-margin);
-    }
-
-    body.trade-page .category-title-row {
-        margin-bottom: var(--mobile-trade-category-title-bottom-gap);
-    }
-
-    body.possessions-page .possessions-table th,
-    body.possessions-page .possessions-table td {
-        padding:
-            var(--mobile-possessions-table-cell-padding-y)
-            var(--mobile-possessions-table-cell-padding-x);
     }
 }
