@@ -110,7 +110,7 @@ color that you can change freely without breaking anything.
     --home-form-submit-button-image: url("assets/home-form-submit-button-background.png");
 
     /* ---- Unified Home-style theme for every page ---- */
-    --unified-wallpaper-image: url("assets/home-page-background.webp");
+    --unified-wallpaper-image: url("assets/home-page-background.png");
     --unified-section-image: url("assets/home-page-div-background.webp");
     --unified-action-image: url("assets/xhome-page-div-background.png");
     --unified-title-image: url("assets/home-page-section-title-background.webp");
@@ -1767,7 +1767,7 @@ body.home-page {
             rgba(var(--home-tint-color), var(--home-tint-strength)),
             rgba(var(--home-tint-color), var(--home-tint-strength))
         ),
-        url("assets/home-page-background.webp");
+        url("assets/home-page-background.png");
     background-repeat: repeat;
 }
 
@@ -2161,7 +2161,7 @@ body.home-page {
             rgba(var(--home-tint-color), var(--home-tint-strength)),
             rgba(var(--home-tint-color), var(--home-tint-strength))
         ),
-        url("assets/home-page-background.webp");
+        url("assets/home-page-background.png");
 }
 
 .home-card {

@@ -116,7 +116,7 @@ V10 CHANGES
 - Gem price text dynamically fits between the configured min/max sizes
 
 USER-CONFIRMED HOME ASSETS
-- home-page-background.webp
+- home-page-background.png
 - home-page-div-background.webp
 - xhome-page-div-background.png
 - home-page-section-title-background.webp
@@ -191,7 +191,7 @@ V14 MASSIVE VISUAL REDESIGN
 - History/Finance menu buttons, tables, pagination, and trade modal now follow the Home visual system
 
 UNIFIED THEME ASSETS
-- assets/home-page-background.webp
+- assets/home-page-background.png
 - assets/home-page-div-background.webp
 - assets/xhome-page-div-background.png
 - assets/home-page-section-title-background.webp
