@@ -4598,3 +4598,76 @@ body.home-page .home-details[open] summary::after {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* ============================================================
+BRANCH-LOCAL TABLE, TITLE, AND CHROME ALIGNMENT
+============================================================ */
+
+/* In RTL, the left edge of each non-final cell is the inner column divider. */
+.trade-history-table th:not(:last-child),
+.trade-history-table td:not(:last-child),
+.possessions-table th:not(:last-child),
+.possessions-table td:not(:last-child) {
+    border-right: 0;
+    border-left:
+        var(--history-table-vertical-line-width)
+        solid
+        rgba(
+            var(--history-gold-line),
+            var(--history-table-vertical-line-strength)
+        );
+}
+
+/* Keep all page titles on one baseline with shared typography and spacing. */
+body.unified-home-theme .main-title-row {
+    width: min(100%, 1200px);
+    margin: 8px auto 20px;
+    min-height: 44px;
+}
+
+body.unified-home-theme .main-title-row--table {
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+body.unified-home-theme .history-table-page {
+    margin-top: 8px;
+}
+
+body.unified-home-theme .main-title-row .section-page-title,
+body.unified-home-theme .main-title-row .history-table-heading {
+    margin: 0;
+    padding: 7px 18px;
+    font-family: "Vazirmatn", Tahoma, Arial, sans-serif !important;
+    font-size: clamp(27px, 3vw, 34px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+/* The Trade title can sit closer to the header while its update label remains clear. */
+body.trade-page .page-content {
+    padding-top: calc(var(--header-height) + var(--pad-top) + 16px);
+}
+
+/* Stronger near-black shadows for the moving header message and footer labels. */
+.header-announcement-text,
+body.unified-home-theme .footer-nav-link {
+    text-shadow:
+        0 0 2px #000000,
+        0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+@media (max-width: 720px) {
+    body.unified-home-theme .main-title-row .section-page-title,
+    body.unified-home-theme .main-title-row .history-table-heading {
+        padding: 5px 10px;
+        font-size: 24px;
+        line-height: 1.25;
+    }
+
+    body.trade-page .page-content {
+        padding-top: calc(var(--header-height) + var(--pad-top) + 16px);
+    }
+}
