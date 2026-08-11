@@ -207,7 +207,7 @@ color that you can change freely without breaking anything.
     --last-update-offset: 7px;
     --last-update-reserved-space: 38px;
     --last-update-right-offset: 64px;
-    --trade-last-update-reserved-space: 48px;
+    --trade-last-update-reserved-space: 32px;
     --trade-last-update-top-offset: 8px;
     --product-row-gap-compact: 20px;
     --mobile-product-row-gap-compact: 14px;
@@ -471,7 +471,7 @@ color that you can change freely without breaking anything.
     --mobile-info-card-gap: 16px;
     --mobile-last-update-font-size: 13px;
     --mobile-last-update-right-offset: 24px;
-    --mobile-trade-last-update-reserved-space: 36px;
+    --mobile-trade-last-update-reserved-space: 28px;
     --mobile-trade-last-update-top-offset: 6px;
     --mobile-possessions-table-min-width: 320px;
     --mobile-possessions-table-cell-padding-y: 6px;
@@ -4520,5 +4520,46 @@ body.trade-page .last-update-indicator {
         padding:
             var(--mobile-possessions-table-cell-padding-y)
             var(--mobile-possessions-table-cell-padding-x);
+    }
+}
+
+/* ============================================================
+UNIFIED PAGE TITLE ALIGNMENT
+============================================================ */
+
+/* Regular pages and table pages share the same title geometry. */
+body.unified-home-theme .main-title-row {
+    width: min(100%, 1200px);
+    margin: 8px auto 20px;
+    min-height: 46px;
+}
+
+body.unified-home-theme .main-title-row--table {
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+body.unified-home-theme .history-table-page {
+    margin-top: 8px;
+}
+
+body.unified-home-theme .main-title-row .section-page-title,
+body.unified-home-theme .main-title-row .history-table-heading {
+    margin: 0;
+    padding: 8px 18px;
+    font-family: "Vazirmatn", Tahoma, Arial, sans-serif !important;
+    font-size: clamp(28px, 3.1vw, 36px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+@media (max-width: 720px) {
+    body.unified-home-theme .main-title-row .section-page-title,
+    body.unified-home-theme .main-title-row .history-table-heading {
+        padding: 6px 10px;
+        font-size: 25px;
+        line-height: 1.25;
     }
 }
