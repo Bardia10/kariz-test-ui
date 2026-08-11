@@ -4563,3 +4563,19 @@ body.unified-home-theme .main-title-row .history-table-heading {
         line-height: 1.25;
     }
 }
+
+/* RTL tables need the divider on the left edge of each non-final cell;
+   that edge is the actual space between adjacent visual columns. */
+.trade-history-table th:not(:last-child),
+.trade-history-table td:not(:last-child),
+.possessions-table th:not(:last-child),
+.possessions-table td:not(:last-child) {
+    border-right: 0;
+    border-left:
+        var(--history-table-vertical-line-width)
+        solid
+        rgba(
+            var(--history-gold-line),
+            var(--history-table-vertical-line-strength)
+        );
+}
